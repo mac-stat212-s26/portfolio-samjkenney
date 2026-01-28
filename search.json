@@ -87,6 +87,28 @@
     ]
   },
   {
+    "objectID": "ica/cleaning.html",
+    "href": "ica/cleaning.html",
+    "title": "Cleaning SFO Weather Data",
+    "section": "",
+    "text": "Exercise\nCarryout the following steps to clean and save the San Francisco Weather data. Make sure to download and add the data file to your portfolio repository as instructed.\nCodelibrary(tidyverse)\nweather_raw &lt;- read.csv(\"./data/raw/weather.csv\")\nReminder of Lubridate casting from https://lubridate.tidyverse.org/reference/as_date.html\nMonth abbreviation from https://lubridate.tidyverse.org/reference/month.html\nCodeweather_processed &lt;- weather_raw %&gt;%\n  mutate(PrecipYr = na_if(PrecipYr, 99999)) %&gt;%\n  arrange(Month, Day) %&gt;%\n  mutate(dateInYear = 1:365) %&gt;%\n  mutate(month_name = month.abb[Month]) %&gt;%\n  write.csv(\"./data/cleaned/weather_processed.csv\")",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
+    ]
+  },
+  {
+    "objectID": "ica/cleaning.html#exercise",
+    "href": "ica/cleaning.html#exercise",
+    "title": "Cleaning SFO Weather Data",
+    "section": "",
+    "text": "Read in the weather data in this file with the correct relative file path after you move it to the instructed location.\nThere is a variable that has values that don’t make sense in the data context. Figure out which variable this is and clean it up by making those values missing using na_if().\nCreate a variable called dateInYear that indicates the day of the year (1-365) for each case. (Jan 1 should be 1, and Dec 31 should be 365).\nCreate a variable called month_name that shows the 3-letter abbreviation for each case.\nSave the wrangled data to the data/processed/ folder using write_csv(). Name this file weather_clean.csv. Look up the documentation for this function by typing ?write_csv in the Console. You’ll need to write an appropriate relative path.",
+    "crumbs": [
+      "In-Class Activities",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
+    ]
+  },
+  {
     "objectID": "extra/extra-sample1.html",
     "href": "extra/extra-sample1.html",
     "title": "Extra Sample 1",
@@ -94,7 +116,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Extra Sample 1</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Extra Sample 1</span>"
     ]
   },
   {
@@ -105,7 +127,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Extra Sample 2</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Extra Sample 2</span>"
     ]
   }
 ]
