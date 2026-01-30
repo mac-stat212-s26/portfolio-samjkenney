@@ -1,0 +1,35 @@
+---
+title: "Homework 01"
+---
+
+
+## TidyTuesday Section
+
+Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story with [effective visualization(s)]({{< var effective-viz-url >}}).  Provide sufficient background for readers to grasp your narrative.
+```{r}
+library(tidyverse)
+```
+
+```{r}
+companies <- read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv")
+head(companies)
+```
+```{r}
+quantile(companies$capital_stock)
+```
+
+```{r}
+companies_processed <- companies %>%
+  filter(capital_stock < 1000000)
+```
+
+Research Question: How does capital stock vary by company size between micro and small enterprises? 
+
+```{r fig.alt="A density plot displaying the distruibution of capital stock by company size. Both micro- and small-enterprises peak at around 200,000, and their distributions are roughly equivalent."}
+companies_processed %>%
+  ggplot(aes(x = capital_stock, fill = company_size)) +
+  geom_density(alpha = 0.5) +
+  labs(x = "Capital Stock (in BRL)", title = "Distribution of Capital Stock between Company Sizes", fill = "Company Size")
+```
+
+
