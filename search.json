@@ -43,6 +43,17 @@
     ]
   },
   {
+    "objectID": "tt/hw01-tt.html",
+    "href": "tt/hw01-tt.html",
+    "title": "Homework 01",
+    "section": "",
+    "text": "TidyTuesday Section\nExplore the week’s TidyTuesday challenge. Develop a research question, then answer it through a short data story with effective visualization(s). Provide sufficient background for readers to grasp your narrative.\nCodelibrary(tidyverse)\nCodecompanies &lt;- read.csv(\"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv\")\nhead(companies)\n\n  company_id                                             company_name\n1   41273639                          MH MATERIAIS DE CONSTRUCAO LTDA\n2   41274138                   CLINICA ESTETICA CAXIAS DO SUL RS LTDA\n3   41274505                          G P CONSTRUCOES E SERVICOS LTDA\n4   41274745 UNICREDIT BANK SAO PAULO CONSULTORIA UNIPESSOAL LIMITADA\n5   41274856                   PRODUCON PRODUTOS PARA CONSTRUCAO LTDA\n6   41274914                        HSG DISTRIBUIDORA DE BEBIDAS LTDA\n                              legal_nature\n1 Limited Liability Business Company (LLC)\n2 Limited Liability Business Company (LLC)\n3 Limited Liability Business Company (LLC)\n4 Limited Liability Business Company (LLC)\n5 Limited Liability Business Company (LLC)\n6 Limited Liability Business Company (LLC)\n                       owner_qualification capital_stock     company_size\n1 Managing Partner / Partner-Administrator       1000000 small-enterprise\n2 Managing Partner / Partner-Administrator        200000 micro-enterprise\n3 Managing Partner / Partner-Administrator        500000 small-enterprise\n4 Managing Partner / Partner-Administrator        159600 small-enterprise\n5 Managing Partner / Partner-Administrator        200000 micro-enterprise\n6 Managing Partner / Partner-Administrator        300000 small-enterprise\nCodequantile(companies$capital_stock)\n\n          0%          25%          50%          75%         100% \n1.500001e+05 2.100000e+05 4.000000e+05 1.000000e+06 1.000000e+12\nCodecompanies_processed &lt;- companies %&gt;%\n  filter(capital_stock &lt; 1000000)\nResearch Question: How does capital stock vary by company size between micro and small enterprises?\nCodecompanies_processed %&gt;%\n  ggplot(aes(x = capital_stock, fill = company_size)) +\n  geom_density(alpha = 0.5) +\n  labs(x = \"Capital Stock (in BRL)\", title = \"Distribution of Capital Stock between Company Sizes\", fill = \"Company Size\")",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 01</span>"
+    ]
+  },
+  {
     "objectID": "pcl/pcl.html",
     "href": "pcl/pcl.html",
     "title": "Pre-Class Learning Summaries",
@@ -50,7 +61,7 @@
     "text": "R",
     "crumbs": [
       "Pre-Class Learnings",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
     ]
   },
   {
@@ -61,7 +72,7 @@
     "text": "Quarto\n\n\n\nfrom qmd4sci.njtierney.com",
     "crumbs": [
       "Pre-Class Learnings",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
     ]
   },
   {
@@ -72,7 +83,7 @@
     "text": "Add content here",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ICA Sample 1</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>ICA Sample 1</span>"
     ]
   },
   {
@@ -83,7 +94,7 @@
     "text": "Add content here",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>ICA Sample 2</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>ICA Sample 2</span>"
     ]
   },
   {
@@ -94,7 +105,7 @@
     "text": "Exercise\nCarryout the following steps to clean and save the San Francisco Weather data. Make sure to download and add the data file to your portfolio repository as instructed.\nCodelibrary(tidyverse)\nweather_raw &lt;- read.csv(\"./data/raw/weather.csv\")\nReminder of Lubridate casting from https://lubridate.tidyverse.org/reference/as_date.html\nMonth abbreviation from https://lubridate.tidyverse.org/reference/month.html\nCodeweather_processed &lt;- weather_raw %&gt;%\n  mutate(PrecipYr = na_if(PrecipYr, 99999)) %&gt;%\n  arrange(Month, Day) %&gt;%\n  mutate(dateInYear = 1:365) %&gt;%\n  mutate(month_name = month.abb[Month]) %&gt;%\n  write.csv(\"./data/cleaned/weather_processed.csv\")",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
     ]
   },
   {
@@ -105,7 +116,7 @@
     "text": "Read in the weather data in this file with the correct relative file path after you move it to the instructed location.\nThere is a variable that has values that don’t make sense in the data context. Figure out which variable this is and clean it up by making those values missing using na_if().\nCreate a variable called dateInYear that indicates the day of the year (1-365) for each case. (Jan 1 should be 1, and Dec 31 should be 365).\nCreate a variable called month_name that shows the 3-letter abbreviation for each case.\nSave the wrangled data to the data/processed/ folder using write_csv(). Name this file weather_clean.csv. Look up the documentation for this function by typing ?write_csv in the Console. You’ll need to write an appropriate relative path.",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
     ]
   },
   {
@@ -116,7 +127,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Extra Sample 1</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Extra Sample 1</span>"
     ]
   },
   {
@@ -127,7 +138,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Extra Sample 2</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Extra Sample 2</span>"
     ]
   }
 ]
