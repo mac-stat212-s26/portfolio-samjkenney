@@ -23,12 +23,13 @@ companies_processed <- companies %>%
   filter(capital_stock < 1000000)
 ```
 
-Research Question: How does capital stock vary by company size between micro and small enterprises? 
+Research Question: How does capital stock vary by company size? 
 
-```{r fig.alt="A density plot displaying the distruibution of capital stock by company size. Both micro- and small-enterprises peak at around 200,000, and their distributions are roughly equivalent."}
+```{r fig.alt="A density plot displaying the distruibution of capital stock by company size. All three company sizes, micro, small, and other, peak around 200,000 BRL. Companies sized 'other' have a higher concentration of higher stock values."} 
 companies_processed %>%
   ggplot(aes(x = capital_stock, fill = company_size)) +
   geom_density(alpha = 0.5) +
-  labs(x = "Capital Stock (in BRL)", title = "Distribution of Capital Stock between Company Sizes", fill = "Company Size")
+  labs(x = "Capital Stock (in BRL)", title = "Distribution of Capital Stock between Company Sizes", fill = "Company Size", caption = "via TidyTuesday, by Sam Kenney") +
+  scale_fill_viridis_d()
 ```
-
+This dataset from TidyTuesday represents a variety of aspects about Brazillian companies. It includes capital stock in BRL of each company, as well as company size. Company size is categorized as micro-enterprise, small-enterprise, and other. This dataset is highly skewed, with most capital stock values being below 1,000,000 BRL, and some values at 999,999,999,999 BRL. To visualize the standard relationship between stock and company size, only the bottom 75% of values were used. Of these values, most of the higher stocks (over 600,000 BRL) are held by other-sized companies. All three company sizes are concentrated at around 200,000 BRL, and density quickly decreases at around 300,000 BRL. 
