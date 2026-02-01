@@ -409,6 +409,11 @@ cookieconsent.run({
   <a href="../ica/cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Cleaning SFO Weather Data</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/03-adv-ggplot-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3 Adv Data Viz</span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -504,19 +509,21 @@ cookieconsent.run({
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">filter</span>(capital_stock <span class="sc">&lt;</span> <span class="dv">1000000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Research Question: How does capital stock vary by company size between micro and small enterprises?</p>
+<p>Research Question: How does capital stock vary by company size?</p>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>companies_processed <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> capital_stock, <span class="at">fill =</span> company_size)) <span class="sc">+</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Capital Stock (in BRL)"</span>, <span class="at">title =</span> <span class="st">"Distribution of Capital Stock between Company Sizes"</span>, <span class="at">fill =</span> <span class="st">"Company Size"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Capital Stock (in BRL)"</span>, <span class="at">title =</span> <span class="st">"Distribution of Capital Stock between Company Sizes"</span>, <span class="at">fill =</span> <span class="st">"Company Size"</span>, <span class="at">caption =</span> <span class="st">"via TidyTuesday, by Sam Kenney"</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">scale_fill_viridis_d</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="hw01-tt_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" alt="A density plot displaying the distruibution of capital stock by company size. Both micro- and small-enterprises peak at around 200,000, and their distributions are roughly equivalent." width="672"></p>
+<figure class="figure"><p><img src="hw01-tt_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" alt="A density plot displaying the distruibution of capital stock by company size. All three company sizes, micro, small, and other, peak around 200,000 BRL. Companies sized 'other' have a higher concentration of higher stock values." width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>This dataset from TidyTuesday represents a variety of aspects about Brazillian companies. It includes capital stock in BRL of each company, as well as company size. Company size is categorized as micro-enterprise, small-enterprise, and other. This dataset is highly skewed, with most capital stock values being below 1,000,000 BRL, and some values at 999,999,999,999 BRL. To visualize the standard relationship between stock and company size, only the bottom 75% of values were used. Of these values, most of the higher stocks (over 600,000 BRL) are held by other-sized companies. All three company sizes are concentrated at around 200,000 BRL, and density quickly decreases at around 300,000 BRL.</p>
 
 
 <!-- -->
@@ -1025,14 +1032,16 @@ cookieconsent.run({
 <span id="cb8-31"><a href="#cb8-31"></a>  <span class="fu">filter</span>(capital_stock <span class="sc">&lt;</span> <span class="dv">1000000</span>)</span>
 <span id="cb8-32"><a href="#cb8-32"></a><span class="in">```</span></span>
 <span id="cb8-33"><a href="#cb8-33"></a></span>
-<span id="cb8-34"><a href="#cb8-34"></a>Research Question: How does capital stock vary by company size between micro and small enterprises? </span>
+<span id="cb8-34"><a href="#cb8-34"></a>Research Question: How does capital stock vary by company size? </span>
 <span id="cb8-35"><a href="#cb8-35"></a></span>
-<span id="cb8-36"><a href="#cb8-36"></a><span class="in">```{r fig.alt="A density plot displaying the distruibution of capital stock by company size. Both micro- and small-enterprises peak at around 200,000, and their distributions are roughly equivalent."}</span></span>
+<span id="cb8-36"><a href="#cb8-36"></a><span class="in">```{r fig.alt="A density plot displaying the distruibution of capital stock by company size. All three company sizes, micro, small, and other, peak around 200,000 BRL. Companies sized 'other' have a higher concentration of higher stock values."} </span></span>
 <span id="cb8-37"><a href="#cb8-37"></a>companies_processed <span class="sc">%&gt;%</span></span>
 <span id="cb8-38"><a href="#cb8-38"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> capital_stock, <span class="at">fill =</span> company_size)) <span class="sc">+</span></span>
 <span id="cb8-39"><a href="#cb8-39"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb8-40"><a href="#cb8-40"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Capital Stock (in BRL)"</span>, <span class="at">title =</span> <span class="st">"Distribution of Capital Stock between Company Sizes"</span>, <span class="at">fill =</span> <span class="st">"Company Size"</span>)</span>
-<span id="cb8-41"><a href="#cb8-41"></a><span class="in">```</span></span>
+<span id="cb8-40"><a href="#cb8-40"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Capital Stock (in BRL)"</span>, <span class="at">title =</span> <span class="st">"Distribution of Capital Stock between Company Sizes"</span>, <span class="at">fill =</span> <span class="st">"Company Size"</span>, <span class="at">caption =</span> <span class="st">"via TidyTuesday, by Sam Kenney"</span>) <span class="sc">+</span></span>
+<span id="cb8-41"><a href="#cb8-41"></a>  <span class="fu">scale_fill_viridis_d</span>()</span>
+<span id="cb8-42"><a href="#cb8-42"></a><span class="in">```</span></span>
+<span id="cb8-43"><a href="#cb8-43"></a>This dataset from TidyTuesday represents a variety of aspects about Brazillian companies. It includes capital stock in BRL of each company, as well as company size. Company size is categorized as micro-enterprise, small-enterprise, and other. This dataset is highly skewed, with most capital stock values being below 1,000,000 BRL, and some values at 999,999,999,999 BRL. To visualize the standard relationship between stock and company size, only the bottom 75% of values were used. Of these values, most of the higher stocks (over 600,000 BRL) are held by other-sized companies. All three company sizes are concentrated at around 200,000 BRL, and density quickly decreases at around 300,000 BRL. </span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
