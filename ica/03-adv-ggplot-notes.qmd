@@ -136,7 +136,7 @@ Look at the [`geom_linerange` documentation page](https://ggplot2.tidyverse.org/
 
 ```{r weather_plot_temp_records}
 ggplot(weather, aes(x = dateInYear, y = Low)) +
-    geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), colour = '#ECEBE3', linewidth = 1) +
+    geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), colour = '#ECEBE3', linewidth = 0.75) +
     theme_classic()
 ```
 
@@ -159,7 +159,11 @@ In your visualization, also display the usual temperatures (`NormalLow` and `Nor
 ![SFO observed, Average, and Record Daily Temperatures in 2011](https://hash-mac.github.io/stat212site-sp26/images/sfo_second_graph.png)
 
 ```{r weather_plot_temp_all}
-
+ggplot(weather, aes(x = dateInYear, y = Low)) +
+    geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), colour = '#ECEBE3', linewidth = 0.75) +
+    geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), colour = '#C8B8BA', linewidth = 1) +
+    geom_linerange(aes(ymin = Low, ymax = High), color = '#A90248', linewidth = 0.75) + 
+    theme_classic()
 
 ```
 
@@ -174,8 +178,15 @@ If you'd like finer control of the width of these lines/rectangles, check out th
 Recreate the visual demarcations of the months by adding vertical lines separating the months.  Brainstorm how we might draw those vertical lines. What `geom` might we use?  What subset of the data might we use in that `geom` layer to draw lines only at the month divisions? 
 
 ```{r }
+weather_firstsub <- weather %>%
+  filter(Day == 1)
 
-
+ggplot(weather, aes(x = dateInYear, y = Low)) +
+    geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), colour = '#ECEBE3', linewidth = 0.75) +
+    geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), colour = '#C8B8BA', linewidth = 1) +
+    geom_linerange(aes(ymin = Low, ymax = High), color = '#A90248', linewidth = 0.75) + 
+    geom_vline(data = weather_firstsub, aes(xintercept = dateInYear)) +
+    theme_classic()
 ```
 
 
@@ -187,6 +198,17 @@ Change the x-axis labels so that the month names display in the center of each m
 ::: {.callout-tip title="Month Names"}
 R has built-in variables called `month.abb` and `month.name` that contain abbreviated and full month names.
 :::
+```{r}
+ggplot(weather, aes(x = dateInYear, y = Low)) +
+    geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), colour = '#ECEBE3', linewidth = 0.75) +
+    geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), colour = '#C8B8BA', linewidth = 1) +
+    geom_linerange(aes(ymin = Low, ymax = High), color = '#A90248', linewidth = 0.75) + 
+    geom_vline(data = weather_firstsub, aes(xintercept = dateInYear)) +
+    scale_x_continuous(breaks = weather_firstsub$dateInYear, labels = month.abb)+
+    theme_classic() +
+    theme(axis.text.x = element_text(hjust = -0.4)) 
+    
+```
 
 
 Try to figuring out this new challenge using search engines and LLMs:
@@ -208,7 +230,19 @@ Create a precipitation plot that looks like the following.  Note that
 
 
 ```{r weather_plot_precip}
+weather_recordsub <- weather %>%
+  filter(RecordP == TRUE)
 
+weather_lastsub <- weather %>%
+  group_by(Month) %>%
+  arrange(desc(Day)) 
+
+ggplot(weather, aes(x = dateInYear, y = CulmPrec)) +
+  geom_area(fill = '#ebeae2') +
+  geom_line(color = '#32a3d8', linewidth = 0.5) +
+  geom_point(data = weather_recordsub, aes(shape = RecordP), fill = "black") +
+  scale_shape_manual(values = (25)) +
+  theme_classic()
 ```
 ## Done!
 
