@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>adv_wrangling_1 – COMP/STAT212 Portfolio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../ica/ica-sample1.html" rel="next">
+<link href="../tt/hw02-tt.html" rel="prev">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-16eaaa9b790cfaabc94008ee33c52662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-2b3e8dfe8c7d4b2781b388bd72db8514.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-16eaaa9b790cfaabc94008ee33c52662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script><style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="../style/custom.css">
+</head>
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pcl/adv_wrangling_1.html">Pre-Class Learnings</a></li><li class="breadcrumb-item"><a href="../pcl/adv_wrangling_1.html"><span class="chapter-title">adv_wrangling_1</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Sam Kenney</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Prof Viz</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pv/pv-01.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Professional Viz</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">TidyTuesday</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tt/hw01-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Homework 01</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tt/hw02-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Homework 02</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Pre-Class Learnings</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pcl/adv_wrangling_1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">adv_wrangling_1</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">In-Class Activities</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/ica-sample1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">ICA Sample 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/ica-sample2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">ICA Sample 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Cleaning SFO Weather Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/03-adv-ggplot-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3 Adv Data Viz</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/ica4/src/04-adv-maps-1-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4 Adv Spatial Viz P1</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extras</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../extra/extra-sample1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extra Sample 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../extra/extra-sample2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Extra Sample 2</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#chapter-12-logical-vectors" id="toc-chapter-12-logical-vectors" class="nav-link active" data-scroll-target="#chapter-12-logical-vectors">Chapter 12: Logical Vectors</a>
+  <ul class="collapse">
+<li>
+<a href="#basic-comparisons" id="toc-basic-comparisons" class="nav-link" data-scroll-target="#basic-comparisons">Basic Comparisons</a>
+  <ul class="collapse">
+<li><a href="#note-on-floats" id="toc-note-on-floats" class="nav-link" data-scroll-target="#note-on-floats">Note on Floats</a></li>
+  <li><a href="#note-on-missing-values" id="toc-note-on-missing-values" class="nav-link" data-scroll-target="#note-on-missing-values">Note on Missing Values</a></li>
+  </ul>
+</li>
+  <li><a href="#logical-operators" id="toc-logical-operators" class="nav-link" data-scroll-target="#logical-operators">Logical Operators</a></li>
+  <li><a href="#summaries" id="toc-summaries" class="nav-link" data-scroll-target="#summaries">Summaries</a></li>
+  <li>
+<a href="#conditional-transformations" id="toc-conditional-transformations" class="nav-link" data-scroll-target="#conditional-transformations">Conditional Transformations</a>
+  <ul class="collapse">
+<li><a href="#if_else" id="toc-if_else" class="nav-link" data-scroll-target="#if_else">if_else</a></li>
+  <li><a href="#case_when" id="toc-case_when" class="nav-link" data-scroll-target="#case_when">case_when</a></li>
+  <li><a href="#compatible-datatypes" id="toc-compatible-datatypes" class="nav-link" data-scroll-target="#compatible-datatypes">Compatible Datatypes</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  <li>
+<a href="#chapter-13" id="toc-chapter-13" class="nav-link" data-scroll-target="#chapter-13">Chapter 13</a>
+  <ul class="collapse">
+<li><a href="#parsing" id="toc-parsing" class="nav-link" data-scroll-target="#parsing">Parsing</a></li>
+  <li><a href="#counting" id="toc-counting" class="nav-link" data-scroll-target="#counting">Counting</a></li>
+  <li><a href="#numeric-transformations" id="toc-numeric-transformations" class="nav-link" data-scroll-target="#numeric-transformations">Numeric Transformations</a></li>
+  </ul>
+</li>
+  <li><a href="#factors" id="toc-factors" class="nav-link" data-scroll-target="#factors">Factors</a></li>
+  <li><a href="#dates-and-times" id="toc-dates-and-times" class="nav-link" data-scroll-target="#dates-and-times">Dates and Times</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pcl/adv_wrangling_1.html">Pre-Class Learnings</a></li><li class="breadcrumb-item"><a href="../pcl/adv_wrangling_1.html"><span class="chapter-title">adv_wrangling_1</span></a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">adv_wrangling_1</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><section id="chapter-12-logical-vectors" class="level1"><h1>Chapter 12: Logical Vectors</h1>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(nycflights13)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="basic-comparisons" class="level2"><h2 class="anchored" data-anchor-id="basic-comparisons">Basic Comparisons</h2>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">filter</span>(dep_time <span class="sc">&gt;</span> <span class="dv">600</span> <span class="sc">&amp;</span> dep_time <span class="sc">&lt;</span> <span class="dv">2000</span> <span class="sc">&amp;</span> <span class="fu">abs</span>(arr_delay) <span class="sc">&lt;</span> <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 172,286 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      601            600         1      844            850
+ 2  2013     1     1      602            610        -8      812            820
+ 3  2013     1     1      602            605        -3      821            805
+ 4  2013     1     1      606            610        -4      858            910
+ 5  2013     1     1      606            610        -4      837            845
+ 6  2013     1     1      607            607         0      858            915
+ 7  2013     1     1      611            600        11      945            931
+ 8  2013     1     1      613            610         3      925            921
+ 9  2013     1     1      615            615         0      833            842
+10  2013     1     1      622            630        -8     1017           1014
+# ℹ 172,276 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">mutate</span>(<span class="at">daytime =</span> dep_time <span class="sc">&gt;</span> <span class="dv">600</span> <span class="sc">&amp;</span> dep_time <span class="sc">&lt;</span> <span class="dv">2000</span>, </span>
+<span id="cb4-3"><a href="#cb4-3"></a>         <span class="at">approx_ontime =</span> <span class="fu">abs</span>(arr_delay) <span class="sc">&lt;</span> <span class="dv">20</span>,</span>
+<span id="cb4-4"><a href="#cb4-4"></a>         <span class="at">.keep =</span> <span class="st">"used"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 4
+   dep_time arr_delay daytime approx_ontime
+      &lt;int&gt;     &lt;dbl&gt; &lt;lgl&gt;   &lt;lgl&gt;        
+ 1      517        11 FALSE   TRUE         
+ 2      533        20 FALSE   FALSE        
+ 3      542        33 FALSE   FALSE        
+ 4      544       -18 FALSE   TRUE         
+ 5      554       -25 FALSE   FALSE        
+ 6      554        12 FALSE   TRUE         
+ 7      555        19 FALSE   TRUE         
+ 8      557       -14 FALSE   TRUE         
+ 9      557        -8 FALSE   TRUE         
+10      558         8 FALSE   TRUE         
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+<p>.keep is an argument within mutate that selects variables based on the key provided: - “all”: default, retains all original columns and new/modified ones - “used”: only uses the columns used in the mutate call, plus the new ones - “unused”: maintains newly created columns, discards all that were used to create them - “none”: keeps only grouping keys and new columns</p>
+<section id="note-on-floats" class="level3"><h3 class="anchored" data-anchor-id="note-on-floats">Note on Floats</h3>
+<p>Don’t utilize the ‘==’ operator for floats, instead, use near()</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>x <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>x <span class="sc">==</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">near</span>(x, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section><section id="note-on-missing-values" class="level3"><h3 class="anchored" data-anchor-id="note-on-missing-values">Note on Missing Values</h3>
+<p>Logical comparisons using NA will result in NA.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="cn">NA</span> <span class="sc">&gt;</span> <span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="dv">10</span> <span class="sc">==</span> <span class="cn">NA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="cn">NA</span> <span class="sc">==</span> <span class="cn">NA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<p>When looking for NA values, use is.na().</p>
+</section></section><section id="logical-operators" class="level2"><h2 class="anchored" data-anchor-id="logical-operators">Logical Operators</h2>
+<p>R has &amp; and &amp;&amp;, as well as | and ||. Use only the single operators for data wrangling, and only the double operators for programming.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(arr_delay) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(dep_delay))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,175 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1     1525           1530        -5     1934           1805
+ 2  2013     1     1     1528           1459        29     2002           1647
+ 3  2013     1     1     1740           1745        -5     2158           2020
+ 4  2013     1     1     1807           1738        29     2251           2103
+ 5  2013     1     1     1939           1840        59       29           2151
+ 6  2013     1     1     1952           1930        22     2358           2207
+ 7  2013     1     1     2016           1930        46       NA           2220
+ 8  2013     1     2      905            822        43     1313           1045
+ 9  2013     1     2     1125            925       120     1445           1146
+10  2013     1     2     1848           1840         8     2333           2151
+# ℹ 1,165 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(dep_time))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8,255 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1       NA           1630        NA       NA           1815
+ 2  2013     1     1       NA           1935        NA       NA           2240
+ 3  2013     1     1       NA           1500        NA       NA           1825
+ 4  2013     1     1       NA            600        NA       NA            901
+ 5  2013     1     2       NA           1540        NA       NA           1747
+ 6  2013     1     2       NA           1620        NA       NA           1746
+ 7  2013     1     2       NA           1355        NA       NA           1459
+ 8  2013     1     2       NA           1420        NA       NA           1644
+ 9  2013     1     2       NA           1321        NA       NA           1536
+10  2013     1     2       NA           1545        NA       NA           1910
+# ℹ 8,245 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+</section><section id="summaries" class="level2"><h2 class="anchored" data-anchor-id="summaries">Summaries</h2>
+<p>any() returns TRUE is anything in x is TRUE. all() returns TRUE if everything in x is TRUE.</p>
+<p>We can use a subset operator to perform contradictory summaries.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">group_by</span>(year, month, day) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb20-4"><a href="#cb20-4"></a>    <span class="at">behind =</span> <span class="fu">mean</span>(arr_delay[arr_delay <span class="sc">&gt;</span> <span class="dv">0</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb20-5"><a href="#cb20-5"></a>    <span class="at">ahead =</span> <span class="fu">mean</span>(arr_delay[arr_delay <span class="sc">&lt;</span> <span class="dv">0</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb20-6"><a href="#cb20-6"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb20-7"><a href="#cb20-7"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 365 × 6
+    year month   day behind ahead     n
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+ 1  2013     1     1   32.5 -12.5   842
+ 2  2013     1     2   32.0 -14.3   943
+ 3  2013     1     3   27.7 -18.2   914
+ 4  2013     1     4   28.3 -17.0   915
+ 5  2013     1     5   22.6 -14.0   720
+ 6  2013     1     6   24.4 -13.6   832
+ 7  2013     1     7   27.8 -17.0   933
+ 8  2013     1     8   20.8 -14.3   899
+ 9  2013     1     9   25.6 -13.0   902
+10  2013     1    10   27.3 -16.4   932
+# ℹ 355 more rows</code></pre>
+</div>
+</div>
+</section><section id="conditional-transformations" class="level2"><h2 class="anchored" data-anchor-id="conditional-transformations">Conditional Transformations</h2>
+<section id="if_else" class="level3"><h3 class="anchored" data-anchor-id="if_else">if_else</h3>
+<p>if_else takes three required arguments:</p>
+<ul>
+<li>Condition: a logical vector,</li>
+<li>true: the output when condition is true,</li>
+<li>false: the output when the condition is false</li>
+</ul>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">3</span>, <span class="cn">NA</span>)</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">if_else</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"+ve"</span>, <span class="st">"-ve"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] "-ve" "-ve" "-ve" "-ve" "+ve" "+ve" "+ve" NA   </code></pre>
+</div>
+</div>
+<p>if_else can take a fourth ‘missing’ argument that specifies what to do with a missing value.</p>
+<p>You can also manipulate the value.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">if_else</span>(x <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="sc">-</span>x, x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1]  3  2  1  0  1  2  3 NA</code></pre>
+</div>
+</div>
+<p>We can nest if_else as well!</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">if_else</span>(x <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"0"</span>, <span class="fu">if_else</span>(x <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">"-ve"</span>, <span class="st">"+ve"</span>), <span class="st">"???"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] "-ve" "-ve" "-ve" "0"   "+ve" "+ve" "+ve" "???"</code></pre>
+</div>
+</div>
+</section><section id="case_when" class="level3"><h3 class="anchored" data-anchor-id="case_when">case_when</h3>
+<p>case_when takes pairs of ‘condition ~ output,’ where condition is a logical vector.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">case_when</span>(</span>
+<span id="cb28-2"><a href="#cb28-2"></a>  x <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"0"</span>,</span>
+<span id="cb28-3"><a href="#cb28-3"></a>  x <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"-ve"</span>,</span>
+<span id="cb28-4"><a href="#cb28-4"></a>  x <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"+ve"</span>,</span>
+<span id="cb28-5"><a href="#cb28-5"></a>  <span class="fu">is.na</span>(x) <span class="sc">~</span> <span class="st">"???"</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] "-ve" "-ve" "-ve" "0"   "+ve" "+ve" "+ve" "???"</code></pre>
+</div>
+</div>
+<p>We can use a .default argument to create a default value. If multiple conditions match, only the first is used.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">case_when</span>(</span>
+<span id="cb30-2"><a href="#cb30-2"></a>  x <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"0"</span>,</span>
+<span id="cb30-3"><a href="#cb30-3"></a>  x <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"+ve"</span>,</span>
+<span id="cb30-4"><a href="#cb30-4"></a>  x <span class="sc">&gt;</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"big"</span>,</span>
+<span id="cb30-5"><a href="#cb30-5"></a>  <span class="at">.default =</span> <span class="st">"???"</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a>  </span>
+<span id="cb30-7"><a href="#cb30-7"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] "???" "???" "???" "0"   "+ve" "+ve" "+ve" "???"</code></pre>
+</div>
+</div>
+<p>In practice, it may look like this.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">mutate</span>(<span class="at">status =</span> <span class="fu">case_when</span>(</span>
+<span id="cb32-3"><a href="#cb32-3"></a>    <span class="fu">is.na</span>(arr_delay) <span class="sc">~</span> <span class="st">"cancelled"</span>,</span>
+<span id="cb32-4"><a href="#cb32-4"></a>    arr_delay <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">30</span> <span class="sc">~</span> <span class="st">"very early"</span>,</span>
+<span id="cb32-5"><a href="#cb32-5"></a>    arr_delay <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">15</span> <span class="sc">~</span> <span class="st">"early"</span>,</span>
+<span id="cb32-6"><a href="#cb32-6"></a>    <span class="fu">abs</span>(arr_delay) <span class="sc">&lt;=</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">"on time"</span>,</span>
+<span id="cb32-7"><a href="#cb32-7"></a>    arr_delay <span class="sc">&lt;</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">"late"</span>,</span>
+<span id="cb32-8"><a href="#cb32-8"></a>    arr_delay <span class="sc">&lt;</span> <span class="cn">Inf</span> <span class="sc">~</span> <span class="st">"super late"</span>,</span>
+<span id="cb32-9"><a href="#cb32-9"></a>  ),</span>
+<span id="cb32-10"><a href="#cb32-10"></a>  <span class="at">.keep =</span> <span class="st">"used"</span></span>
+<span id="cb32-11"><a href="#cb32-11"></a>         )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 2
+   arr_delay status 
+       &lt;dbl&gt; &lt;chr&gt;  
+ 1        11 on time
+ 2        20 late   
+ 3        33 late   
+ 4       -18 early  
+ 5       -25 early  
+ 6        12 on time
+ 7        19 late   
+ 8       -14 on time
+ 9        -8 on time
+10         8 on time
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+</section><section id="compatible-datatypes" class="level3"><h3 class="anchored" data-anchor-id="compatible-datatypes">Compatible Datatypes</h3>
+<p>Both if_else and case_when require compatible output types. - Numerical and logical - String and factors - Dates and date-times - NA and anything</p>
+</section></section></section><section id="chapter-13" class="level1"><h1>Chapter 13</h1>
+<section id="parsing" class="level2"><h2 class="anchored" data-anchor-id="parsing">Parsing</h2>
+<p>To change a string to a number, readr has two functions:</p>
+<ul>
+<li>parse_double()</li>
+<li>parse_number()</li>
+</ul>
+<p>parse number works well when the string contains non-numeric text, like dollar signs or percentages</p>
+</section><section id="counting" class="level2"><h2 class="anchored" data-anchor-id="counting">Counting</h2>
+<p>The count() function can be used on its own to display a summary of a given column. n() must be used within another verb, like summarize().</p>
+<p>n_distinct() counts the number of unique values.</p>
+<p>You can perform a weighted count (adding up values within a column) with count by utilizing the ‘wt’ argument.</p>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>flights <span class="sc">|&gt;</span> <span class="fu">count</span>(tailnum, <span class="at">wt=</span> distance)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4,044 × 2
+   tailnum      n
+   &lt;chr&gt;    &lt;dbl&gt;
+ 1 D942DN    3418
+ 2 N0EGMQ  250866
+ 3 N10156  115966
+ 4 N102UW   25722
+ 5 N103US   24619
+ 6 N104UW   25157
+ 7 N10575  150194
+ 8 N105UW   23618
+ 9 N107US   21677
+10 N108UW   32070
+# ℹ 4,034 more rows</code></pre>
+</div>
+</div>
+</section><section id="numeric-transformations" class="level2"><h2 class="anchored" data-anchor-id="numeric-transformations">Numeric Transformations</h2>
+<p>pmin() and pmax() will summarize a given set of rows</p>
+<p>%/% does integer division, and %% does remainder division</p>
+<p>round() uses Banker’s rounding: if a number is halfway between two numbers, it’s rounded to the even integer. i.e.&nbsp;1.5 -&gt; 2, and 2.5 -&gt; 2</p>
+<p>floor() always rounds down</p>
+<p>ceiling() always rounds up</p>
+<p>cut() bins numbers</p>
+</section></section><section id="factors" class="level1"><h1>Factors</h1>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>gss_cat <span class="ot">&lt;-</span> forcats<span class="sc">::</span>gss_cat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>fct_reorder() takes three arguments:</p>
+<ul>
+<li>.f, the factor which needs to be modified</li>
+<li>.x, a numeric vector to reorder the levels</li>
+<li>.fun, a function to use if there are multiple values of .x for .f (default is median)</li>
+</ul>
+<p>fct_relevel() takes one factor to bump up or down</p>
+<p>fct_reorder2(.f, .x, .y) reorders factor f by y values associated with largest x values.This is used for color, so the ending order matches the legend.</p>
+<p>fct_infreq() is used for bar plots.</p>
+<p>fct_reverse() reverses the factor order.</p>
+<p>fct_recode can be used in conjuction with mutate to rename factors.</p>
+<p>fct_collapse can be used in conjunction with mutate to condense variables</p>
+<p>fct_lump_* will lump together factors based on *. - lowfreq: takes the smallest categories and puts them into one ‘other’ category, making sure ‘other’ is always the smallest - n: specifies we want n groups</p>
+<p>ordered() will specify ordering between levels</p>
+</section><section id="dates-and-times" class="level1"><h1>Dates and Times</h1>
+<p>R has three data types referring to time: - date - time - date-time</p>
+<p>The hms package can be useful for casting strings to dates. - ymd: will cast “2017-01-31” to a date - mdy: will cast “January 31st, 2017” to a date - dmy: will cast “31-Jan-2017” to a date - *_hms: includes hour minute second - *_hm: includes hour and minute - make_date: takes in year, month, day as seperate components - make_datetime: takes in year, month, day, hours, minutes, seconds as separate components</p>
+<p>These all have an argument of tz, for timezone</p>
+<p>We can use rounding, much like the standard functions: - *_date(x, “time chunk”): will round to the nearest given time chunk</p>
+<p>Subtracting dates will return a difftime object, and it can be cast to a duration with: as.duration(). We can specify the time units with d*() with the given time unit.</p>
+<p>Time zones are specified by the region, like “America/Chicago”.</p>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
+      <a href="../tt/hw02-tt.html" class="pagination-link" aria-label="Homework 02">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Homework 02</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../ica/ica-sample1.html" class="pagination-link" aria-label="ICA Sample 1">
+        <span class="nav-page-text"><span class="chapter-title">ICA Sample 1</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb37-1"><a href="#cb37-1"></a><span class="co">---</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="an">title:</span><span class="co"> "adv_wrangling_1"</span></span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb37-4"><a href="#cb37-4"></a><span class="co">---</span></span>
+<span id="cb37-5"><a href="#cb37-5"></a><span class="fu"># Chapter 12: Logical Vectors</span></span>
+<span id="cb37-6"><a href="#cb37-6"></a></span>
+<span id="cb37-7"><a href="#cb37-7"></a><span class="in">```{r setup}</span></span>
+<span id="cb37-8"><a href="#cb37-8"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb37-9"><a href="#cb37-9"></a><span class="fu">library</span>(nycflights13)</span>
+<span id="cb37-10"><a href="#cb37-10"></a><span class="in">```</span></span>
+<span id="cb37-11"><a href="#cb37-11"></a></span>
+<span id="cb37-12"><a href="#cb37-12"></a></span>
+<span id="cb37-13"><a href="#cb37-13"></a><span class="fu">## Basic Comparisons</span></span>
+<span id="cb37-16"><a href="#cb37-16"></a><span class="in">```{r}</span></span>
+<span id="cb37-17"><a href="#cb37-17"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb37-18"><a href="#cb37-18"></a>  <span class="fu">filter</span>(dep_time <span class="sc">&gt;</span> <span class="dv">600</span> <span class="sc">&amp;</span> dep_time <span class="sc">&lt;</span> <span class="dv">2000</span> <span class="sc">&amp;</span> <span class="fu">abs</span>(arr_delay) <span class="sc">&lt;</span> <span class="dv">20</span>)</span>
+<span id="cb37-19"><a href="#cb37-19"></a></span>
+<span id="cb37-20"><a href="#cb37-20"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb37-21"><a href="#cb37-21"></a>  <span class="fu">mutate</span>(<span class="at">daytime =</span> dep_time <span class="sc">&gt;</span> <span class="dv">600</span> <span class="sc">&amp;</span> dep_time <span class="sc">&lt;</span> <span class="dv">2000</span>, </span>
+<span id="cb37-22"><a href="#cb37-22"></a>         <span class="at">approx_ontime =</span> <span class="fu">abs</span>(arr_delay) <span class="sc">&lt;</span> <span class="dv">20</span>,</span>
+<span id="cb37-23"><a href="#cb37-23"></a>         <span class="at">.keep =</span> <span class="st">"used"</span>)</span>
+<span id="cb37-24"><a href="#cb37-24"></a><span class="in">```</span></span>
+<span id="cb37-25"><a href="#cb37-25"></a></span>
+<span id="cb37-26"><a href="#cb37-26"></a>.keep is an argument within mutate that selects variables based on the key provided:</span>
+<span id="cb37-27"><a href="#cb37-27"></a><span class="ss">- </span>"all": default, retains all original columns and new/modified ones</span>
+<span id="cb37-28"><a href="#cb37-28"></a><span class="ss">- </span>"used": only uses the columns used in the mutate call, plus the new ones</span>
+<span id="cb37-29"><a href="#cb37-29"></a><span class="ss">- </span>"unused": maintains newly created columns, discards all that were used to create them</span>
+<span id="cb37-30"><a href="#cb37-30"></a><span class="ss">- </span>"none": keeps only grouping keys and new columns</span>
+<span id="cb37-31"><a href="#cb37-31"></a></span>
+<span id="cb37-32"><a href="#cb37-32"></a><span class="fu">### Note on Floats</span></span>
+<span id="cb37-33"><a href="#cb37-33"></a></span>
+<span id="cb37-34"><a href="#cb37-34"></a>Don't utilize the '==' operator for floats, instead, use near()</span>
+<span id="cb37-35"><a href="#cb37-35"></a></span>
+<span id="cb37-38"><a href="#cb37-38"></a><span class="in">```{r}</span></span>
+<span id="cb37-39"><a href="#cb37-39"></a>x <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb37-40"><a href="#cb37-40"></a>x <span class="sc">==</span> <span class="dv">2</span></span>
+<span id="cb37-41"><a href="#cb37-41"></a></span>
+<span id="cb37-42"><a href="#cb37-42"></a><span class="fu">near</span>(x, <span class="dv">2</span>)</span>
+<span id="cb37-43"><a href="#cb37-43"></a><span class="in">```</span></span>
+<span id="cb37-44"><a href="#cb37-44"></a></span>
+<span id="cb37-45"><a href="#cb37-45"></a><span class="fu">### Note on Missing Values</span></span>
+<span id="cb37-46"><a href="#cb37-46"></a></span>
+<span id="cb37-47"><a href="#cb37-47"></a>Logical comparisons using NA will result in NA.</span>
+<span id="cb37-48"><a href="#cb37-48"></a></span>
+<span id="cb37-51"><a href="#cb37-51"></a><span class="in">```{r}</span></span>
+<span id="cb37-52"><a href="#cb37-52"></a><span class="cn">NA</span> <span class="sc">&gt;</span> <span class="dv">5</span></span>
+<span id="cb37-53"><a href="#cb37-53"></a></span>
+<span id="cb37-54"><a href="#cb37-54"></a><span class="dv">10</span> <span class="sc">==</span> <span class="cn">NA</span></span>
+<span id="cb37-55"><a href="#cb37-55"></a></span>
+<span id="cb37-56"><a href="#cb37-56"></a><span class="cn">NA</span> <span class="sc">==</span> <span class="cn">NA</span></span>
+<span id="cb37-57"><a href="#cb37-57"></a><span class="in">```</span></span>
+<span id="cb37-58"><a href="#cb37-58"></a>When looking for NA values, use is.na().</span>
+<span id="cb37-59"><a href="#cb37-59"></a></span>
+<span id="cb37-60"><a href="#cb37-60"></a><span class="fu">## Logical Operators</span></span>
+<span id="cb37-61"><a href="#cb37-61"></a></span>
+<span id="cb37-62"><a href="#cb37-62"></a>R has &amp; and &amp;&amp;, as well as | and ||. Use only the single operators for data wrangling, and only the double operators for programming. </span>
+<span id="cb37-63"><a href="#cb37-63"></a></span>
+<span id="cb37-66"><a href="#cb37-66"></a><span class="in">```{r}</span></span>
+<span id="cb37-67"><a href="#cb37-67"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb37-68"><a href="#cb37-68"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(arr_delay) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(dep_delay))</span>
+<span id="cb37-69"><a href="#cb37-69"></a></span>
+<span id="cb37-70"><a href="#cb37-70"></a>flights <span class="sc">|&gt;</span> </span>
+<span id="cb37-71"><a href="#cb37-71"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(dep_time))</span>
+<span id="cb37-72"><a href="#cb37-72"></a></span>
+<span id="cb37-73"><a href="#cb37-73"></a><span class="in">```</span></span>
+<span id="cb37-74"><a href="#cb37-74"></a></span>
+<span id="cb37-75"><a href="#cb37-75"></a><span class="fu">## Summaries</span></span>
+<span id="cb37-76"><a href="#cb37-76"></a>any() returns TRUE is anything in x is TRUE.</span>
+<span id="cb37-77"><a href="#cb37-77"></a>all() returns TRUE if everything in x is TRUE.</span>
+<span id="cb37-78"><a href="#cb37-78"></a></span>
+<span id="cb37-79"><a href="#cb37-79"></a>We can use a subset operator to perform contradictory summaries.</span>
+<span id="cb37-80"><a href="#cb37-80"></a></span>
+<span id="cb37-83"><a href="#cb37-83"></a><span class="in">```{r}</span></span>
+<span id="cb37-84"><a href="#cb37-84"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb37-85"><a href="#cb37-85"></a>  <span class="fu">group_by</span>(year, month, day) <span class="sc">|&gt;</span></span>
+<span id="cb37-86"><a href="#cb37-86"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb37-87"><a href="#cb37-87"></a>    <span class="at">behind =</span> <span class="fu">mean</span>(arr_delay[arr_delay <span class="sc">&gt;</span> <span class="dv">0</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb37-88"><a href="#cb37-88"></a>    <span class="at">ahead =</span> <span class="fu">mean</span>(arr_delay[arr_delay <span class="sc">&lt;</span> <span class="dv">0</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb37-89"><a href="#cb37-89"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb37-90"><a href="#cb37-90"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb37-91"><a href="#cb37-91"></a>  )</span>
+<span id="cb37-92"><a href="#cb37-92"></a><span class="in">```</span></span>
+<span id="cb37-93"><a href="#cb37-93"></a></span>
+<span id="cb37-94"><a href="#cb37-94"></a><span class="fu">## Conditional Transformations</span></span>
+<span id="cb37-95"><a href="#cb37-95"></a></span>
+<span id="cb37-96"><a href="#cb37-96"></a><span class="fu">### if_else</span></span>
+<span id="cb37-97"><a href="#cb37-97"></a></span>
+<span id="cb37-98"><a href="#cb37-98"></a>if_else takes three required arguments:</span>
+<span id="cb37-99"><a href="#cb37-99"></a></span>
+<span id="cb37-100"><a href="#cb37-100"></a><span class="ss">- </span>Condition: a logical vector,</span>
+<span id="cb37-101"><a href="#cb37-101"></a><span class="ss">- </span>true: the output when condition is true,</span>
+<span id="cb37-102"><a href="#cb37-102"></a><span class="ss">- </span>false: the output when the condition is false</span>
+<span id="cb37-103"><a href="#cb37-103"></a></span>
+<span id="cb37-104"><a href="#cb37-104"></a><span class="in">```{r if_else example 1}</span></span>
+<span id="cb37-105"><a href="#cb37-105"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">3</span>, <span class="cn">NA</span>)</span>
+<span id="cb37-106"><a href="#cb37-106"></a><span class="fu">if_else</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"+ve"</span>, <span class="st">"-ve"</span>)</span>
+<span id="cb37-107"><a href="#cb37-107"></a><span class="in">```</span></span>
+<span id="cb37-108"><a href="#cb37-108"></a></span>
+<span id="cb37-109"><a href="#cb37-109"></a>if_else can take a fourth 'missing' argument that specifies what to do with a missing value.</span>
+<span id="cb37-110"><a href="#cb37-110"></a></span>
+<span id="cb37-111"><a href="#cb37-111"></a>You can also manipulate the value.</span>
+<span id="cb37-112"><a href="#cb37-112"></a></span>
+<span id="cb37-113"><a href="#cb37-113"></a><span class="in">```{r if_else example 2}</span></span>
+<span id="cb37-114"><a href="#cb37-114"></a><span class="fu">if_else</span>(x <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="sc">-</span>x, x)</span>
+<span id="cb37-115"><a href="#cb37-115"></a><span class="in">```</span></span>
+<span id="cb37-116"><a href="#cb37-116"></a></span>
+<span id="cb37-117"><a href="#cb37-117"></a>We can nest if_else as well!</span>
+<span id="cb37-118"><a href="#cb37-118"></a><span class="in">```{r nested if_else}</span></span>
+<span id="cb37-119"><a href="#cb37-119"></a><span class="fu">if_else</span>(x <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"0"</span>, <span class="fu">if_else</span>(x <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">"-ve"</span>, <span class="st">"+ve"</span>), <span class="st">"???"</span>)</span>
+<span id="cb37-120"><a href="#cb37-120"></a><span class="in">```</span></span>
+<span id="cb37-121"><a href="#cb37-121"></a></span>
+<span id="cb37-122"><a href="#cb37-122"></a><span class="fu">### case_when</span></span>
+<span id="cb37-123"><a href="#cb37-123"></a></span>
+<span id="cb37-124"><a href="#cb37-124"></a>case_when takes pairs of 'condition ~ output,' where condition is a logical vector.</span>
+<span id="cb37-125"><a href="#cb37-125"></a></span>
+<span id="cb37-126"><a href="#cb37-126"></a><span class="in">```{r case_when example}</span></span>
+<span id="cb37-127"><a href="#cb37-127"></a><span class="fu">case_when</span>(</span>
+<span id="cb37-128"><a href="#cb37-128"></a>  x <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"0"</span>,</span>
+<span id="cb37-129"><a href="#cb37-129"></a>  x <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"-ve"</span>,</span>
+<span id="cb37-130"><a href="#cb37-130"></a>  x <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"+ve"</span>,</span>
+<span id="cb37-131"><a href="#cb37-131"></a>  <span class="fu">is.na</span>(x) <span class="sc">~</span> <span class="st">"???"</span></span>
+<span id="cb37-132"><a href="#cb37-132"></a>)</span>
+<span id="cb37-133"><a href="#cb37-133"></a></span>
+<span id="cb37-134"><a href="#cb37-134"></a><span class="in">```</span></span>
+<span id="cb37-135"><a href="#cb37-135"></a></span>
+<span id="cb37-136"><a href="#cb37-136"></a>We can use a .default argument to create a default value. If multiple conditions match, only the first is used.</span>
+<span id="cb37-137"><a href="#cb37-137"></a></span>
+<span id="cb37-140"><a href="#cb37-140"></a><span class="in">```{r}</span></span>
+<span id="cb37-141"><a href="#cb37-141"></a><span class="fu">case_when</span>(</span>
+<span id="cb37-142"><a href="#cb37-142"></a>  x <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"0"</span>,</span>
+<span id="cb37-143"><a href="#cb37-143"></a>  x <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"+ve"</span>,</span>
+<span id="cb37-144"><a href="#cb37-144"></a>  x <span class="sc">&gt;</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"big"</span>,</span>
+<span id="cb37-145"><a href="#cb37-145"></a>  <span class="at">.default =</span> <span class="st">"???"</span></span>
+<span id="cb37-146"><a href="#cb37-146"></a>  </span>
+<span id="cb37-147"><a href="#cb37-147"></a>)</span>
+<span id="cb37-148"><a href="#cb37-148"></a></span>
+<span id="cb37-149"><a href="#cb37-149"></a><span class="in">```</span></span>
+<span id="cb37-150"><a href="#cb37-150"></a></span>
+<span id="cb37-151"><a href="#cb37-151"></a></span>
+<span id="cb37-152"><a href="#cb37-152"></a>In practice, it may look like this.</span>
+<span id="cb37-155"><a href="#cb37-155"></a><span class="in">```{r}</span></span>
+<span id="cb37-156"><a href="#cb37-156"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb37-157"><a href="#cb37-157"></a>  <span class="fu">mutate</span>(<span class="at">status =</span> <span class="fu">case_when</span>(</span>
+<span id="cb37-158"><a href="#cb37-158"></a>    <span class="fu">is.na</span>(arr_delay) <span class="sc">~</span> <span class="st">"cancelled"</span>,</span>
+<span id="cb37-159"><a href="#cb37-159"></a>    arr_delay <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">30</span> <span class="sc">~</span> <span class="st">"very early"</span>,</span>
+<span id="cb37-160"><a href="#cb37-160"></a>    arr_delay <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">15</span> <span class="sc">~</span> <span class="st">"early"</span>,</span>
+<span id="cb37-161"><a href="#cb37-161"></a>    <span class="fu">abs</span>(arr_delay) <span class="sc">&lt;=</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">"on time"</span>,</span>
+<span id="cb37-162"><a href="#cb37-162"></a>    arr_delay <span class="sc">&lt;</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">"late"</span>,</span>
+<span id="cb37-163"><a href="#cb37-163"></a>    arr_delay <span class="sc">&lt;</span> <span class="cn">Inf</span> <span class="sc">~</span> <span class="st">"super late"</span>,</span>
+<span id="cb37-164"><a href="#cb37-164"></a>  ),</span>
+<span id="cb37-165"><a href="#cb37-165"></a>  <span class="at">.keep =</span> <span class="st">"used"</span></span>
+<span id="cb37-166"><a href="#cb37-166"></a>         )</span>
+<span id="cb37-167"><a href="#cb37-167"></a></span>
+<span id="cb37-168"><a href="#cb37-168"></a><span class="in">```</span></span>
+<span id="cb37-169"><a href="#cb37-169"></a></span>
+<span id="cb37-170"><a href="#cb37-170"></a><span class="fu">### Compatible Datatypes</span></span>
+<span id="cb37-171"><a href="#cb37-171"></a></span>
+<span id="cb37-172"><a href="#cb37-172"></a>Both if_else and case_when require compatible output types. </span>
+<span id="cb37-173"><a href="#cb37-173"></a><span class="ss">- </span>Numerical and logical</span>
+<span id="cb37-174"><a href="#cb37-174"></a><span class="ss">- </span>String and factors</span>
+<span id="cb37-175"><a href="#cb37-175"></a><span class="ss">- </span>Dates and date-times</span>
+<span id="cb37-176"><a href="#cb37-176"></a><span class="ss">- </span>NA and anything</span>
+<span id="cb37-177"><a href="#cb37-177"></a></span>
+<span id="cb37-178"><a href="#cb37-178"></a><span class="fu"># Chapter 13</span></span>
+<span id="cb37-179"><a href="#cb37-179"></a></span>
+<span id="cb37-180"><a href="#cb37-180"></a><span class="fu">## Parsing</span></span>
+<span id="cb37-181"><a href="#cb37-181"></a></span>
+<span id="cb37-182"><a href="#cb37-182"></a>To change a string to a number, readr has two functions:</span>
+<span id="cb37-183"><a href="#cb37-183"></a></span>
+<span id="cb37-184"><a href="#cb37-184"></a><span class="ss">- </span>parse_double()</span>
+<span id="cb37-185"><a href="#cb37-185"></a><span class="ss">- </span>parse_number()</span>
+<span id="cb37-186"><a href="#cb37-186"></a></span>
+<span id="cb37-187"><a href="#cb37-187"></a>parse number works well when the string contains non-numeric text, like dollar signs or percentages</span>
+<span id="cb37-188"><a href="#cb37-188"></a></span>
+<span id="cb37-189"><a href="#cb37-189"></a><span class="fu">## Counting</span></span>
+<span id="cb37-190"><a href="#cb37-190"></a></span>
+<span id="cb37-191"><a href="#cb37-191"></a>The count() function can be used on its own to display a summary of a given column. n() must be used within another verb, like summarize().</span>
+<span id="cb37-192"><a href="#cb37-192"></a></span>
+<span id="cb37-193"><a href="#cb37-193"></a>n_distinct() counts the number of unique values.</span>
+<span id="cb37-194"><a href="#cb37-194"></a></span>
+<span id="cb37-195"><a href="#cb37-195"></a>You can perform a weighted count (adding up values within a column) with count by utilizing the 'wt' argument.</span>
+<span id="cb37-196"><a href="#cb37-196"></a></span>
+<span id="cb37-199"><a href="#cb37-199"></a><span class="in">```{r}</span></span>
+<span id="cb37-200"><a href="#cb37-200"></a>flights <span class="sc">|&gt;</span> <span class="fu">count</span>(tailnum, <span class="at">wt=</span> distance)</span>
+<span id="cb37-201"><a href="#cb37-201"></a><span class="in">```</span></span>
+<span id="cb37-202"><a href="#cb37-202"></a></span>
+<span id="cb37-203"><a href="#cb37-203"></a><span class="fu">## Numeric Transformations</span></span>
+<span id="cb37-204"><a href="#cb37-204"></a></span>
+<span id="cb37-205"><a href="#cb37-205"></a>pmin() and pmax() will summarize a given set of rows</span>
+<span id="cb37-206"><a href="#cb37-206"></a></span>
+<span id="cb37-207"><a href="#cb37-207"></a>%/% does integer division, and %% does remainder division</span>
+<span id="cb37-208"><a href="#cb37-208"></a></span>
+<span id="cb37-209"><a href="#cb37-209"></a>round() uses Banker's rounding: if a number is halfway between two numbers, it's rounded to the even integer. i.e. 1.5 -&gt; 2, and 2.5 -&gt; 2</span>
+<span id="cb37-210"><a href="#cb37-210"></a></span>
+<span id="cb37-211"><a href="#cb37-211"></a>floor() always rounds down</span>
+<span id="cb37-212"><a href="#cb37-212"></a></span>
+<span id="cb37-213"><a href="#cb37-213"></a>ceiling() always rounds up</span>
+<span id="cb37-214"><a href="#cb37-214"></a></span>
+<span id="cb37-215"><a href="#cb37-215"></a>cut() bins numbers</span>
+<span id="cb37-216"><a href="#cb37-216"></a></span>
+<span id="cb37-217"><a href="#cb37-217"></a><span class="fu"># Factors</span></span>
+<span id="cb37-220"><a href="#cb37-220"></a><span class="in">```{r}</span></span>
+<span id="cb37-221"><a href="#cb37-221"></a>gss_cat <span class="ot">&lt;-</span> forcats<span class="sc">::</span>gss_cat</span>
+<span id="cb37-222"><a href="#cb37-222"></a><span class="in">```</span></span>
+<span id="cb37-223"><a href="#cb37-223"></a></span>
+<span id="cb37-224"><a href="#cb37-224"></a>fct_reorder() takes three arguments:</span>
+<span id="cb37-225"><a href="#cb37-225"></a></span>
+<span id="cb37-226"><a href="#cb37-226"></a><span class="ss">- </span>.f, the factor which needs to be modified</span>
+<span id="cb37-227"><a href="#cb37-227"></a><span class="ss">- </span>.x, a numeric vector to reorder the levels</span>
+<span id="cb37-228"><a href="#cb37-228"></a><span class="ss">- </span>.fun, a function to use if there are multiple values of .x for .f (default is median)</span>
+<span id="cb37-229"><a href="#cb37-229"></a></span>
+<span id="cb37-230"><a href="#cb37-230"></a>fct_relevel() takes one factor to bump up or down</span>
+<span id="cb37-231"><a href="#cb37-231"></a></span>
+<span id="cb37-232"><a href="#cb37-232"></a>fct_reorder2(.f, .x, .y) reorders factor f by y values associated with largest x values.This is used for color, so the ending order matches the legend. </span>
+<span id="cb37-233"><a href="#cb37-233"></a></span>
+<span id="cb37-234"><a href="#cb37-234"></a>fct_infreq() is used for bar plots.</span>
+<span id="cb37-235"><a href="#cb37-235"></a></span>
+<span id="cb37-236"><a href="#cb37-236"></a>fct_reverse() reverses the factor order.</span>
+<span id="cb37-237"><a href="#cb37-237"></a></span>
+<span id="cb37-238"><a href="#cb37-238"></a>fct_recode can be used in conjuction with mutate to rename factors. </span>
+<span id="cb37-239"><a href="#cb37-239"></a></span>
+<span id="cb37-240"><a href="#cb37-240"></a>fct_collapse can be used in conjunction with mutate to condense variables</span>
+<span id="cb37-241"><a href="#cb37-241"></a></span>
+<span id="cb37-242"><a href="#cb37-242"></a>fct_lump_* will lump together factors based on *. </span>
+<span id="cb37-243"><a href="#cb37-243"></a><span class="ss">- </span>lowfreq: takes the smallest categories and puts them into one 'other' category, making sure 'other' is always the smallest</span>
+<span id="cb37-244"><a href="#cb37-244"></a><span class="ss">- </span>n: specifies we want n groups</span>
+<span id="cb37-245"><a href="#cb37-245"></a></span>
+<span id="cb37-246"><a href="#cb37-246"></a>ordered() will specify ordering between levels</span>
+<span id="cb37-247"><a href="#cb37-247"></a></span>
+<span id="cb37-248"><a href="#cb37-248"></a><span class="fu"># Dates and Times</span></span>
+<span id="cb37-249"><a href="#cb37-249"></a></span>
+<span id="cb37-250"><a href="#cb37-250"></a>R has three data types referring to time:</span>
+<span id="cb37-251"><a href="#cb37-251"></a><span class="ss">- </span>date</span>
+<span id="cb37-252"><a href="#cb37-252"></a><span class="ss">- </span>time</span>
+<span id="cb37-253"><a href="#cb37-253"></a><span class="ss">- </span>date-time</span>
+<span id="cb37-254"><a href="#cb37-254"></a></span>
+<span id="cb37-255"><a href="#cb37-255"></a>The hms package can be useful for casting strings to dates.</span>
+<span id="cb37-256"><a href="#cb37-256"></a><span class="ss">- </span>ymd: will cast "2017-01-31" to a date</span>
+<span id="cb37-257"><a href="#cb37-257"></a><span class="ss">- </span>mdy: will cast "January 31st, 2017" to a date</span>
+<span id="cb37-258"><a href="#cb37-258"></a><span class="ss">- </span>dmy: will cast "31-Jan-2017" to a date</span>
+<span id="cb37-259"><a href="#cb37-259"></a><span class="ss">- </span>*_hms: includes hour minute second</span>
+<span id="cb37-260"><a href="#cb37-260"></a><span class="ss">- </span>*_hm: includes hour and minute</span>
+<span id="cb37-261"><a href="#cb37-261"></a><span class="ss">- </span>make_date: takes in year, month, day as seperate components</span>
+<span id="cb37-262"><a href="#cb37-262"></a><span class="ss">- </span>make_datetime: takes in year, month, day, hours, minutes, seconds as separate components</span>
+<span id="cb37-263"><a href="#cb37-263"></a></span>
+<span id="cb37-264"><a href="#cb37-264"></a>These all have an argument of tz, for timezone</span>
+<span id="cb37-265"><a href="#cb37-265"></a></span>
+<span id="cb37-266"><a href="#cb37-266"></a></span>
+<span id="cb37-267"><a href="#cb37-267"></a>We can use rounding, much like the standard functions:</span>
+<span id="cb37-268"><a href="#cb37-268"></a><span class="ss">- </span>*_date(x, "time chunk"): will round to the nearest given time chunk</span>
+<span id="cb37-269"><a href="#cb37-269"></a></span>
+<span id="cb37-270"><a href="#cb37-270"></a>Subtracting dates will return a difftime object, and it can be cast to a duration with: as.duration().</span>
+<span id="cb37-271"><a href="#cb37-271"></a>We can specify the time units with d*() with the given time unit. </span>
+<span id="cb37-272"><a href="#cb37-272"></a></span>
+<span id="cb37-273"><a href="#cb37-273"></a>Time zones are specified by the region, like "America/Chicago".</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

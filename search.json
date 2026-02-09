@@ -21,28 +21,6 @@
     ]
   },
   {
-    "objectID": "tt/2025-07-08.html",
-    "href": "tt/2025-07-08.html",
-    "title": "TidyTuesday Sample 1",
-    "section": "",
-    "text": "Add content here",
-    "crumbs": [
-      "TidyTuesday",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>TidyTuesday Sample 1</span>"
-    ]
-  },
-  {
-    "objectID": "tt/2025-07-15.html",
-    "href": "tt/2025-07-15.html",
-    "title": "TidyTuesday Sample 2",
-    "section": "",
-    "text": "Add content here",
-    "crumbs": [
-      "TidyTuesday",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>TidyTuesday Sample 2</span>"
-    ]
-  },
-  {
     "objectID": "tt/hw01-tt.html",
     "href": "tt/hw01-tt.html",
     "title": "Homework 01",
@@ -50,29 +28,117 @@
     "text": "TidyTuesday Section\nExplore the week’s TidyTuesday challenge. Develop a research question, then answer it through a short data story with effective visualization(s). Provide sufficient background for readers to grasp your narrative.\nCodelibrary(tidyverse)\nCodecompanies &lt;- read.csv(\"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv\")\nhead(companies)\n\n  company_id                                             company_name\n1   41273639                          MH MATERIAIS DE CONSTRUCAO LTDA\n2   41274138                   CLINICA ESTETICA CAXIAS DO SUL RS LTDA\n3   41274505                          G P CONSTRUCOES E SERVICOS LTDA\n4   41274745 UNICREDIT BANK SAO PAULO CONSULTORIA UNIPESSOAL LIMITADA\n5   41274856                   PRODUCON PRODUTOS PARA CONSTRUCAO LTDA\n6   41274914                        HSG DISTRIBUIDORA DE BEBIDAS LTDA\n                              legal_nature\n1 Limited Liability Business Company (LLC)\n2 Limited Liability Business Company (LLC)\n3 Limited Liability Business Company (LLC)\n4 Limited Liability Business Company (LLC)\n5 Limited Liability Business Company (LLC)\n6 Limited Liability Business Company (LLC)\n                       owner_qualification capital_stock     company_size\n1 Managing Partner / Partner-Administrator       1000000 small-enterprise\n2 Managing Partner / Partner-Administrator        200000 micro-enterprise\n3 Managing Partner / Partner-Administrator        500000 small-enterprise\n4 Managing Partner / Partner-Administrator        159600 small-enterprise\n5 Managing Partner / Partner-Administrator        200000 micro-enterprise\n6 Managing Partner / Partner-Administrator        300000 small-enterprise\nCodequantile(companies$capital_stock)\n\n          0%          25%          50%          75%         100% \n1.500001e+05 2.100000e+05 4.000000e+05 1.000000e+06 1.000000e+12\nCodecompanies_processed &lt;- companies %&gt;%\n  filter(capital_stock &lt; 1000000)\nResearch Question: How does capital stock vary by company size?\nCodecompanies_processed %&gt;%\n  ggplot(aes(x = capital_stock, fill = company_size)) +\n  geom_density(alpha = 0.5) +\n  labs(x = \"Capital Stock (in BRL)\", title = \"Distribution of Capital Stock between Company Sizes\", fill = \"Company Size\", caption = \"via TidyTuesday, by Sam Kenney\") +\n  scale_fill_viridis_d()\nThis dataset from TidyTuesday represents a variety of aspects about Brazillian companies. It includes capital stock in BRL of each company, as well as company size. Company size is categorized as micro-enterprise, small-enterprise, and other. This dataset is highly skewed, with most capital stock values being below 1,000,000 BRL, and some values at 999,999,999,999 BRL. To visualize the standard relationship between stock and company size, only the bottom 75% of values were used. Of these values, most of the higher stocks (over 600,000 BRL) are held by other-sized companies. All three company sizes are concentrated at around 200,000 BRL, and density quickly decreases at around 300,000 BRL.",
     "crumbs": [
       "TidyTuesday",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 01</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 01</span>"
     ]
   },
   {
-    "objectID": "pcl/pcl.html",
-    "href": "pcl/pcl.html",
-    "title": "Pre-Class Learning Summaries",
+    "objectID": "tt/hw02-tt.html",
+    "href": "tt/hw02-tt.html",
+    "title": "Homework 02",
     "section": "",
-    "text": "R",
+    "text": "TidyTuesday Section (optional)\nExplore the week’s TidyTuesday challenge. Develop a research question, then answer it through a short data story with effective visualization(s). Provide sufficient background for readers to grasp your narrative.\nCodelibrary(tidyverse)\nedible_plants &lt;- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-02-03/edible_plants.csv')\nCodeedible_plants_clean &lt;- edible_plants %&gt;%\n  mutate(sunlight = recode(sunlight, \n         'Full sun/partial shade/ full shade' = 'Full sun/partial shade/full shade',\n         'full sun/partial shade/ full shade' = 'Full sun/partial shade/full shade',\n         'partial shade' = 'Partial shade')) %&gt;%\n  mutate(diff = preferred_ph_upper - preferred_ph_lower)\nCodeggplot(edible_plants_clean, aes(x = reorder(taxonomic_name, diff), color = sunlight)) +\n  geom_linerange(aes(ymin = preferred_ph_lower, ymax = preferred_ph_upper), linewidth = 1) +\n  scale_color_viridis_d(name = \"Sunlight Level\") +\n  labs(x = \" \", y = \"Preferred pH\", title = \"How Particular Is Your Food?\", subtitle = \"Edible Plant Species by Preferred Soil pH and Sunlight Level\", caption = \"via TidyTuesday, by Sam Kenney\")+\n  theme_classic() +\n  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())",
     "crumbs": [
-      "Pre-Class Learnings",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+      "TidyTuesday",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 02</span>"
     ]
   },
   {
-    "objectID": "pcl/pcl.html#quarto",
-    "href": "pcl/pcl.html#quarto",
-    "title": "Pre-Class Learning Summaries",
-    "section": "Quarto",
-    "text": "Quarto\n\n\n\nfrom qmd4sci.njtierney.com",
+    "objectID": "tt/hw02-tt.html#tidytuesday-section-optional",
+    "href": "tt/hw02-tt.html#tidytuesday-section-optional",
+    "title": "Homework 02",
+    "section": "",
+    "text": "ImportantInstructions\n\n\n\nYou can count work on this week’s TidyTuesday toward the exceptional work required for an A in the Homework component.",
+    "crumbs": [
+      "TidyTuesday",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 02</span>"
+    ]
+  },
+  {
+    "objectID": "pcl/adv_wrangling_1.html",
+    "href": "pcl/adv_wrangling_1.html",
+    "title": "adv_wrangling_1",
+    "section": "",
+    "text": "Chapter 12: Logical Vectors\nCodelibrary(tidyverse)\nlibrary(nycflights13)",
     "crumbs": [
       "Pre-Class Learnings",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Pre-Class Learning Summaries</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>adv_wrangling_1</span>"
+    ]
+  },
+  {
+    "objectID": "pcl/adv_wrangling_1.html#basic-comparisons",
+    "href": "pcl/adv_wrangling_1.html#basic-comparisons",
+    "title": "adv_wrangling_1",
+    "section": "Basic Comparisons",
+    "text": "Basic Comparisons\n\nCodeflights |&gt;\n  filter(dep_time &gt; 600 & dep_time &lt; 2000 & abs(arr_delay) &lt; 20)\n\n# A tibble: 172,286 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1      601            600         1      844            850\n 2  2013     1     1      602            610        -8      812            820\n 3  2013     1     1      602            605        -3      821            805\n 4  2013     1     1      606            610        -4      858            910\n 5  2013     1     1      606            610        -4      837            845\n 6  2013     1     1      607            607         0      858            915\n 7  2013     1     1      611            600        11      945            931\n 8  2013     1     1      613            610         3      925            921\n 9  2013     1     1      615            615         0      833            842\n10  2013     1     1      622            630        -8     1017           1014\n# ℹ 172,276 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\nCodeflights |&gt; \n  mutate(daytime = dep_time &gt; 600 & dep_time &lt; 2000, \n         approx_ontime = abs(arr_delay) &lt; 20,\n         .keep = \"used\")\n\n# A tibble: 336,776 × 4\n   dep_time arr_delay daytime approx_ontime\n      &lt;int&gt;     &lt;dbl&gt; &lt;lgl&gt;   &lt;lgl&gt;        \n 1      517        11 FALSE   TRUE         \n 2      533        20 FALSE   FALSE        \n 3      542        33 FALSE   FALSE        \n 4      544       -18 FALSE   TRUE         \n 5      554       -25 FALSE   FALSE        \n 6      554        12 FALSE   TRUE         \n 7      555        19 FALSE   TRUE         \n 8      557       -14 FALSE   TRUE         \n 9      557        -8 FALSE   TRUE         \n10      558         8 FALSE   TRUE         \n# ℹ 336,766 more rows\n\n\n.keep is an argument within mutate that selects variables based on the key provided: - “all”: default, retains all original columns and new/modified ones - “used”: only uses the columns used in the mutate call, plus the new ones - “unused”: maintains newly created columns, discards all that were used to create them - “none”: keeps only grouping keys and new columns\nNote on Floats\nDon’t utilize the ‘==’ operator for floats, instead, use near()\n\nCodex &lt;- sqrt(2) ^ 2\nx == 2\n\n[1] FALSE\n\nCodenear(x, 2)\n\n[1] TRUE\n\n\nNote on Missing Values\nLogical comparisons using NA will result in NA.\n\nCodeNA &gt; 5\n\n[1] NA\n\nCode10 == NA\n\n[1] NA\n\nCodeNA == NA\n\n[1] NA\n\n\nWhen looking for NA values, use is.na().",
+    "crumbs": [
+      "Pre-Class Learnings",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>adv_wrangling_1</span>"
+    ]
+  },
+  {
+    "objectID": "pcl/adv_wrangling_1.html#logical-operators",
+    "href": "pcl/adv_wrangling_1.html#logical-operators",
+    "title": "adv_wrangling_1",
+    "section": "Logical Operators",
+    "text": "Logical Operators\nR has & and &&, as well as | and ||. Use only the single operators for data wrangling, and only the double operators for programming.\n\nCodeflights |&gt;\n  filter(is.na(arr_delay) & !is.na(dep_delay))\n\n# A tibble: 1,175 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1     1525           1530        -5     1934           1805\n 2  2013     1     1     1528           1459        29     2002           1647\n 3  2013     1     1     1740           1745        -5     2158           2020\n 4  2013     1     1     1807           1738        29     2251           2103\n 5  2013     1     1     1939           1840        59       29           2151\n 6  2013     1     1     1952           1930        22     2358           2207\n 7  2013     1     1     2016           1930        46       NA           2220\n 8  2013     1     2      905            822        43     1313           1045\n 9  2013     1     2     1125            925       120     1445           1146\n10  2013     1     2     1848           1840         8     2333           2151\n# ℹ 1,165 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;\n\nCodeflights |&gt; \n  filter(is.na(dep_time))\n\n# A tibble: 8,255 × 19\n    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;\n 1  2013     1     1       NA           1630        NA       NA           1815\n 2  2013     1     1       NA           1935        NA       NA           2240\n 3  2013     1     1       NA           1500        NA       NA           1825\n 4  2013     1     1       NA            600        NA       NA            901\n 5  2013     1     2       NA           1540        NA       NA           1747\n 6  2013     1     2       NA           1620        NA       NA           1746\n 7  2013     1     2       NA           1355        NA       NA           1459\n 8  2013     1     2       NA           1420        NA       NA           1644\n 9  2013     1     2       NA           1321        NA       NA           1536\n10  2013     1     2       NA           1545        NA       NA           1910\n# ℹ 8,245 more rows\n# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,\n#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,\n#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;",
+    "crumbs": [
+      "Pre-Class Learnings",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>adv_wrangling_1</span>"
+    ]
+  },
+  {
+    "objectID": "pcl/adv_wrangling_1.html#summaries",
+    "href": "pcl/adv_wrangling_1.html#summaries",
+    "title": "adv_wrangling_1",
+    "section": "Summaries",
+    "text": "Summaries\nany() returns TRUE is anything in x is TRUE. all() returns TRUE if everything in x is TRUE.\nWe can use a subset operator to perform contradictory summaries.\n\nCodeflights |&gt;\n  group_by(year, month, day) |&gt;\n  summarize(\n    behind = mean(arr_delay[arr_delay &gt; 0], na.rm = TRUE),\n    ahead = mean(arr_delay[arr_delay &lt; 0], na.rm = TRUE),\n    n = n(),\n    .groups = \"drop\"\n  )\n\n# A tibble: 365 × 6\n    year month   day behind ahead     n\n   &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n 1  2013     1     1   32.5 -12.5   842\n 2  2013     1     2   32.0 -14.3   943\n 3  2013     1     3   27.7 -18.2   914\n 4  2013     1     4   28.3 -17.0   915\n 5  2013     1     5   22.6 -14.0   720\n 6  2013     1     6   24.4 -13.6   832\n 7  2013     1     7   27.8 -17.0   933\n 8  2013     1     8   20.8 -14.3   899\n 9  2013     1     9   25.6 -13.0   902\n10  2013     1    10   27.3 -16.4   932\n# ℹ 355 more rows",
+    "crumbs": [
+      "Pre-Class Learnings",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>adv_wrangling_1</span>"
+    ]
+  },
+  {
+    "objectID": "pcl/adv_wrangling_1.html#conditional-transformations",
+    "href": "pcl/adv_wrangling_1.html#conditional-transformations",
+    "title": "adv_wrangling_1",
+    "section": "Conditional Transformations",
+    "text": "Conditional Transformations\nif_else\nif_else takes three required arguments:\n\nCondition: a logical vector,\ntrue: the output when condition is true,\nfalse: the output when the condition is false\n\n\nCodex &lt;- c(-3:3, NA)\nif_else(x &gt; 0, \"+ve\", \"-ve\")\n\n[1] \"-ve\" \"-ve\" \"-ve\" \"-ve\" \"+ve\" \"+ve\" \"+ve\" NA   \n\n\nif_else can take a fourth ‘missing’ argument that specifies what to do with a missing value.\nYou can also manipulate the value.\n\nCodeif_else(x &lt; 0, -x, x)\n\n[1]  3  2  1  0  1  2  3 NA\n\n\nWe can nest if_else as well!\n\nCodeif_else(x == 0, \"0\", if_else(x &lt; 0, \"-ve\", \"+ve\"), \"???\")\n\n[1] \"-ve\" \"-ve\" \"-ve\" \"0\"   \"+ve\" \"+ve\" \"+ve\" \"???\"\n\n\ncase_when\ncase_when takes pairs of ‘condition ~ output,’ where condition is a logical vector.\n\nCodecase_when(\n  x == 0 ~ \"0\",\n  x &lt; 0 ~ \"-ve\",\n  x &gt; 0 ~ \"+ve\",\n  is.na(x) ~ \"???\"\n)\n\n[1] \"-ve\" \"-ve\" \"-ve\" \"0\"   \"+ve\" \"+ve\" \"+ve\" \"???\"\n\n\nWe can use a .default argument to create a default value. If multiple conditions match, only the first is used.\n\nCodecase_when(\n  x == 0 ~ \"0\",\n  x &gt; 0 ~ \"+ve\",\n  x &gt; 2 ~ \"big\",\n  .default = \"???\"\n  \n)\n\n[1] \"???\" \"???\" \"???\" \"0\"   \"+ve\" \"+ve\" \"+ve\" \"???\"\n\n\nIn practice, it may look like this.\n\nCodeflights |&gt;\n  mutate(status = case_when(\n    is.na(arr_delay) ~ \"cancelled\",\n    arr_delay &lt; -30 ~ \"very early\",\n    arr_delay &lt; -15 ~ \"early\",\n    abs(arr_delay) &lt;= 15 ~ \"on time\",\n    arr_delay &lt; 60 ~ \"late\",\n    arr_delay &lt; Inf ~ \"super late\",\n  ),\n  .keep = \"used\"\n         )\n\n# A tibble: 336,776 × 2\n   arr_delay status \n       &lt;dbl&gt; &lt;chr&gt;  \n 1        11 on time\n 2        20 late   \n 3        33 late   \n 4       -18 early  \n 5       -25 early  \n 6        12 on time\n 7        19 late   \n 8       -14 on time\n 9        -8 on time\n10         8 on time\n# ℹ 336,766 more rows\n\n\nCompatible Datatypes\nBoth if_else and case_when require compatible output types. - Numerical and logical - String and factors - Dates and date-times - NA and anything",
+    "crumbs": [
+      "Pre-Class Learnings",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>adv_wrangling_1</span>"
+    ]
+  },
+  {
+    "objectID": "pcl/adv_wrangling_1.html#parsing",
+    "href": "pcl/adv_wrangling_1.html#parsing",
+    "title": "adv_wrangling_1",
+    "section": "Parsing",
+    "text": "Parsing\nTo change a string to a number, readr has two functions:\n\nparse_double()\nparse_number()\n\nparse number works well when the string contains non-numeric text, like dollar signs or percentages",
+    "crumbs": [
+      "Pre-Class Learnings",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>adv_wrangling_1</span>"
+    ]
+  },
+  {
+    "objectID": "pcl/adv_wrangling_1.html#counting",
+    "href": "pcl/adv_wrangling_1.html#counting",
+    "title": "adv_wrangling_1",
+    "section": "Counting",
+    "text": "Counting\nThe count() function can be used on its own to display a summary of a given column. n() must be used within another verb, like summarize().\nn_distinct() counts the number of unique values.\nYou can perform a weighted count (adding up values within a column) with count by utilizing the ‘wt’ argument.\n\nCodeflights |&gt; count(tailnum, wt= distance)\n\n# A tibble: 4,044 × 2\n   tailnum      n\n   &lt;chr&gt;    &lt;dbl&gt;\n 1 D942DN    3418\n 2 N0EGMQ  250866\n 3 N10156  115966\n 4 N102UW   25722\n 5 N103US   24619\n 6 N104UW   25157\n 7 N10575  150194\n 8 N105UW   23618\n 9 N107US   21677\n10 N108UW   32070\n# ℹ 4,034 more rows",
+    "crumbs": [
+      "Pre-Class Learnings",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>adv_wrangling_1</span>"
+    ]
+  },
+  {
+    "objectID": "pcl/adv_wrangling_1.html#numeric-transformations",
+    "href": "pcl/adv_wrangling_1.html#numeric-transformations",
+    "title": "adv_wrangling_1",
+    "section": "Numeric Transformations",
+    "text": "Numeric Transformations\npmin() and pmax() will summarize a given set of rows\n%/% does integer division, and %% does remainder division\nround() uses Banker’s rounding: if a number is halfway between two numbers, it’s rounded to the even integer. i.e. 1.5 -&gt; 2, and 2.5 -&gt; 2\nfloor() always rounds down\nceiling() always rounds up\ncut() bins numbers",
+    "crumbs": [
+      "Pre-Class Learnings",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>adv_wrangling_1</span>"
     ]
   },
   {
@@ -83,7 +149,7 @@
     "text": "Add content here",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>ICA Sample 1</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>ICA Sample 1</span>"
     ]
   },
   {
@@ -94,7 +160,7 @@
     "text": "Add content here",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>ICA Sample 2</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>ICA Sample 2</span>"
     ]
   },
   {
@@ -105,7 +171,7 @@
     "text": "Exercise\nCarryout the following steps to clean and save the San Francisco Weather data. Make sure to download and add the data file to your portfolio repository as instructed.\nCodelibrary(tidyverse)\nweather_raw &lt;- read.csv(\"./data/raw/weather.csv\")\nReminder of Lubridate casting from https://lubridate.tidyverse.org/reference/as_date.html\nMonth abbreviation from https://lubridate.tidyverse.org/reference/month.html\nCodeweather_processed &lt;- weather_raw %&gt;%\n  mutate(PrecipYr = na_if(PrecipYr, 99999)) %&gt;%\n  arrange(Month, Day) %&gt;%\n  mutate(dateInYear = 1:365) %&gt;%\n  mutate(month_name = month.abb[Month]) %&gt;%\n  write.csv(\"./data/cleaned/weather_processed.csv\")",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
     ]
   },
   {
@@ -116,7 +182,7 @@
     "text": "Read in the weather data in this file with the correct relative file path after you move it to the instructed location.\nThere is a variable that has values that don’t make sense in the data context. Figure out which variable this is and clean it up by making those values missing using na_if().\nCreate a variable called dateInYear that indicates the day of the year (1-365) for each case. (Jan 1 should be 1, and Dec 31 should be 365).\nCreate a variable called month_name that shows the 3-letter abbreviation for each case.\nSave the wrangled data to the data/processed/ folder using write_csv(). Name this file weather_clean.csv. Look up the documentation for this function by typing ?write_csv in the Console. You’ll need to write an appropriate relative path.",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Cleaning SFO Weather Data</span>"
     ]
   },
   {
@@ -127,7 +193,7 @@
     "text": "🧩 Learning Goals\nBy the end of this lesson, you should be able to:",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
     ]
   },
   {
@@ -138,7 +204,7 @@
     "text": "Navigate ggplot2 reference page to find needed functions for a desired visualization\nNavigate the different sections of a function help page to construct desired plot features, in particular,\n\nNavigate the Usage section to identify arguments that must be set\nNavigate the Arguments section to understand how arguments work\nNavigate the Aesthetics section to learn how plot appearance can be controlled\nNavigate the Examples section for some usage examples\n\n\nIdentify when to use different data arguments within ggplot() and geom_() layers",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
     ]
   },
   {
@@ -149,7 +215,7 @@
     "text": "Introduction 1\n\nIn this lesson, we are going to recreate NYTimes 2015 Temperature Visualization (html) using data from San Francisco (SFO) in 2011.\n\n\nScreenshot of NYTimes 2015 Temperature Visualization",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
     ]
   },
   {
@@ -160,7 +226,7 @@
     "text": "Reading Data\nRun the code chunk below to load the tidyverse package and read in the San Francisco weather data.\n\nCodelibrary(tidyverse)\nweather &lt;- read_csv(\"https://mac-stat.github.io/data/sfo_weather.csv\")",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
     ]
   },
   {
@@ -171,7 +237,7 @@
     "text": "Understanding Data\nBelow is the codebook of the data. Familiarize yourself with the meaning of each variable. Use the codebook as a reference when using the data.\n\n\nMonth: Month of the year (1-12)\n\nDay: Day within the month (1-31)\n\nLow/High: Low/high temperature this day\n\nNormalLow/NormalHigh: Typical low/high temperature for this day of the year\n\nRecordLow/RecordHigh: Record low/high temperature for this day of the year\n\nLowYr/HighYr: Year in which the record low/high was observed\n\nPrecip: Amount of precipitation (inches) this day\n\nRecordPrecip: Record amount of precipitation for this day of the year\n\nPrecipYr: Year in which the record precipitation was observed\n\ndate: The actual date in 2011 for this day in YYYY-MM-DD format\n\ndateInYear: What day of the year is it? (1-365)\n\nRecord: Logical (TRUE/FALSE) indicating whether this day had a high temperature record\n\nRecordText: Text that displays the record high for this day (\"Record high: ##\")\n\nRecordP: Logical (TRUE/FALSE) indicating whether this day had a precipitation record\n\nCulmPrec: Cumulative precipitation for the month up to this day",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
     ]
   },
   {
@@ -182,7 +248,7 @@
     "text": "Exercise 1\nExamine the NYTimes 2015 Temperature Visualization (html) then answer the following questions.\nData Storytelling\n\nRelate the intro paragraph: “Scientists declared that 2015 was Earth’s hottest year on record…” to the design of the visualization. In particular, based on the intro paragraph,\n\n2015’s temperature are contrasted with standard temperatures and historical highs and lows.\n\nWhat key message/claim does NYTimes want readers to be able to explore?\n\nHow has 2015 weather patterns differed from standard weather patterns, and how has is differed from historical extremes?\n\nHow did this goal inform what information is displayed in the visualization?\n\nThis goal motivated the inclusion of three sets of data- the 2015 high and low, average high and low, and record high and low.\nAesthetic Mapping\n\nWhat specific variables (from the data codebook) underlie the visualization?\n\ndateInYear, Low/High, NormalLow/High, RecordLow/High, RecordText, Record, Precip, CulmPrecip, RecordPrecip\n\nHow do these variables map to aesthetics of the visual elements, eg, position, size, shape, and color of glyphs?\n\ndateInYeer for x axis, one of the temperature values for y axis, Low/High for red bars, NormalLow/High for grey bars, RecordLow/High for tan bars, if Record is true, then display RecordText, Precip for y axis, horizontal line at y= RecordPrecip, and text for Record Precip and CulmPrecip",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
     ]
   },
   {
@@ -193,7 +259,7 @@
     "text": "Exercise 2\nNavigate the Geoms section of the ggplot2 reference page to find a geom that corresponds to the visual elements in the temperature plot. Using both the small thumbnail visuals on the right and the names of the geom’s, brainstorm some possibilities for geom’s you might use to recreate the temperature visualization.\n\n\n\n\n\n\nNoteNavigating Documentation / Reference Pages\n\n\n\nYou need to navigate the geoms further by opening up their reference pages to understand if a particular geom is suitable for our task. Let’s look at the geom_point documentation page to learn how to read a documentation page..\nThe Usage section shows all of the possible inputs (arguments) to the geom. These are all of the ways that a geom can be customized. Just looking at the argument names can help give a hint as to what arguments might fit our needs.\nThe Arguments section, on the other hand, explains in detail what each argument does and the possible values the argument can take. The mapping, data, and ... arguments will be the most commonly used by far.\n\n\nmapping is the argument that is being used when we specify which variables should link or map to the plot aesthetics (the code inside aes()).\n\ndata is the argument where we specify the dataset containing the variables that the geom is using.\n\n... is used for fixed aesthetics (ones that don’t correspond to a variable), eg, to set the color of all points, we use color = \"red\" and to set the size of all points, we use size = 3.\n\nThe Aesthetics section of a geom documentation page gives information on how the visual elements of the geom correspond to data. For example, the geom_point documentation page shows that x and y aesthetics are available. It also shows some new aesthetics like stroke.\n\n\n\n\n\n\n\n\nNotedata Argument\n\n\n\nPreviously you have used one dataset per plot by specifying that as the first argument of ggplot(). However, multiple data sets can be passed into ggplot as shown in the example below.\n\nCodedata(diamonds)\n\ndiamonds_avg_price &lt;- diamonds |&gt;\n  group_by(carat) |&gt;\n  summarize(avg_price = mean(price)) |&gt;\n  arrange(carat)\ndiamonds_avg_price &lt;- diamonds_avg_price[seq(1, nrow(diamonds_avg_price), 3), ]\n\nggplot(diamonds, aes(x = carat, y = price)) +\n  geom_point() +\n  geom_point(\n    data = diamonds_avg_price,\n    aes(x = carat, y = avg_price),\n    color = \"deepskyblue\",\n    size = 3\n  )\n\n\n\n\n\n\n\n\n\nLook at the geom_linerange documentation page and start off your temperature visualization with the record lows and highs. Your plot should look like the one below. The hex code of the used light tan color is #ECEBE3.\n\n\nSFO Weather Records in 2011\n\n\nCodeggplot(weather, aes(x = dateInYear, y = Low)) +\n    geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), colour = '#ECEBE3', linewidth = 0.75) +\n    theme_classic()\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipKeyboard Shortcuts\n\n\n\nAs you work on this plot, try to use some new keyboard shortcuts. Focus on the following:\n\nInsert code chunk: Ctrl+Alt+I (Windows). Option+Command+I (Mac).\nRun current code chunk: Ctrl+Shift+Enter (Windows). Command+Shift+Return (Mac).\nRun current line/currently selected lines: Ctrl+Enter (Windows). Command+Return (Mac).",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
     ]
   },
   {
@@ -204,7 +270,7 @@
     "text": "Exercise 3\nIn your visualization, also display the usual temperatures (NormalLow and NormalHigh) and actual 2011 temperatures (Low and High). Your plot should look like the one below. The hex code of the color used for the usual temperatures is \"#C8B8BA\" and for the color used for actual temperatures is \"#A90248\".\n\n\nSFO observed, Average, and Record Daily Temperatures in 2011\n\n\nCodeggplot(weather, aes(x = dateInYear, y = Low)) +\n    geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), colour = '#ECEBE3', linewidth = 0.75) +\n    geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), colour = '#C8B8BA', linewidth = 1) +\n    geom_linerange(aes(ymin = Low, ymax = High), color = '#A90248', linewidth = 0.75) + \n    theme_classic()\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipFiner Control\n\n\n\nIf you’d like finer control of the width of these lines/rectangles, check out the geom_rect documentation page.",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
     ]
   },
   {
@@ -215,7 +281,7 @@
     "text": "Exercise 4\nRecreate the visual demarcations of the months by adding vertical lines separating the months. Brainstorm how we might draw those vertical lines. What geom might we use? What subset of the data might we use in that geom layer to draw lines only at the month divisions?\n\nCodeweather_firstsub &lt;- weather %&gt;%\n  filter(Day == 1)\n\nggplot(weather, aes(x = dateInYear, y = Low)) +\n    geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), colour = '#ECEBE3', linewidth = 0.75) +\n    geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), colour = '#C8B8BA', linewidth = 1) +\n    geom_linerange(aes(ymin = Low, ymax = High), color = '#A90248', linewidth = 0.75) + \n    geom_vline(data = weather_firstsub, aes(xintercept = dateInYear)) +\n    theme_classic()",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
     ]
   },
   {
@@ -226,7 +292,7 @@
     "text": "Exercise 5\nChange the x-axis labels so that the month names display in the center of each month’s slice of the plot.\n\n\n\n\n\n\nTipMonth Names\n\n\n\nR has built-in variables called month.abb and month.name that contain abbreviated and full month names.\n\n\n\nCodeggplot(weather, aes(x = dateInYear, y = Low)) +\n    geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), colour = '#ECEBE3', linewidth = 0.75) +\n    geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), colour = '#C8B8BA', linewidth = 1) +\n    geom_linerange(aes(ymin = Low, ymax = High), color = '#A90248', linewidth = 0.75) + \n    geom_vline(data = weather_firstsub, aes(xintercept = dateInYear)) +\n    scale_x_continuous(breaks = weather_firstsub$dateInYear, labels = month.abb)+\n    theme_classic() +\n    theme(axis.text.x = element_text(hjust = -0.4)) \n\n\n\n\n\n\n\nTry to figuring out this new challenge using search engines and LLMs:\n\nSearch Engines. Use Google to search for possible solutions using the jargon that is most likely to return the most relevant results. Record search queries and your thought process in selecting which search results to look at first.\nLLMs. Use ChatGPT or Gemini with prompts that will most efficiently get you the desired results. Record the chat prompts used and output given. Evaluate the output. Do you fully understand the code generated? How can you tell that the generated code is correct?",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
     ]
   },
   {
@@ -237,7 +303,7 @@
     "text": "Exercise 6\nCreate a precipitation plot that looks like the following. Note that\n\nThe triangles point to precipitation records–refer to the data codebook above for the RecordP variable.\nThe numbers on the plot indicate the total precipitation for the month–search the hjust and vjust options to adjust the alignment of the numbers.\nThe blue and tan colors hex codes are \"#32a3d8\" and \"#ebeae2\", respectively.\n\n\n\nSFO Precipitation in 2011\n\n\nCodeweather_recordsub &lt;- weather %&gt;%\n  filter(RecordP == TRUE)\n\nweather_lastsub &lt;- weather %&gt;%\n  group_by(Month) %&gt;%\n  arrange(desc(Day)) \n\nggplot(weather, aes(x = dateInYear, y = CulmPrec)) +\n  geom_area(fill = '#ebeae2') +\n  geom_line(color = '#32a3d8', linewidth = 0.5) +\n  geom_point(data = weather_recordsub, aes(shape = RecordP), fill = \"black\") +\n  scale_shape_manual(values = (25)) +\n  theme_classic()",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
     ]
   },
   {
@@ -248,7 +314,7 @@
     "text": "Done!\n\nCheck the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
     ]
   },
   {
@@ -259,7 +325,7 @@
     "text": "The exercise in this lesson are inspired by an assignment from the Concepts in Computing with Data course at UC Berkeley taught by Dr. Deborah Nolan.↩︎",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>3 Adv Data Viz</span>"
     ]
   },
   {
@@ -270,7 +336,7 @@
     "text": "🧩 Learning Goals\nBy the end of this lesson, you should be able to:",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
     ]
   },
   {
@@ -281,7 +347,7 @@
     "text": "Understand the basics of a CRS (coordinate reference system)\nUnderstand and recognize different spatial file types and data types in R\nImplement some of the basic plotting with the sf package\nUnderstand foundation ideas in working with spatial data (aggregating spatial point data to a spatial region, joining spatial data sets)",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
     ]
   },
   {
@@ -292,7 +358,7 @@
     "text": "Additional Resources\n\nSpatial Data Science with Applications in R book: web\n\nSpatial Data Science with R and terra Resources: web\n\nLeaflet in R Package: web\n\nCRAN task view on spatial analysis: web",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
     ]
   },
   {
@@ -303,7 +369,7 @@
     "text": "Setup\nFor this activity, create the following directory structure in your portfolio repository under src/ica folder:\nportfolio\n└─ src\n   └─ ica\n      └─ 04_adv_maps\n         ├─ code\n         │  └─ 04-adv-maps-1-notes.qmd\n         ├─ data\n         │  └─ ...  ← saving data here during this activity\n         └─ figures\n            └─ ...  ← saving created maps here during this activity\nFirst load required packages.\n\nCodeloadNamespace(\"USAboundariesData\")\n\n&lt;environment: namespace:USAboundariesData&gt;\n\nCode#Install these packages first\n\n# install.packages(c(\"sf\",\"elevatr\",\"terra\",\"stars\",\"tidycensus\"))\n# install.packages('devtools')\n# devtools::install_github(\"ropensci/USAboundaries\")\n# install.packages(\"USAboundariesData\", repos = \"https://ropensci.r-universe.dev\", type = \"source\")\n\n\nlibrary(tidyverse)\nlibrary(sf) # tools for working with spatial vector data (GIS functionality, mapping)\nlibrary(elevatr) # access to raster elevation maps\nlibrary(terra)\nlibrary(stars)\nlibrary(tidycensus) # spatial data for the US with census information\nlibrary(USAboundaries) # access to boundaries for US states, counties, zip codes, and congressional districts",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
     ]
   },
   {
@@ -314,7 +380,7 @@
     "text": "Spatial Data in R\nSee Spatial Data Appendix for basics of CRS and spatial data types.\nDownload Shapefiles\n\nNavigate to the following URLs to download the spatial data files we’ll be using in this activity. Put these files in the data folder of your 04_adv_maps folder.\n\n\nMN cities: https://gisdata.mn.gov/dataset/loc-pop-centers\n\nFile type: shapefile (.shp)\nFile name: shp_loc_pop_centers.zip (Unzip this after downloading.)\n\n\nMN water: https://gisdata.mn.gov/dataset/us-mn-state-metc-water-lakes-rivers\n\nFile type: shapefile (.shp)\nFile name: shp_water_lakes_rivers.zip (Unzip this after downloading.)\n\n\nRead in Files\n\nRead in the MN cities and MN water shapefiles by entering the correct relative paths in st_read(). Tab completion will be very helpful here: type part of a directory or file name and hit tab to autocomplete or bring up a dropdown of options.\n\n\n\nCode# The sf package comes with a North Carolina shapefile:\nnc &lt;- st_read(system.file(\"shape/nc.shp\", package = \"sf\"))\n\nReading layer `nc' from data source \n  `C:\\Users\\marra\\AppData\\Local\\R\\win-library\\4.2\\sf\\shape\\nc.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 100 features and 14 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965\nGeodetic CRS:  NAD27\n\nCode# Read in shapefiles just downloaded\nmn_cities &lt;- st_read(\"../data/city_and_township_population_centers.shp\")\n\nReading layer `city_and_township_population_centers' from data source \n  `C:\\Users\\marra\\OneDrive\\Desktop\\STAT212\\portfolio-samjkenney\\ica\\ica4\\data\\city_and_township_population_centers.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 1081 features and 8 fields\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: 190832.6 ymin: 4816672 xmax: 747463.4 ymax: 5468045\nProjected CRS: NAD83 / UTM zone 15N\n\nCodemn_water &lt;- st_read(\"../data/LakesAndRivers.shp\")\n\nReading layer `LakesAndRivers' from data source \n  `C:\\Users\\marra\\OneDrive\\Desktop\\STAT212\\portfolio-samjkenney\\ica\\ica4\\data\\LakesAndRivers.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 2313 features and 8 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: 419538.6 ymin: 4922700 xmax: 522665 ymax: 5029945\nProjected CRS: NAD83 / UTM zone 15N\n\n\nThe sf package reads in spatial data in data.frame-like format. Using the class() function we can check the class (type) of object that we just read in. Note the presence of the “sf” and “data.frame” classes:\n\nCodeclass(nc)\n\n[1] \"sf\"         \"data.frame\"\n\nCodeclass(mn_cities)\n\n[1] \"sf\"         \"data.frame\"\n\nCodeclass(mn_water)\n\n[1] \"sf\"         \"data.frame\"\n\n\nWhen we read in spatial objects, it is useful to check what CRS underlies the data. We can do that with st_crs() from the sf package:\n\nCodest_crs(nc)\n\nCoordinate Reference System:\n  User input: NAD27 \n  wkt:\nGEOGCRS[\"NAD27\",\n    DATUM[\"North American Datum 1927\",\n        ELLIPSOID[\"Clarke 1866\",6378206.4,294.978698213898,\n            LENGTHUNIT[\"metre\",1]]],\n    PRIMEM[\"Greenwich\",0,\n        ANGLEUNIT[\"degree\",0.0174532925199433]],\n    CS[ellipsoidal,2],\n        AXIS[\"latitude\",north,\n            ORDER[1],\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        AXIS[\"longitude\",east,\n            ORDER[2],\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n    ID[\"EPSG\",4267]]\n\n\nWe can treat sf objects similarly to ordinary datasets when using ggplot2 to make spatial visualizations:\n\nCodeggplot(nc) +\n    geom_sf() +\n    theme_classic() +\n    labs(title = \"NAD27\")\n\n\n\n\n\n\n\nChange CRS\n\nLet’s explore how changing the CRS changes the map. The st_transform() function in sf re-expresses a spatial object using a user-supplied CRS. The crs argument takes a string descriptor of the CRS. We can find these descriptors via https://epsg.io. In the example below, I searched for “South Carolina”.\n\n\nCodenc_transformed &lt;- nc |&gt; st_transform(crs = \"EPSG:32133\")\nst_crs(nc_transformed)\n\nCoordinate Reference System:\n  User input: EPSG:32133 \n  wkt:\nPROJCRS[\"NAD83 / South Carolina\",\n    BASEGEOGCRS[\"NAD83\",\n        DATUM[\"North American Datum 1983\",\n            ELLIPSOID[\"GRS 1980\",6378137,298.257222101,\n                LENGTHUNIT[\"metre\",1]]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        ID[\"EPSG\",4269]],\n    CONVERSION[\"SPCS83 South Carolina zone (meters)\",\n        METHOD[\"Lambert Conic Conformal (2SP)\",\n            ID[\"EPSG\",9802]],\n        PARAMETER[\"Latitude of false origin\",31.8333333333333,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8821]],\n        PARAMETER[\"Longitude of false origin\",-81,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8822]],\n        PARAMETER[\"Latitude of 1st standard parallel\",34.8333333333333,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8823]],\n        PARAMETER[\"Latitude of 2nd standard parallel\",32.5,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8824]],\n        PARAMETER[\"Easting at false origin\",609600,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8826]],\n        PARAMETER[\"Northing at false origin\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8827]]],\n    CS[Cartesian,2],\n        AXIS[\"easting (X)\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1]],\n        AXIS[\"northing (Y)\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1]],\n    USAGE[\n        SCOPE[\"Engineering survey, topographic mapping.\"],\n        AREA[\"United States (USA) - South Carolina - counties of Abbeville; Aiken; Allendale; Anderson; Bamberg; Barnwell; Beaufort; Berkeley; Calhoun; Charleston; Cherokee; Chester; Chesterfield; Clarendon; Colleton; Darlington; Dillon; Dorchester; Edgefield; Fairfield; Florence; Georgetown; Greenville; Greenwood; Hampton; Horry; Jasper; Kershaw; Lancaster; Laurens; Lee; Lexington; Marion; Marlboro; McCormick; Newberry; Oconee; Orangeburg; Pickens; Richland; Saluda; Spartanburg; Sumter; Union; Williamsburg; York.\"],\n        BBOX[32.05,-83.36,35.21,-78.52]],\n    ID[\"EPSG\",32133]]\n\nCodeggplot(nc_transformed) +\n    geom_sf() +\n    theme_classic()\n\n\n\n\n\n\n\nThe goal is to use https://epsg.io to find two CRSs that result in a North Carolina map that is noticeably different from the original in the NAD27 CRS.\nTake a look at the function below that re-maps a spatial object using a new CRS.\n\nRead through the function to get a sense for how this code works.\n\nspatial_obj and new_crs are called arguments (function inputs).\n\nAdd one more argument called title to this function. Use this input to set the plot title.\n\n\nUse your function to make two new maps using your chosen CRSs.\n\n\nCodetransform_and_plot &lt;- function(spatial_obj, new_crs) {\n    spatial_obj |&gt; \n        st_transform(crs = new_crs) |&gt; \n        ggplot() +\n            geom_sf() +\n            theme_classic()\n}\n\n# Example usage of this function (using a South Carolina CRS)\ntransform_and_plot(nc, new_crs = \"EPSG:32133\")\n\n\n\n\n\n\n\nVerify your understanding: If you had point location data that was not in the NAD27 CRS, what would you expect about the accuracy of how they would be overlaid on the original North Carolina map? Not very accurate, as it’s not anchored on the map",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
     ]
   },
   {
@@ -325,7 +391,7 @@
     "text": "MN Map with Multiple Layers\nGoal: create a map of MN with different layers of information (city point locations, county polygon boundaries, rivers as lines and polygons, and a raster elevation map).\nGet County Boundaries\n\nWe’ve already read in city location and water information from external shapefiles. We can access county boundaries with the us_counties() function in the USAboundaries package.\n\n\nCode# Load country boundaries data as sf object\nmn_counties &lt;- USAboundaries::us_counties(resolution = \"high\", states = \"Minnesota\")\n\n# Take care of duplicate column names (there are two identical \"state_name\" columns)\nnames_counties &lt;- names(mn_counties)\nnames(mn_counties)[names_counties == \"state_name\"] &lt;- c(\"state_name1\", \"state_name2\")\n\n\nUnifying CRSs Across Different Spatial Datasets\n\nWe first need to ensure that the CRS is the same for all spatial datasets.\n\n\nCheck the CRS for the mn_cities, mn_water, and mn_counties datasets.\nIf the datasets don’t all have the same CRS, use st_transform() to update the datasets to have the same CRS as mn_cities. You can use crs = st_crs(mn_cities) within st_transform().\n\n\nCodest_crs(mn_cities)\n\nCoordinate Reference System:\n  User input: NAD83 / UTM zone 15N \n  wkt:\nPROJCRS[\"NAD83 / UTM zone 15N\",\n    BASEGEOGCRS[\"NAD83\",\n        DATUM[\"North American Datum 1983\",\n            ELLIPSOID[\"GRS 1980\",6378137,298.257222101,\n                LENGTHUNIT[\"metre\",1]]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        ID[\"EPSG\",4269]],\n    CONVERSION[\"UTM zone 15N\",\n        METHOD[\"Transverse Mercator\",\n            ID[\"EPSG\",9807]],\n        PARAMETER[\"Latitude of natural origin\",0,\n            ANGLEUNIT[\"Degree\",0.0174532925199433],\n            ID[\"EPSG\",8801]],\n        PARAMETER[\"Longitude of natural origin\",-93,\n            ANGLEUNIT[\"Degree\",0.0174532925199433],\n            ID[\"EPSG\",8802]],\n        PARAMETER[\"Scale factor at natural origin\",0.9996,\n            SCALEUNIT[\"unity\",1],\n            ID[\"EPSG\",8805]],\n        PARAMETER[\"False easting\",500000,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8806]],\n        PARAMETER[\"False northing\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8807]]],\n    CS[Cartesian,2],\n        AXIS[\"(E)\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1]],\n        AXIS[\"(N)\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1]],\n    ID[\"EPSG\",26915]]\n\nCodest_crs(mn_water)\n\nCoordinate Reference System:\n  User input: NAD83 / UTM zone 15N \n  wkt:\nPROJCRS[\"NAD83 / UTM zone 15N\",\n    BASEGEOGCRS[\"NAD83\",\n        DATUM[\"North American Datum 1983\",\n            ELLIPSOID[\"GRS 1980\",6378137,298.257222101,\n                LENGTHUNIT[\"metre\",1]]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        ID[\"EPSG\",4269]],\n    CONVERSION[\"UTM zone 15N\",\n        METHOD[\"Transverse Mercator\",\n            ID[\"EPSG\",9807]],\n        PARAMETER[\"Latitude of natural origin\",0,\n            ANGLEUNIT[\"Degree\",0.0174532925199433],\n            ID[\"EPSG\",8801]],\n        PARAMETER[\"Longitude of natural origin\",-93,\n            ANGLEUNIT[\"Degree\",0.0174532925199433],\n            ID[\"EPSG\",8802]],\n        PARAMETER[\"Scale factor at natural origin\",0.9996,\n            SCALEUNIT[\"unity\",1],\n            ID[\"EPSG\",8805]],\n        PARAMETER[\"False easting\",500000,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8806]],\n        PARAMETER[\"False northing\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8807]]],\n    CS[Cartesian,2],\n        AXIS[\"(E)\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1]],\n        AXIS[\"(N)\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1]],\n    ID[\"EPSG\",26915]]\n\nCodest_crs(mn_counties)\n\nCoordinate Reference System:\n  User input: EPSG:4326 \n  wkt:\nGEOGCRS[\"WGS 84\",\n    ENSEMBLE[\"World Geodetic System 1984 ensemble\",\n        MEMBER[\"World Geodetic System 1984 (Transit)\"],\n        MEMBER[\"World Geodetic System 1984 (G730)\"],\n        MEMBER[\"World Geodetic System 1984 (G873)\"],\n        MEMBER[\"World Geodetic System 1984 (G1150)\"],\n        MEMBER[\"World Geodetic System 1984 (G1674)\"],\n        MEMBER[\"World Geodetic System 1984 (G1762)\"],\n        MEMBER[\"World Geodetic System 1984 (G2139)\"],\n        MEMBER[\"World Geodetic System 1984 (G2296)\"],\n        ELLIPSOID[\"WGS 84\",6378137,298.257223563,\n            LENGTHUNIT[\"metre\",1]],\n        ENSEMBLEACCURACY[2.0]],\n    PRIMEM[\"Greenwich\",0,\n        ANGLEUNIT[\"degree\",0.0174532925199433]],\n    CS[ellipsoidal,2],\n        AXIS[\"geodetic latitude (Lat)\",north,\n            ORDER[1],\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        AXIS[\"geodetic longitude (Lon)\",east,\n            ORDER[2],\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n    USAGE[\n        SCOPE[\"Horizontal component of 3D system.\"],\n        AREA[\"World.\"],\n        BBOX[-90,-180,90,180]],\n    ID[\"EPSG\",4326]]\n\nCodemn_counties_transformed &lt;- st_transform(mn_counties, crs = st_crs(mn_cities))\nst_crs(mn_counties_transformed)\n\nCoordinate Reference System:\n  User input: NAD83 / UTM zone 15N \n  wkt:\nPROJCRS[\"NAD83 / UTM zone 15N\",\n    BASEGEOGCRS[\"NAD83\",\n        DATUM[\"North American Datum 1983\",\n            ELLIPSOID[\"GRS 1980\",6378137,298.257222101,\n                LENGTHUNIT[\"metre\",1]]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        ID[\"EPSG\",4269]],\n    CONVERSION[\"UTM zone 15N\",\n        METHOD[\"Transverse Mercator\",\n            ID[\"EPSG\",9807]],\n        PARAMETER[\"Latitude of natural origin\",0,\n            ANGLEUNIT[\"Degree\",0.0174532925199433],\n            ID[\"EPSG\",8801]],\n        PARAMETER[\"Longitude of natural origin\",-93,\n            ANGLEUNIT[\"Degree\",0.0174532925199433],\n            ID[\"EPSG\",8802]],\n        PARAMETER[\"Scale factor at natural origin\",0.9996,\n            SCALEUNIT[\"unity\",1],\n            ID[\"EPSG\",8805]],\n        PARAMETER[\"False easting\",500000,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8806]],\n        PARAMETER[\"False northing\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8807]]],\n    CS[Cartesian,2],\n        AXIS[\"(E)\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1]],\n        AXIS[\"(N)\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1]],\n    ID[\"EPSG\",26915]]\n\n\nCounties + Cities\n\nCreate a map where city locations are overlaid on a map of county boundaries.\n\n\nYou will need to call geom_sf() twice.\nMake the map background white.\nInstall the ggthemes package, and add the following layer to use a clean map theme: + ggthemes::theme_map()\n\n\n\nCodeggplot(mn_counties_transformed) +\n  geom_sf() +\n  geom_sf(data = mn_cities) +\n  ggthemes::theme_map()\n\n\n\n\n\n\n\nCustomize Colors\n\nWe can use traditional ggplot2 aesthetics (e.g., fill, color) to display location specific attributes. Below we only plot large cities, and we color and size cities according to their population.\n\n\nCodeggplot() +\n    geom_sf(data = mn_counties, fill = \"white\") + \n    geom_sf(data = mn_cities |&gt; filter(Population &gt;= 10000), mapping = aes(color = Population, size = Population)) + # cities layer\n    scale_color_viridis_c() + # continuous (gradient) color scale\n    labs(title = \"Minnesota Cities with Population &gt;= 10,000\") + \n    ggthemes::theme_map() +\n    theme(legend.position = \"bottom\") # move legend\n\n\n\n\n\n\n\nLook up the scale_color_viridis_c() documentation via the ggplot2 reference.\n\nRead the function description at the top. What is the advantage of using this function for making color palettes? It is color-blind friendly!\nLook through the examples section. What is the difference between the _d(), _c(), and _b() variants of this function? D is for discrete variables, C s for continous, and b is for binned\nAdding Elevation Raster Data\nWhere are large cities located? Is there some relationship to local geography/terrain?\n\nTo investigate these questions, we can obtain elevation data to include on the map using the elevatr package. We encounter two new functions here—we can look up their documentation to make sense of the code by entering the following in the Console:\n\n\n?elevatr::get_elev_raster\n?terra::as.data.frame\n\n\nCodeelevation &lt;- elevatr::get_elev_raster(mn_counties, z = 5, clip = \"bbox\")\nraster::crs(elevation) &lt;- sf::st_crs(mn_counties)\n\n# Convert to data frame for plotting\nelev_df &lt;- elevation |&gt; terra::as.data.frame(xy = TRUE)\ncolnames(elev_df) &lt;- c(\"x\", \"y\", \"elevation\")\n\n\nBuild on our existing map by adding a raster layer for elevation as the background.\n\nLook up the documentation for geom_raster() to plot the elevation data from elev_df. This will be the first layer of the plot.\nLook at the documentation for scale_fill_gradient() to add the following elevation color scale: \"darkgreen\" represents the lowest elevations, and \"white\" represents the highest elevations.\nAdd in the layers from the map above to show the largest cities and the county outlines. To remove a background color, use fill = NA.\n\n\nCodeggplot() +\n    geom_raster(data = elev_df, aes(x = x, y = y,fill = elevation)) +\n    scale_fill_gradient(low = 'darkgreen', high = 'white') +\n    geom_sf(data = mn_counties, fill = NA) + \n    geom_sf(data = mn_cities |&gt; filter(Population &gt;= 10000), mapping = aes(color = Population, size = Population)) + # cities layer\n    scale_color_viridis_c() + # continuous (gradient) color scale\n   \n    labs(title = \"Minnesota Cities with Population &gt;= 10,000\") + \n    ggthemes::theme_map() +\n    theme(legend.position = \"bottom\") # move legend\n\n\n\n\n\n\n\nZoom in to Twin Cities and Add Water\n\nThe bulk of the interesting information in this map is in the Twin Cities area. Let’s zoom in to this area.\n\n\nWe can use the st_bbox() function to get the bounding box for a spatial object—we do this after filtering to the 7 counties in the Twin Cities.\nWe then use st_crop() to trim a spatial object to a given bounding box.\n\n\nCodeseven_countyarea &lt;- mn_counties |&gt;\n    filter(name %in% c(\"Anoka\", \"Hennepin\", \"Ramsey\", \"Dakota\", \"Carver\", \"Washington\", \"Scott\")) |&gt; \n    st_bbox()\nseven_countyarea\n\n     xmin      ymin      xmax      ymax \n-94.01250  44.47115 -92.73204  45.41480 \n\nCodecounty_crop &lt;- mn_counties %&gt;% st_crop(seven_countyarea) %&gt;% st_cast('MULTIPOLYGON')\n\nelevation &lt;- elevatr::get_elev_raster(county_crop, z = 9, clip = 'bbox')\nraster::crs(elevation) &lt;- sf::st_crs(mn_counties)\n\n# Convert to data frame for plotting\nelev_df &lt;- elevation |&gt; terra::as.data.frame(xy = TRUE)\ncolnames(elev_df) &lt;- c(\"x\", \"y\", \"elevation\")\n\n\nIn the plot below, we add a layer for water information and a coord_sf() layer to restrict the x and y-axis limits to the Twin Cities bounding box. (Without this layer, the map would zoom back out to show all counties and bodies of water).\n\nCodeggplot() +\n    geom_raster(data = elev_df, aes(x = x, y = y, fill = elevation)) + \n    geom_sf(data = mn_counties, fill = NA, color = \"black\") + # county boundary layer\n    geom_sf(data = mn_water, fill = \"lightsteelblue1\", color = \"lightsteelblue1\") + # NEW: river/lake layer\n    geom_sf(data = mn_cities |&gt; filter(Population &gt;= 10000), mapping = aes(color = Population, size = Population)) + # cities layer\n    scale_color_viridis_c(option = \"magma\") + # continuous (gradient) color scale\n    scale_fill_gradient(low = \"darkgreen\", high = \"white\") + # continuous (gradient) fill scale\n    coord_sf(xlim = seven_countyarea[c(\"xmin\", \"xmax\")], ylim = seven_countyarea[c(\"ymin\", \"ymax\")]) + # NEW: crop map to Twin Cities bounding box\n    labs(title = \"Twin Cities with Population &gt;= 10,000\") + \n    ggthemes::theme_map() +\n    theme(legend.position = \"none\")\n\n\n\n\n\n\nCode    # remove legend\n\n\nLet’s add to the above code chunk to save the map above to an image file called tc_map_zoom.png in the figures folder. The code example below shows a general template for saving a plot to file. Choose a reasonable width and height. (There are also jpeg() and pdf() functions for writing images.)\n\nCodepng(\"../figures/tc_map_zoom.png\", width = 1040, height = 1040, units = \"px\")\n# Code for creating plot\ndev.off()",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
     ]
   },
   {
@@ -336,7 +402,7 @@
     "text": "Going Beyond - Twin Cities Map with leaflet\n\nBelow we show how to make the MN counties map in the leaflet package.\n\nCodelibrary(leaflet)\n\nmn_counties_leaf &lt;- mn_counties |&gt; st_transform(4326) # Leaflet expects this CRS for vectors\nmn_cities_leaf &lt;- mn_cities |&gt; st_transform(4326)\n\ncities_per_county &lt;- st_join(mn_cities_leaf, mn_counties_leaf) |&gt;\n    st_drop_geometry() |&gt; # removes geometry - makes the following calculation more efficient\n    count(name) \n\nmn_counties_leaf |&gt; \n    filter(name %in% c(\"Anoka\", \"Hennepin\", \"Ramsey\", \"Dakota\", \"Carver\", \"Washington\", \"Scott\")) |&gt;\n    left_join(cities_per_county) |&gt;\n    leaflet() |&gt; \n    addProviderTiles(\"CartoDB.Positron\") |&gt; \n    addPolygons(\n        color = \"#444444\", weight = 1, smoothFactor = 0.5, opacity = 1.0,\n        fillOpacity = 0.5, fillColor = ~colorQuantile(\"YlOrRd\", n)(n),\n        highlightOptions = highlightOptions(color = \"white\", weight = 2, bringToFront = TRUE)) |&gt;\n    addCircles(data = mn_cities_leaf |&gt; filter(County %in% paste(c(\"Anoka\", \"Hennepin\", \"Ramsey\", \"Dakota\", \"Carver\", \"Washington\", \"Scott\"), \"County\")), color = \"#444444\")",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
     ]
   },
   {
@@ -347,7 +413,7 @@
     "text": "Done!\n\nCheck the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website",
     "crumbs": [
       "In-Class Activities",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>4 Adv Spatial Viz P1</span>"
     ]
   },
   {
@@ -358,7 +424,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Extra Sample 1</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Extra Sample 1</span>"
     ]
   },
   {
@@ -369,7 +435,7 @@
     "text": "Add content here",
     "crumbs": [
       "Extras",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Extra Sample 2</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Extra Sample 2</span>"
     ]
   }
 ]
