@@ -1,11 +1,16 @@
 ---
 title: "Homework 01"
+format: 
+  html: 
+    embed-resources: true
 ---
-
 
 ## TidyTuesday Section
 
-Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story with [effective visualization(s)]({{< var effective-viz-url >}}).  Provide sufficient background for readers to grasp your narrative.
+Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge.
+Develop a research question, then answer it through a short data story with [effective visualization(s)]({{< var effective-viz-url >}}).
+Provide sufficient background for readers to grasp your narrative.
+
 ```{r}
 library(tidyverse)
 ```
@@ -14,6 +19,7 @@ library(tidyverse)
 companies <- read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-01-27/companies.csv")
 head(companies)
 ```
+
 ```{r}
 quantile(companies$capital_stock)
 ```
@@ -23,13 +29,20 @@ companies_processed <- companies %>%
   filter(capital_stock < 1000000)
 ```
 
-Research Question: How does capital stock vary by company size? 
+Research Question: How does capital stock vary by company size?
 
-```{r fig.alt="A density plot displaying the distruibution of capital stock by company size. All three company sizes, micro, small, and other, peak around 200,000 BRL. Companies sized 'other' have a higher concentration of higher stock values."} 
+```{r fig.alt="A density plot displaying the distruibution of capital stock by company size. All three company sizes, micro, small, and other, peak around 200,000 BRL. Companies sized 'other' have a higher concentration of higher stock values."}
 companies_processed %>%
   ggplot(aes(x = capital_stock, fill = company_size)) +
   geom_density(alpha = 0.5) +
   labs(x = "Capital Stock (in BRL)", title = "Distribution of Capital Stock between Company Sizes", fill = "Company Size", caption = "via TidyTuesday, by Sam Kenney") +
   scale_fill_viridis_d()
 ```
-This dataset from TidyTuesday represents a variety of aspects about Brazillian companies. It includes capital stock in BRL of each company, as well as company size. Company size is categorized as micro-enterprise, small-enterprise, and other. This dataset is highly skewed, with most capital stock values being below 1,000,000 BRL, and some values at 999,999,999,999 BRL. To visualize the standard relationship between stock and company size, only the bottom 75% of values were used. Of these values, most of the higher stocks (over 600,000 BRL) are held by other-sized companies. All three company sizes are concentrated at around 200,000 BRL, and density quickly decreases at around 300,000 BRL. 
+
+This dataset from TidyTuesday represents a variety of aspects about Brazillian companies.
+It includes capital stock in BRL of each company, as well as company size.
+Company size is categorized as micro-enterprise, small-enterprise, and other.
+This dataset is highly skewed, with most capital stock values being below 1,000,000 BRL, and some values at 999,999,999,999 BRL.
+To visualize the standard relationship between stock and company size, only the bottom 75% of values were used.
+Of these values, most of the higher stocks (over 600,000 BRL) are held by other-sized companies.
+All three company sizes are concentrated at around 200,000 BRL, and density quickly decreases at around 300,000 BRL.

@@ -1,0 +1,43 @@
+---
+title: "Homework 02"
+format: 
+  html: 
+    embed-resources: true
+---
+
+
+## TidyTuesday Section (optional)
+
+::: {.callout-important title="Instructions"}
+
+You can count work on this week's TidyTuesday toward the exceptional work required for an A in the Homework component.
+
+:::
+
+
+Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story with [effective visualization(s)]({{< var effective-viz-url >}}).  Provide sufficient background for readers to grasp your narrative.
+
+```{r}
+library(tidyverse)
+edible_plants <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-02-03/edible_plants.csv')
+
+```
+```{r}
+edible_plants_clean <- edible_plants %>%
+  mutate(sunlight = recode(sunlight, 
+         'Full sun/partial shade/ full shade' = 'Full sun/partial shade/full shade',
+         'full sun/partial shade/ full shade' = 'Full sun/partial shade/full shade',
+         'partial shade' = 'Partial shade')) %>%
+  mutate(diff = preferred_ph_upper - preferred_ph_lower)
+
+```
+
+```{r fig.alt= "How Particular is Your Food? Edible plant species vary by desired pH range and sunlight level. Most plants prefer full sun and have a range of about 1 pH level of tolerance."}
+ggplot(edible_plants_clean, aes(x = reorder(taxonomic_name, diff), color = sunlight)) +
+  geom_linerange(aes(ymin = preferred_ph_lower, ymax = preferred_ph_upper), linewidth = 1) +
+  scale_color_viridis_d(name = "Sunlight Level") +
+  labs(x = " ", y = "Preferred pH", title = "How Particular Is Your Food?", subtitle = "Edible Plant Species by Preferred Soil pH and Sunlight Level", caption = "via TidyTuesday, by Sam Kenney")+
+  theme_classic() +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+```

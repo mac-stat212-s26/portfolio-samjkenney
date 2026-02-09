@@ -1,0 +1,53 @@
+---
+title: "Homework 03"
+format: 
+  html: 
+    embed-resources: true
+---
+
+
+## TidyTuesday Section (optional)
+
+::: {.callout-important title="Instructions"}
+
+You can count work on this week's TidyTuesday toward the exceptional work required for an A in the Homework component.
+
+:::
+
+
+Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story with [effective visualization(s)]({{< var effective-viz-url >}}).  Provide sufficient background for readers to grasp your narrative.
+
+```{r}
+library(tidyverse)
+olympics_schedule <- read.csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-02-10/schedule.csv')
+
+```
+
+```{r}
+olympics_schedule %>%
+  filter(is_medal_event == TRUE & is_training == TRUE)
+```
+
+```{r}
+olympics_schedule_sums <- olympics_schedule %>%
+  group_by(discipline_name, is_medal_event, date, is_training) %>%
+  summarize(count = n(), .groups = "drop") %>%
+  mutate(status = case_when(
+    is_training == "TRUE" ~ "training",
+    is_medal_event == "TRUE" ~ "medal event", 
+    .default = "standard event"
+  ))
+
+head(olympics_schedule_sums)
+```
+
+```{r}
+ggplot(olympics_schedule_sums, aes(x = date, y = discipline_name, color = status, size = count)) +
+  scale_color_viridis_d(name = "Event Type") +
+  geom_point(alpha = 0.75) +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  labs(title = "What's the Best Day to Go to the Olympics?", subtitle = "Event type by count, discipline, and day of the week.") 
+  
+
+```

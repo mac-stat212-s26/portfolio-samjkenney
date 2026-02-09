@@ -66,13 +66,12 @@ book:
 
     - part: "TidyTuesday"
       chapters:
-      - tt/2025-07-08.qmd
-      - tt/2025-07-15.qmd
       - tt/hw01-tt.qmd
+      - tt/hw02-tt.qmd
 
     - part: "Pre-Class Learnings"
       chapters:
-      - pcl/pcl.qmd
+      - pcl/adv_wrangling_1.qmd
 
     - part: "In-Class Activities"
       chapters:
