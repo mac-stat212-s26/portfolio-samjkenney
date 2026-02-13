@@ -1,0 +1,255 @@
+---
+title: "adv_wrangling_1"
+format: html
+---
+# Chapter 12: Logical Vectors
+
+```{r setup}
+library(tidyverse)
+library(nycflights13)
+```
+
+
+## Basic Comparisons
+```{r}
+flights |>
+  filter(dep_time > 600 & dep_time < 2000 & abs(arr_delay) < 20)
+
+flights |> 
+  mutate(daytime = dep_time > 600 & dep_time < 2000, 
+         approx_ontime = abs(arr_delay) < 20,
+         .keep = "used")
+```
+
+.keep is an argument within mutate that selects variables based on the key provided:
+- "all": default, retains all original columns and new/modified ones
+- "used": only uses the columns used in the mutate call, plus the new ones
+- "unused": maintains newly created columns, discards all that were used to create them
+- "none": keeps only grouping keys and new columns
+
+### Note on Floats
+
+Don't utilize the '==' operator for floats, instead, use near()
+
+```{r}
+x <- sqrt(2) ^ 2
+x == 2
+
+near(x, 2)
+```
+
+### Note on Missing Values
+
+Logical comparisons using NA will result in NA.
+
+```{r}
+NA > 5
+
+10 == NA
+
+NA == NA
+```
+When looking for NA values, use is.na().
+
+## Logical Operators
+
+R has & and &&, as well as | and ||. Use only the single operators for data wrangling, and only the double operators for programming. 
+
+```{r}
+flights |>
+  filter(is.na(arr_delay) & !is.na(dep_delay))
+
+flights |> 
+  filter(is.na(dep_time))
+
+```
+
+## Summaries
+any() returns TRUE is anything in x is TRUE.
+all() returns TRUE if everything in x is TRUE.
+
+We can use a subset operator to perform contradictory summaries.
+
+```{r}
+flights |>
+  group_by(year, month, day) |>
+  summarize(
+    behind = mean(arr_delay[arr_delay > 0], na.rm = TRUE),
+    ahead = mean(arr_delay[arr_delay < 0], na.rm = TRUE),
+    n = n(),
+    .groups = "drop"
+  )
+```
+
+## Conditional Transformations
+
+### if_else
+
+if_else takes three required arguments:
+
+- Condition: a logical vector,
+- true: the output when condition is true,
+- false: the output when the condition is false
+
+```{r if_else example 1}
+x <- c(-3:3, NA)
+if_else(x > 0, "+ve", "-ve")
+```
+
+if_else can take a fourth 'missing' argument that specifies what to do with a missing value.
+
+You can also manipulate the value.
+
+```{r if_else example 2}
+if_else(x < 0, -x, x)
+```
+
+We can nest if_else as well!
+```{r nested if_else}
+if_else(x == 0, "0", if_else(x < 0, "-ve", "+ve"), "???")
+```
+
+### case_when
+
+case_when takes pairs of 'condition ~ output,' where condition is a logical vector.
+
+```{r case_when example}
+case_when(
+  x == 0 ~ "0",
+  x < 0 ~ "-ve",
+  x > 0 ~ "+ve",
+  is.na(x) ~ "???"
+)
+
+```
+
+We can use a .default argument to create a default value. If multiple conditions match, only the first is used.
+
+```{r}
+case_when(
+  x == 0 ~ "0",
+  x > 0 ~ "+ve",
+  x > 2 ~ "big",
+  .default = "???"
+  
+)
+
+```
+
+
+In practice, it may look like this.
+```{r}
+flights |>
+  mutate(status = case_when(
+    is.na(arr_delay) ~ "cancelled",
+    arr_delay < -30 ~ "very early",
+    arr_delay < -15 ~ "early",
+    abs(arr_delay) <= 15 ~ "on time",
+    arr_delay < 60 ~ "late",
+    arr_delay < Inf ~ "super late",
+  ),
+  .keep = "used"
+         )
+
+```
+
+### Compatible Datatypes
+
+Both if_else and case_when require compatible output types. 
+- Numerical and logical
+- String and factors
+- Dates and date-times
+- NA and anything
+
+# Chapter 13
+
+## Parsing
+
+To change a string to a number, readr has two functions:
+
+- parse_double()
+- parse_number()
+
+parse number works well when the string contains non-numeric text, like dollar signs or percentages
+
+## Counting
+
+The count() function can be used on its own to display a summary of a given column. n() must be used within another verb, like summarize().
+
+n_distinct() counts the number of unique values.
+
+You can perform a weighted count (adding up values within a column) with count by utilizing the 'wt' argument.
+
+```{r}
+flights |> count(tailnum, wt= distance)
+```
+
+## Numeric Transformations
+
+pmin() and pmax() will summarize a given set of rows
+
+%/% does integer division, and %% does remainder division
+
+round() uses Banker's rounding: if a number is halfway between two numbers, it's rounded to the even integer. i.e. 1.5 -> 2, and 2.5 -> 2
+
+floor() always rounds down
+
+ceiling() always rounds up
+
+cut() bins numbers
+
+# Factors
+```{r}
+gss_cat <- forcats::gss_cat
+```
+
+fct_reorder() takes three arguments:
+
+- .f, the factor which needs to be modified
+- .x, a numeric vector to reorder the levels
+- .fun, a function to use if there are multiple values of .x for .f (default is median)
+
+fct_relevel() takes one factor to bump up or down
+
+fct_reorder2(.f, .x, .y) reorders factor f by y values associated with largest x values.This is used for color, so the ending order matches the legend. 
+
+fct_infreq() is used for bar plots.
+
+fct_reverse() reverses the factor order.
+
+fct_recode can be used in conjuction with mutate to rename factors. 
+
+fct_collapse can be used in conjunction with mutate to condense variables
+
+fct_lump_* will lump together factors based on *. 
+- lowfreq: takes the smallest categories and puts them into one 'other' category, making sure 'other' is always the smallest
+- n: specifies we want n groups
+
+ordered() will specify ordering between levels
+
+# Dates and Times
+
+R has three data types referring to time:
+- date
+- time
+- date-time
+
+The hms package can be useful for casting strings to dates.
+- ymd: will cast "2017-01-31" to a date
+- mdy: will cast "January 31st, 2017" to a date
+- dmy: will cast "31-Jan-2017" to a date
+- *_hms: includes hour minute second
+- *_hm: includes hour and minute
+- make_date: takes in year, month, day as seperate components
+- make_datetime: takes in year, month, day, hours, minutes, seconds as separate components
+
+These all have an argument of tz, for timezone
+
+
+We can use rounding, much like the standard functions:
+- *_date(x, "time chunk"): will round to the nearest given time chunk
+
+Subtracting dates will return a difftime object, and it can be cast to a duration with: as.duration().
+We can specify the time units with d*() with the given time unit. 
+
+Time zones are specified by the region, like "America/Chicago".
