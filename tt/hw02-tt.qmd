@@ -41,3 +41,4 @@ ggplot(edible_plants_clean, aes(x = reorder(taxonomic_name, diff), color = sunli
   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
 
 ```
+Most edible plants enjoy pH between 5 and 8. Some have larger ranges of up to 3 pH levels, but most tolerate around 1 level of pH. Very few plants prefer to have partial shade, with most desiring full sun or a mix, but there does not appear to be a clear relationship between pH preference and sunlight preference. 
