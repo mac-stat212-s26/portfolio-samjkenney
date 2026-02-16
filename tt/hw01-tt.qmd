@@ -26,7 +26,8 @@ quantile(companies$capital_stock)
 
 ```{r}
 companies_processed <- companies %>%
-  filter(capital_stock < 1000000)
+  filter(capital_stock < 1000000) %>%
+  mutate(capital_stock_thousands = capital_stock / 1000)
 ```
 
 Research Question: How does capital stock vary by company size?
@@ -35,8 +36,8 @@ Research Question: How does capital stock vary by company size?
 companies_processed %>%
   ggplot(aes(x = capital_stock, fill = company_size)) +
   geom_density(alpha = 0.5) +
-  labs(x = "Capital Stock (in BRL)", title = "Distribution of Capital Stock between Company Sizes", fill = "Company Size", caption = "via TidyTuesday, by Sam Kenney") +
-  scale_fill_viridis_d()
+  labs(x = "Capital Stock (in Thousands of BRL)", title = "Distribution of Capital Stock between Company Sizes", fill = "Company Size", caption = "via TidyTuesday Brazillian Companies, by Sam Kenney", y = element_blank(), subtitle = "Capital stock, how much has been invested in the company, is used as the value of company.") +
+  scale_fill_viridis_d(name = "Company Size", labels = c('Micro Enterprise', 'Other', 'Small Enterprise'))
 ```
 
 This dataset from TidyTuesday represents a variety of aspects about Brazillian companies.

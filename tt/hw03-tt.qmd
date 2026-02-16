@@ -42,12 +42,24 @@ head(olympics_schedule_sums)
 ```
 
 ```{r}
-ggplot(olympics_schedule_sums, aes(x = date, y = discipline_name, color = status, size = count)) +
-  scale_color_viridis_d(name = "Event Type") +
+olympics <- ggplot(olympics_schedule_sums, aes(x = date, y = discipline_name, color = status, size = count)) +
+  scale_color_viridis_d(name = "Event Type", labels = c('Medal', 'Standard', 'Training')) +
+  scale_size_continuous(name = "Count") +
   geom_point(alpha = 0.75) +
   theme_classic() +
-  theme(axis.text.x = element_text(angle = 90)) +
-  labs(title = "What's the Best Day to Go to the Olympics?", subtitle = "Event type by count, discipline, and day of the week.") 
-  
+  theme(axis.text.x = element_text(vjust = 0.4, angle = 90), axis.title.y = element_blank()) +
+  labs(title = "What's the Best Day to Go to the Olympics?", subtitle = "Event type by count, discipline, and date.", alt = "Plot of Olympics events by discipline, count, and date. Curling has the most events , and the vast majority of them are standard. Other event disciplines have medal events dispersed throughout the Olympics. Alpine skiing, bobsleigh, luge, skeleton, and ski jumping all have training events, whereas other events do not.", x = "Date", caption = "via TidyTuesday 2/10/2026 - Winter Olympics, by Sam Kenney") 
+
+olympics
 
 ```
+
+```{r}
+ggsave(plot = olympics, filename = "tt3.png", units = "px", width = 2040, height = 2040)
+
+```
+
+The Winter Olympics are full of fun and fascinating events, and it spans over 2 weeks. There's so much to see, but what if you only have one day? What's the best day to go to the Olympics? 
+Let's say you're interested in seeing as many events as possible, you don't care what kind of event it is. You'll probably want to attend 2/12 or 2/13, and you'll spend a lot of time watching curling.
+
+Interestingly, not all events have training events- only alpine skiing, bobsleigh, luge, nordic combined, skeleton, and ski jumping have them. Additionally, not all have standard events, including alpine skiing, biathlon, and luge. Certain events last the whole duration of the Olympics, like curling, while others are just a few days, like mountaineering!
