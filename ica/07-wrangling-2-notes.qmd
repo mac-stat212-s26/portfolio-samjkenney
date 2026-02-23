@@ -333,6 +333,8 @@ Read in the "Dear Abby" data underlying The Pudding's [30 Years of American Anxi
 
 ```{r read_dear_abby}
 posts <- read_csv("https://raw.githubusercontent.com/the-pudding/data/master/dearabby/raw_da_qs.csv")
+posts <- posts |>
+  slice(100)
 ```
 
 Take a couple minutes to scroll through the [30 Years of American Anxieties](https://pudding.cool/2018/11/dearabby/) article to get ideas for themes that you might want to search for using regular expressions.

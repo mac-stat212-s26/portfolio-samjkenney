@@ -1,0 +1,19 @@
+---
+title: "Exam 1"
+format: 
+  html: 
+    embed-resources: true
+---
+
+CRS Transformations
+
+We mostly use the sf package for spatial visualization, and this package can handle transforming from one Coordinate Reference System (CRS) to another. Transforming CRSs is necessary for getting all of our data on the same page, and making sure locations are appropriately aligned. But transforming from one CRS to another is no small task- which is why we're so glad the st_transform() function does it for us. But how does it work?
+The sf package, alongside a majority of spatial visualization tools, utilizes an open-source C++ library called PROJ. This library manages everything CRS. Given the EPSG code (4 digit code related to a CRS), it can return the contents of the Wellknown Textfile (WKT), which contains everything we need to know to visualize the data.  This includes projection (on a map), units, and axis specifications. sf accesses this function with st_crs(). CRS is encoded within the data, but in case we don't have it, we can set it with st_set_crs(), which utilizes a similar PROJ function to 'create' a CRS.
+PROJ (the C++ library) uses a function called cs2cs to perform transformations. cs2cs utilizes a function called proj_create_crs_to_crs which returns a "transformation object that is a pipeline between two known coordinate reference systems." This then begs the question: what is a transformation object? Transformation objects have the type PJ in PROJ, which "contains everything related to a projection or transformation." 
+To handle the transformation, the PROJ code has to handle a variety of different cases, like geocentric to geographic coordinates. Additionally, it has to handle a variety of shifts and other individual transformations (see Figure). Together, these algorithms can be applied to transform from one CRS to another, as specified by the differences between the given CRS's. 
+
+via [GeoCompX](https://r.geocompx.org/reproj-geo-data),
+
+[PROJ Docs](https://proj.org/en/stable/about.html),
+
+[PROJ Github](https://github.com/OSGeo/PROJ)
