@@ -206,14 +206,31 @@ Tips for writing functions:
 - `x = -3:-1`. Expected output: `0.0 0.5 1.0`
 
 ```{r}
+rescale <- function(x){
+  return ((x - min(x))/ (max(x) - min(x)))
+}
 
+x = 2:4
+rescale(x)
 
+x = c(-1, 0, 5)
+rescale(x)
+
+x = -3:-1
+rescale(x)
 ```
 
 2. **Phone digits** Write a function that formats a 10-digit phone number nicely as `(###) ###-####`. Your function should work on the following test cases: `c("651-330-8661", "6516966000", "800 867 5309")`. It may help to refer to the `stringr` cheatsheet.
 
 ```{r}
+formatPhone <- function(num){
+  first3 <- '[0-9][0-9][0-9]'
+  remainNum <- str_replace(num, first3, ' ')
+  last4 <- str_replace(remainNum, first3, ' ')
+  
+}
 
+formatPhone(c("651-330-8661"))
 
 ```
 
