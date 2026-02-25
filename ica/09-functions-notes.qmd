@@ -225,9 +225,10 @@ rescale(x)
 ```{r}
 formatPhone <- function(num){
   first3 <- '[0-9][0-9][0-9]'
-  remainNum <- str_replace(num, first3, ' ')
-  last4 <- str_replace(remainNum, first3, ' ')
-  
+  remainNum <- str_replace(num, first3, '')
+  last4 <- str_replace(remainNum, first3, '')
+  phoneFormat <- str_c('(', str_match(num, first3), ') ', str_match(remainNum, first3), ' ', str_match(last4, '[0-9][0-9][0-9][0-9]'))
+  return(phoneFormat)
 }
 
 formatPhone(c("651-330-8661"))
@@ -283,6 +284,8 @@ Error in `layer_sf()`:
 ! `mapping` must be created by `aes()`
 ```
 
+
+
 ## The `if-else if-else` Control Structure 
 
 Often in functions, you will want to execute code chunks conditionally. In a programming language, **control structures** are parts of the language that allow you to control what code is executed. By far the most common is the ``if-else if-else` structure.
@@ -318,7 +321,14 @@ The `if () else {}` code is not **vectorized**; the logical condition in `if()` 
 - To convert Fahrenheit to Celsius: `(Fahrenheit - 32) * 5/9`
 
 ```{r}
-
+convertTemp <- function(temp, unit) {
+  if (unit == 'C'){
+    return ((temp * 9/5) + 32)
+  }
+  else{
+    return ((temp - 32) * 5/9)
+  }
+}
 
 ```
 
@@ -326,8 +336,21 @@ The `if () else {}` code is not **vectorized**; the logical condition in `if()` 
 5. **Domain Name** Write a function that extracts the domain name of a supplied email address. The function should return the domain name (e.g., "gmail.com"). If the input is not a valid email address, return "Invalid Email". (A valid email ends in "dot something".)
 
 ```{r}
+extractDomain <- function(email) {
+  domainRegex <- '@.*'
+  domain <- str_match(email, domainRegex)
+  justDomain <- str_sub(domain,start=2)
+  if (str_detect(justDomain, "\\..")){
+    return(justDomain)
+  }
+  else{
+    return('Invalid Email')
+  }
+  
+}
 
-
+extractDomain('skenney@macalester.edu')
+extractDomain('skenney@macalester')
 ```
 
 
