@@ -19,6 +19,8 @@ Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
 
 ```{r}
 library(tidyverse)
+library(lubridate)
+library(stringr)
 olympics_schedule <- read.csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-02-10/schedule.csv')
 
 ```
@@ -36,7 +38,9 @@ olympics_schedule_sums <- olympics_schedule %>%
     is_training == "TRUE" ~ "training",
     is_medal_event == "TRUE" ~ "medal event", 
     .default = "standard event"
-  ))
+  )) %>%
+  mutate(date = as.Date(date),
+         date = format(date, "%m-%d"))
 
 head(olympics_schedule_sums)
 ```
@@ -44,11 +48,11 @@ head(olympics_schedule_sums)
 ```{r}
 olympics <- ggplot(olympics_schedule_sums, aes(x = date, y = discipline_name, color = status, size = count)) +
   scale_color_viridis_d(name = "Event Type", labels = c('Medal', 'Standard', 'Training')) +
-  scale_size_continuous(name = "Count") +
+  scale_size_continuous(name = "Number of Events") +
   geom_point(alpha = 0.75) +
   theme_classic() +
   theme(axis.text.x = element_text(vjust = 0.4, angle = 90), axis.title.y = element_blank()) +
-  labs(title = "What's the Best Day to Go to the Olympics?", subtitle = "Event type by count, discipline, and date.", alt = "Plot of Olympics events by discipline, count, and date. Curling has the most events , and the vast majority of them are standard. Other event disciplines have medal events dispersed throughout the Olympics. Alpine skiing, bobsleigh, luge, skeleton, and ski jumping all have training events, whereas other events do not.", x = "Date", caption = "via TidyTuesday 2/10/2026 - Winter Olympics, by Sam Kenney") 
+  labs(title = "What's the Best Day to Go to the Olympics?", subtitle = "Not all days of the Olympics are created equal! The middle days have a higher amount of events, but the end is packed with medal events.", alt = "Plot of Olympics events by discipline, count, and date. Curling has the most events , and the vast majority of them are standard. Other event disciplines have medal events dispersed throughout the Olympics. Alpine skiing, bobsleigh, luge, skeleton, and ski jumping all have training events, whereas other events do not.", x = "Date", caption = "Source: Winter Olympics Events, via TidyTuesday 2/10/2026, by Sam Kenney") 
 
 olympics
 

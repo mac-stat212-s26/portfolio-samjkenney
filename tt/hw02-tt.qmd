@@ -36,7 +36,7 @@ edible_plants_clean <- edible_plants %>%
 ggplot(edible_plants_clean, aes(x = reorder(taxonomic_name, diff), color = sunlight)) +
   geom_linerange(aes(ymin = preferred_ph_lower, ymax = preferred_ph_upper), linewidth = 1) +
   scale_color_viridis_d(name = "Sunlight Level") +
-  labs(x = " ", y = "Preferred pH", title = "How Particular Is Your Food?", subtitle = "Edible Plant Species by Preferred Soil pH and Sunlight Level", caption = "via TidyTuesday, by Sam Kenney")+
+  labs(x = "Edible Plant Species", y = "Preferred pH Level", title = "Edible Plant Species by Preferred Soil pH and Sunlight Level", caption = "via TidyTuesday, by Sam Kenney")+
   theme_classic() +
   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
 
