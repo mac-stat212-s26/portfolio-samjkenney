@@ -417,11 +417,11 @@ fit_mod_and_extract <- function(data, yvar, preds, pred_of_interest) {
         ci_upper = ci[2]
     )
 }
-```
 
-```{r}
 fit_mod_and_extract(mtcars, "mpg", c("hp", "wt"), "hp")
 ```
+
+
 
 
 
@@ -479,7 +479,6 @@ fit_mod_and_extract <- function(data, yvar, preds, pred_of_interest) {
         ci_upper = ci[pred_of_interest, "97.5 %"]
     )
 }
-
 
 fit_mod_and_extract(data = mtcars, yvar = "mpg", preds = c("hp", "wt"), pred_of_interest = "hp")
 ```
