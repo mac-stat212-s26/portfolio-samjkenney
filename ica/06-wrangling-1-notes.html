@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.8.27">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
 <title>6 Adv Data wrangling I – COMP/STAT212 Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
@@ -54,6 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -71,14 +75,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-16eaaa9b790cfaabc94008ee33c52662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-2b3e8dfe8c7d4b2781b388bd72db8514.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-16eaaa9b790cfaabc94008ee33c52662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-6c274554829fc08bb50b297df4621c59.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-ee6ea4a482cd712473cd05c283bf4656.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-6c274554829fc08bb50b297df4621c59.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -104,7 +109,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script type="text/javascript" charset="UTF-8">
+}</script>
+
+<script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
 cookieconsent.run({
   "notice_banner_type":"simple",
@@ -119,9 +126,14 @@ cookieconsent.run({
 "language":"en"
   });
 });
-</script><style>html{ scroll-behavior: smooth; }</style>
+</script> 
+  
+<style>html{ scroll-behavior: smooth; }</style>
+
+
 <link rel="stylesheet" href="../style/custom.css">
 </head>
+
 <body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -287,7 +299,9 @@ cookieconsent.run({
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -298,11 +312,17 @@ cookieconsent.run({
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
-      <img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
+      <img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Sam Kenney</a> 
         <div class="sidebar-tools-main">
@@ -322,7 +342,7 @@ cookieconsent.run({
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Welcome</span></a>
   </div>
@@ -335,14 +355,14 @@ cookieconsent.run({
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../pv/pv-01.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Professional Viz</span></a>
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -351,8 +371,8 @@ cookieconsent.run({
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../tt/hw01-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Homework 01</span></a>
   </div>
@@ -368,7 +388,7 @@ cookieconsent.run({
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -377,14 +397,14 @@ cookieconsent.run({
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../pcl/adv_wrangling_1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">adv_wrangling_1</span></a>
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -393,8 +413,8 @@ cookieconsent.run({
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ica/ica-sample1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">ICA Sample 1</span></a>
   </div>
@@ -439,8 +459,13 @@ cookieconsent.run({
   <a href="../ica/09-functions-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9 Functions</span></a>
   </div>
 </li>
-      </ul>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ica/10-base-r-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10 Base R</span></a>
+  </div>
 </li>
+      </ul>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
@@ -449,8 +474,8 @@ cookieconsent.run({
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../extra/exam-report1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exam 1</span></a>
   </div>
@@ -461,51 +486,50 @@ cookieconsent.run({
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#learning-goals" id="toc-learning-goals" class="nav-link active" data-scroll-target="#learning-goals">🧩 Learning Goals</a></li>
+  <li><a href="#learning-goals" id="toc-learning-goals" class="nav-link active" data-scroll-target="#learning-goals">🧩 Learning Goals</a></li>
   <li><a href="#helpful-cheatsheets" id="toc-helpful-cheatsheets" class="nav-link" data-scroll-target="#helpful-cheatsheets">Helpful Cheatsheets</a></li>
   <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors">Vectors</a></li>
-  <li>
-<a href="#logicals" id="toc-logicals" class="nav-link" data-scroll-target="#logicals">Logicals</a>
+  <li><a href="#logicals" id="toc-logicals" class="nav-link" data-scroll-target="#logicals">Logicals</a>
   <ul class="collapse">
-<li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#numerics" id="toc-numerics" class="nav-link" data-scroll-target="#numerics">Numerics</a>
+  </ul></li>
+  <li><a href="#numerics" id="toc-numerics" class="nav-link" data-scroll-target="#numerics">Numerics</a>
   <ul class="collapse">
-<li><a href="#notes-1" id="toc-notes-1" class="nav-link" data-scroll-target="#notes-1">Notes</a></li>
+  <li><a href="#notes-1" id="toc-notes-1" class="nav-link" data-scroll-target="#notes-1">Notes</a></li>
   <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1">Exercises</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#dates" id="toc-dates" class="nav-link" data-scroll-target="#dates">Dates</a>
+  </ul></li>
+  <li><a href="#dates" id="toc-dates" class="nav-link" data-scroll-target="#dates">Dates</a>
   <ul class="collapse">
-<li><a href="#notes-2" id="toc-notes-2" class="nav-link" data-scroll-target="#notes-2">Notes</a></li>
+  <li><a href="#notes-2" id="toc-notes-2" class="nav-link" data-scroll-target="#notes-2">Notes</a></li>
   <li><a href="#exercises-2" id="toc-exercises-2" class="nav-link" data-scroll-target="#exercises-2">Exercises</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#factors" id="toc-factors" class="nav-link" data-scroll-target="#factors">Factors</a>
+  </ul></li>
+  <li><a href="#factors" id="toc-factors" class="nav-link" data-scroll-target="#factors">Factors</a>
   <ul class="collapse">
-<li><a href="#notes-3" id="toc-notes-3" class="nav-link" data-scroll-target="#notes-3">Notes</a></li>
+  <li><a href="#notes-3" id="toc-notes-3" class="nav-link" data-scroll-target="#notes-3">Notes</a></li>
   <li><a href="#exercises-3" id="toc-exercises-3" class="nav-link" data-scroll-target="#exercises-3">Exercises</a></li>
-  </ul>
-</li>
+  </ul></li>
   <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">Done!</a></li>
-  </ul></nav>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ica/ica-sample1.html">In-Class Activities</a></li><li class="breadcrumb-item"><a href="../ica/06-wrangling-1-notes.html"><span class="chapter-title">6 Adv Data wrangling I</span></a></li></ol></nav><div class="quarto-title">
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ica/ica-sample1.html">In-Class Activities</a></li><li class="breadcrumb-item"><a href="../ica/06-wrangling-1-notes.html"><span class="chapter-title">6 Adv Data wrangling I</span></a></li></ol></nav>
+<div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">6 Adv Data wrangling I</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -520,7 +544,11 @@ cookieconsent.run({
   
 
 
-</header><section id="learning-goals" class="level2"><h2 class="anchored" data-anchor-id="learning-goals">🧩 Learning Goals</h2>
+</header>
+
+
+<section id="learning-goals" class="level2">
+<h2 class="anchored" data-anchor-id="learning-goals">🧩 Learning Goals</h2>
 <p>By the end of this lesson, you should be able to:</p>
 <ul>
 <li>Determine the class of a given object and identify concerns to be wary of when manipulating an object of that class (numerics, logicals, factors, dates, strings, data.frames)</li>
@@ -528,7 +556,10 @@ cookieconsent.run({
 <li>Use a variety of functions to wrangle numerical and logical data</li>
 <li>Extract date-time information using the <code>lubridate</code> package</li>
 <li>Use the <code>forcats</code> package to wrangle factor data</li>
-</ul></section><section id="helpful-cheatsheets" class="level2"><h2 class="anchored" data-anchor-id="helpful-cheatsheets">Helpful Cheatsheets</h2>
+</ul>
+</section>
+<section id="helpful-cheatsheets" class="level2">
+<h2 class="anchored" data-anchor-id="helpful-cheatsheets">Helpful Cheatsheets</h2>
 <p>RStudio (Posit) maintains a collection of wonderful <a href="https://rstudio.github.io/cheatsheets/html/data-transformation.html">cheatsheets</a>. The following will be helpful:</p>
 <ul>
 <li><a href="https://rstudio.github.io/cheatsheets/html/data-transformation.html">Data transformation with <code>dplyr</code></a></li>
@@ -537,223 +568,263 @@ cookieconsent.run({
 </ul>
 <p><strong>Data Wrangling Verbs (from Stat/Comp 112)</strong></p>
 <ul>
-<li>
-<code>mutate()</code>: creates/changes columns/elements in a data frame/tibble</li>
-<li>
-<code>select()</code>: keeps subset of columns/elements in a data frame/tibble</li>
-<li>
-<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>: keeps subsets of rows in a data frame/tibble</li>
-<li>
-<code>arrange()</code>: sorts rows in a data frame/tibble</li>
-<li>
-<code>group_by()</code>: internally groups rows in data frame/tibble by values in 1 or more columsn/elements</li>
-<li>
-<code>summarize()</code>: collapses/combines information across rows using functions such as <code>n()</code>, <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>, <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, <code><a href="https://rdrr.io/r/base/Extremes.html">min()</a></code>, <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code>, <code><a href="https://rdrr.io/r/stats/median.html">median()</a></code>, <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>
-</li>
-<li>
-<code>count()</code>: shortcut for <code>group_by() |&gt; summarize(n = n())</code>
-</li>
-<li>
-<code>left_join()</code>: mutating join of two data frames/tibbles keeping all rows in left data frame</li>
-<li>
-<code>full_join()</code>: mutating join of two data frames/tibbles keeping all rows in both data frames</li>
-<li>
-<code>inner_join()</code>: mutating join of two data frames/tibbles keeping rows in left data frame that find match in right</li>
-<li>
-<code>semi_join()</code>: filtering join of two data frames/tibbles keeping rows in left data frame that find match in right</li>
-<li>
-<code>anti_join()</code>: filtering join of two data frames/tibbles keeping rows in left data frame that do not find match in right</li>
-<li>
-<code>pivot_wider()</code>: rearrange values from two columns to many(one column becomes the names of new variables, one column becomes the values of the new variables)</li>
-<li>
-<code>pivot_longer()</code>: rearrange values from many columns to two (the names of the columns go to one new variable, the values of the columns go to a second new variable)</li>
-</ul></section><section id="vectors" class="level2"><h2 class="anchored" data-anchor-id="vectors">Vectors</h2>
+<li><code>mutate()</code>: creates/changes columns/elements in a data frame/tibble</li>
+<li><code>select()</code>: keeps subset of columns/elements in a data frame/tibble</li>
+<li><code>filter()</code>: keeps subsets of rows in a data frame/tibble</li>
+<li><code>arrange()</code>: sorts rows in a data frame/tibble</li>
+<li><code>group_by()</code>: internally groups rows in data frame/tibble by values in 1 or more columsn/elements</li>
+<li><code>summarize()</code>: collapses/combines information across rows using functions such as <code>n()</code>, <code>sum()</code>, <code>mean()</code>, <code>min()</code>, <code>max()</code>, <code>median()</code>, <code>sd()</code></li>
+<li><code>count()</code>: shortcut for <code>group_by() |&gt; summarize(n = n())</code></li>
+<li><code>left_join()</code>: mutating join of two data frames/tibbles keeping all rows in left data frame</li>
+<li><code>full_join()</code>: mutating join of two data frames/tibbles keeping all rows in both data frames</li>
+<li><code>inner_join()</code>: mutating join of two data frames/tibbles keeping rows in left data frame that find match in right</li>
+<li><code>semi_join()</code>: filtering join of two data frames/tibbles keeping rows in left data frame that find match in right</li>
+<li><code>anti_join()</code>: filtering join of two data frames/tibbles keeping rows in left data frame that do not find match in right</li>
+<li><code>pivot_wider()</code>: rearrange values from two columns to many(one column becomes the names of new variables, one column becomes the values of the new variables)</li>
+<li><code>pivot_longer()</code>: rearrange values from many columns to two (the names of the columns go to one new variable, the values of the columns go to a second new variable)</li>
+</ul>
+</section>
+<section id="vectors" class="level2">
+<h2 class="anchored" data-anchor-id="vectors">Vectors</h2>
 <p>An <strong>atomic vector</strong> is a storage container in R where all elements in the container are of the same type. The types that are relevant to data science are:</p>
 <ul>
-<li>
-<code>logical</code> (also known as boolean)</li>
+<li><code>logical</code> (also known as boolean)</li>
 <li>numbers
 <ul>
 <li><code>integer</code></li>
-<li>
-<code>numeric</code> floating point (also known as double)</li>
-</ul>
-</li>
-<li>
-<code>character</code> string</li>
-<li>
-<code>Date</code> and date-time (saved as <code>POSIXct</code>)</li>
+<li><code>numeric</code> floating point (also known as double)</li>
+</ul></li>
+<li><code>character</code> string</li>
+<li><code>Date</code> and date-time (saved as <code>POSIXct</code>)</li>
 <li><code>factor</code></li>
 </ul>
 <p>Function documentation will refer to vectors frequently.</p>
 <p>See examples below:</p>
 <ul>
-<li>
-<code><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">ggplot2::scale_x_continuous()</a></code>
+<li><code>ggplot2::scale_x_continuous()</code>
 <ul>
-<li>
-<code>breaks</code>: A <strong>numeric vector</strong> of positions</li>
-<li>
-<code>labels</code>: A <strong>character vector</strong> giving labels (must be same length as breaks)</li>
-</ul>
-</li>
-<li>
-<code><a href="https://rdrr.io/pkg/shiny/man/sliderInput.html">shiny::sliderInput()</a></code>
+<li><code>breaks</code>: A <strong>numeric vector</strong> of positions</li>
+<li><code>labels</code>: A <strong>character vector</strong> giving labels (must be same length as breaks)</li>
+</ul></li>
+<li><code>shiny::sliderInput()</code>
 <ul>
-<li>
-<code>value</code>: The initial value of the slider […] A <strong>length one vector</strong> will create a regular slider; a <strong>length two vector</strong> will create a double-ended range slider.</li>
-</ul>
-</li>
+<li><code>value</code>: The initial value of the slider […] A <strong>length one vector</strong> will create a regular slider; a <strong>length two vector</strong> will create a double-ended range slider.</li>
+</ul></li>
 </ul>
 <p>When you need a vector, you can create one manually using</p>
 <ul>
-<li>
-<code><a href="https://rdrr.io/r/base/c.html">c()</a></code>: the combine function</li>
+<li><code>c()</code>: the combine function</li>
 </ul>
 <p>Or you can create one based on available data using</p>
 <ul>
-<li>
-<code>dataset |&gt; mutate(newvar = variable &gt; 5) |&gt; pull(newvar)</code>: taking one column out of a dataset</li>
-<li>
-<code>dataset |&gt; pull(variable) |&gt; unique()</code>: taking one column out of a dataset and finding unique values</li>
+<li><code>dataset |&gt; mutate(newvar = variable &gt; 5) |&gt; pull(newvar)</code>: taking one column out of a dataset</li>
+<li><code>dataset |&gt; pull(variable) |&gt; unique()</code>: taking one column out of a dataset and finding unique values</li>
 </ul>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">c</span>(<span class="st">"Fair"</span>, <span class="st">"Good"</span>, <span class="st">"Very Good"</span>, <span class="st">"Premium"</span>, <span class="st">"Ideal"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">c</span>(<span class="st">"Fair"</span>, <span class="st">"Good"</span>, <span class="st">"Very Good"</span>, <span class="st">"Premium"</span>, <span class="st">"Ideal"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "Fair"      "Good"      "Very Good" "Premium"   "Ideal"    </code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>diamonds <span class="sc">|&gt;</span> <span class="fu">pull</span>(cut) <span class="sc">|&gt;</span> <span class="fu">unique</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>diamonds <span class="sc">|&gt;</span> <span class="fu">pull</span>(cut) <span class="sc">|&gt;</span> <span class="fu">unique</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] Ideal     Premium   Good      Very Good Fair     
 Levels: Fair &lt; Good &lt; Very Good &lt; Premium &lt; Ideal</code></pre>
 </div>
 </div>
-</section><section id="logicals" class="level2"><h2 class="anchored" data-anchor-id="logicals">Logicals</h2>
-<section id="notes" class="level3"><h3 class="anchored" data-anchor-id="notes">Notes</h3>
+</section>
+<section id="logicals" class="level2">
+<h2 class="anchored" data-anchor-id="logicals">Logicals</h2>
+<section id="notes" class="level3">
+<h3 class="anchored" data-anchor-id="notes">Notes</h3>
 <p>What does a logical vector look like?</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">NA</span>)</span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">NA</span>)</span>
 <span id="cb5-2"><a href="#cb5-2"></a>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE FALSE    NA</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">class</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">class</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "logical"</code></pre>
 </div>
 </div>
 <p>You will often create logical vectors with comparison operators: <code>&gt;</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>==</code>, <code>!=</code>.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">12</span>)</span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">12</span>)</span>
 <span id="cb9-2"><a href="#cb9-2"></a>x <span class="sc">&lt;</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE FALSE FALSE FALSE</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>x <span class="sc">&lt;=</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>x <span class="sc">&lt;=</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE  TRUE FALSE FALSE</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>x <span class="sc">&gt;</span> <span class="dv">9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>x <span class="sc">&gt;</span> <span class="dv">9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE FALSE FALSE  TRUE</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>x <span class="sc">&gt;=</span> <span class="dv">9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>x <span class="sc">&gt;=</span> <span class="dv">9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE FALSE  TRUE  TRUE</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>x <span class="sc">==</span> <span class="dv">12</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>x <span class="sc">==</span> <span class="dv">12</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE FALSE FALSE  TRUE</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>x <span class="sc">!=</span> <span class="dv">12</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>x <span class="sc">!=</span> <span class="dv">12</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE  TRUE  TRUE FALSE</code></pre>
 </div>
 </div>
 <p>When you want to check for set containment, the <code>%in%</code> operator is the correct way to do this (as opposed to <code>==</code>).</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">4</span>)</span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">4</span>)</span>
 <span id="cb21-2"><a href="#cb21-2"></a>x <span class="sc">==</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stderr">
+</details>
+<div class="cell-output cell-output-stderr">
 <pre><code>Warning in x == c(1, 2, 4): longer object length is not a multiple of shorter
 object length</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE  TRUE FALSE FALSE</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE  TRUE FALSE  TRUE</code></pre>
 </div>
 </div>
 <p>The <code>Warning: longer object length is not a multiple of shorter object length</code> is a manifestation of <strong>vector recycling</strong>.</p>
 <p>In R, if two vectors are being combined or compared, the shorter one will be repeated to match the length of the longer one–even if longer object length isn’t a multiple of the shorter object length. We can see the exact recycling that happens below:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">4</span>)</span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">4</span>)</span>
 <span id="cb26-2"><a href="#cb26-2"></a>x <span class="sc">==</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE  TRUE FALSE FALSE</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>x <span class="sc">==</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">1</span>) <span class="co"># This line demonstrates the recycling that happens on the previous line</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>x <span class="sc">==</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">1</span>) <span class="co"># This line demonstrates the recycling that happens on the previous line</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE  TRUE FALSE FALSE</code></pre>
 </div>
 </div>
-<p>Logical vectors can also be created with functions. <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> is one useful example:</p>
+<p>Logical vectors can also be created with functions. <code>is.na()</code> is one useful example:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="cn">NA</span>)</span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="cn">NA</span>)</span>
 <span id="cb30-2"><a href="#cb30-2"></a>x <span class="sc">==</span> <span class="cn">NA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] NA NA NA NA</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">is.na</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">is.na</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE FALSE FALSE  TRUE</code></pre>
 </div>
 </div>
 <p>We can negate a logical object with <code>!</code>. We can combine logical objects with <code>&amp;</code> (and) and <code>|</code> (or).</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">9</span>)</span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">9</span>)</span>
 <span id="cb34-2"><a href="#cb34-2"></a>x <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE  TRUE  TRUE FALSE</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="sc">!</span>(x <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="sc">!</span>(x <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE FALSE FALSE  TRUE</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>x <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">|</span> x <span class="sc">&gt;</span> <span class="dv">8</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>x <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">|</span> x <span class="sc">&gt;</span> <span class="dv">8</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE FALSE FALSE  TRUE</code></pre>
 </div>
 </div>
 <p>We can summarize logical vectors with:</p>
 <ul>
-<li>
-<code><a href="https://rdrr.io/r/base/any.html">any()</a></code>: Are ANY of the values <code>TRUE</code>?</li>
-<li>
-<code><a href="https://rdrr.io/r/base/all.html">all()</a></code>: Are ALL of the values <code>TRUE</code>?</li>
-<li>
-<code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>: How many of the values are <code>TRUE</code>?</li>
-<li>
-<code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>: What fraction of the values are <code>TRUE</code>?</li>
+<li><code>any()</code>: Are ANY of the values <code>TRUE</code>?</li>
+<li><code>all()</code>: Are ALL of the values <code>TRUE</code>?</li>
+<li><code>sum()</code>: How many of the values are <code>TRUE</code>?</li>
+<li><code>mean()</code>: What fraction of the values are <code>TRUE</code>?</li>
 </ul>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">9</span>)</span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">9</span>)</span>
 <span id="cb40-2"><a href="#cb40-2"></a><span class="fu">any</span>(x <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">all</span>(x <span class="sc">&lt;</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">all</span>(x <span class="sc">&lt;</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">sum</span>(x <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">sum</span>(x <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">mean</span>(x <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">mean</span>(x <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.25</code></pre>
 </div>
 </div>
@@ -764,41 +835,61 @@ object length</code></pre>
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Note: <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> (from base R) and <code>if_else()</code> (from tidyverse) are different functions. We prefer <code>if_else()</code> for many reasons (examples below).</p>
+<p>Note: <code>ifelse()</code> (from base R) and <code>if_else()</code> (from tidyverse) are different functions. We prefer <code>if_else()</code> for many reasons (examples below).</p>
 <ul>
 <li>Noisy to make sure you catch issues/bugs</li>
 <li>Can explicitly handle missing values</li>
 <li>Keeps dates as dates</li>
 </ul>
-<details><summary>
+<details>
+<summary>
 Examples
-</summary><div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="cn">NA</span>)</span>
+</summary>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="cn">NA</span>)</span>
 <span id="cb48-2"><a href="#cb48-2"></a></span>
 <span id="cb48-3"><a href="#cb48-3"></a><span class="fu">ifelse</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">'positive'</span>, <span class="st">'negative'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "negative" "negative" "positive" "positive" NA        </code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">if_else</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">'positive'</span>, <span class="st">'negative'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="fu">if_else</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">'positive'</span>, <span class="st">'negative'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "negative" "negative" "positive" "positive" NA        </code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="fu">ifelse</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="st">'negative'</span>) <span class="co"># Bad: doesn't complain with combo of data types</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="fu">ifelse</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="st">'negative'</span>) <span class="co"># Bad: doesn't complain with combo of data types</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "negative" "negative" "1"        "1"        NA        </code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="fu">if_else</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="st">'negative'</span>) <span class="co"># Good:noisy to make sure you catch issues</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-error">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="fu">if_else</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="st">'negative'</span>) <span class="co"># Good:noisy to make sure you catch issues</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-error">
 <pre><code>Error in `if_else()`:
 ! Can't combine `true` &lt;double&gt; and `false` &lt;character&gt;.</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="fu">if_else</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">'positive'</span>, <span class="st">'negative'</span>, <span class="at">missing =</span> <span class="st">'missing'</span>) <span class="co"># Good: can explicitly handle NA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="fu">if_else</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">'positive'</span>, <span class="st">'negative'</span>, <span class="at">missing =</span> <span class="st">'missing'</span>) <span class="co"># Good: can explicitly handle NA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "negative" "negative" "positive" "positive" "missing" </code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>fun_dates <span class="ot">&lt;-</span> <span class="fu">mdy</span>(<span class="st">'1-1-2025'</span>) <span class="sc">+</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">365</span></span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>fun_dates <span class="ot">&lt;-</span> <span class="fu">mdy</span>(<span class="st">'1-1-2025'</span>) <span class="sc">+</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">365</span></span>
 <span id="cb58-2"><a href="#cb58-2"></a><span class="fu">ifelse</span>(fun_dates <span class="sc">&lt;</span> <span class="fu">today</span>(), fun_dates <span class="sc">+</span> <span class="fu">years</span>(), fun_dates) <span class="co"># Bad: converts dates to integers</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>  [1] 20454 20455 20456 20457 20458 20459 20460 20461 20462 20463 20464 20465
  [13] 20466 20467 20468 20469 20470 20471 20472 20473 20474 20475 20476 20477
  [25] 20478 20479 20480 20481 20482 20483 20484 20485 20486 20487 20488 20489
@@ -831,8 +922,11 @@ Examples
 [349] 20802 20803 20804 20805 20806 20807 20808 20809 20810 20811 20812 20813
 [361] 20814 20815 20816 20817 20818 20819</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="fu">if_else</span>(fun_dates <span class="sc">&lt;</span> <span class="fu">today</span>(), fun_dates <span class="sc">+</span> <span class="fu">years</span>(), fun_dates) <span class="co"># Good: keeps dates as dates</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="fu">if_else</span>(fun_dates <span class="sc">&lt;</span> <span class="fu">today</span>(), fun_dates <span class="sc">+</span> <span class="fu">years</span>(), fun_dates) <span class="co"># Good: keeps dates as dates</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>  [1] "2026-01-01" "2026-01-02" "2026-01-03" "2026-01-04" "2026-01-05"
   [6] "2026-01-06" "2026-01-07" "2026-01-08" "2026-01-09" "2026-01-10"
  [11] "2026-01-11" "2026-01-12" "2026-01-13" "2026-01-14" "2026-01-15"
@@ -913,10 +1007,14 @@ Examples
 </div>
 </div>
 </div>
-</section><section id="exercises" class="level3"><h3 class="anchored" data-anchor-id="exercises">Exercises</h3>
+</section>
+<section id="exercises" class="level3">
+<h3 class="anchored" data-anchor-id="exercises">Exercises</h3>
 <p>Load the diamonds dataset, and filter to the first 1000 diamonds.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="fu">data</span>(diamonds)</span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="fu">data</span>(diamonds)</span>
 <span id="cb62-2"><a href="#cb62-2"></a>diamonds <span class="ot">&lt;-</span> diamonds <span class="sc">|&gt;</span> </span>
 <span id="cb62-3"><a href="#cb62-3"></a>    <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -929,20 +1027,18 @@ Examples
 <ul>
 <li>First, do this a wrong way with <code>==</code>. Predict the warning message that you will receive.</li>
 <li>Second, do this the correct way with an appropriate logical operator.</li>
-</ul>
-</li>
+</ul></li>
 <li>Are there any diamonds of Fair cut that are more than $3000? Are all diamonds of Ideal cut more than $2000?</li>
 <li>Create two new categorized versions of <code>price</code> by looking up the documentation for <code>if_else()</code> and <code>case_when()</code>:
 <ul>
-<li>
-<code>price_cat1</code>: “low” if price is less than 500 and “high” otherwise</li>
-<li>
-<code>price_cat2</code>: “low” if price is less than 500, “medium” if price is between 500 and 1000 dollars inclusive, and “high” otherwise.</li>
-</ul>
-</li>
+<li><code>price_cat1</code>: “low” if price is less than 500 and “high” otherwise</li>
+<li><code>price_cat2</code>: “low” if price is less than 500, “medium” if price is between 500 and 1000 dollars inclusive, and “high” otherwise.</li>
+</ul></li>
 </ol>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="co">#1</span></span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="co">#1</span></span>
 <span id="cb63-2"><a href="#cb63-2"></a>diamonds_sub1 <span class="ot">&lt;-</span> diamonds <span class="sc">%&gt;%</span></span>
 <span id="cb63-3"><a href="#cb63-3"></a>  <span class="fu">filter</span>(price <span class="sc">&lt;</span> <span class="dv">400</span> <span class="sc">|</span> price <span class="sc">&gt;</span> <span class="dv">1000</span>)</span>
 <span id="cb63-4"><a href="#cb63-4"></a><span class="co">#2</span></span>
@@ -967,74 +1063,86 @@ Examples
 <span id="cb63-23"><a href="#cb63-23"></a>  <span class="fu">mutate</span>(<span class="at">price_cat2 =</span> <span class="fu">if_else</span>(price <span class="sc">&lt;</span> <span class="dv">500</span>, <span class="st">"low"</span>, <span class="st">"high"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-</section></section><section id="numerics" class="level2"><h2 class="anchored" data-anchor-id="numerics">Numerics</h2>
-<section id="notes-1" class="level3"><h3 class="anchored" data-anchor-id="notes-1">Notes</h3>
+</section>
+</section>
+<section id="numerics" class="level2">
+<h2 class="anchored" data-anchor-id="numerics">Numerics</h2>
+<section id="notes-1" class="level3">
+<h3 class="anchored" data-anchor-id="notes-1">Notes</h3>
 <p>Numerical data can be of class <code>integer</code> or <code>numeric</code> (representing real numbers).</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
 <span id="cb64-2"><a href="#cb64-2"></a>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 2 3</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="fu">class</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="fu">class</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "integer"</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="fl">+1e-9</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="fl">+1e-9</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb68-2"><a href="#cb68-2"></a>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 2 3</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="fu">class</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="fu">class</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "numeric"</code></pre>
 </div>
 </div>
 <p>The <a href="https://r4ds.hadley.nz/numbers">Numbers</a> chapter in R4DS covers the following functions that are all useful for wrangling numeric data:</p>
 <ul>
-<li>
-<code>n()</code>, <code>n_distinct()</code>: Counting and counting the number of unique values</li>
-<li>
-<code>sum(is.na())</code>: Counting the number of missing values</li>
-<li>
-<code><a href="https://rdrr.io/r/base/Extremes.html">min()</a></code>, <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code>
-</li>
-<li>
-<code><a href="https://rdrr.io/r/base/Extremes.html">pmin()</a></code>, <code><a href="https://rdrr.io/r/base/Extremes.html">pmax()</a></code>: Get the min and max across several vectors</li>
+<li><code>n()</code>, <code>n_distinct()</code>: Counting and counting the number of unique values</li>
+<li><code>sum(is.na())</code>: Counting the number of missing values</li>
+<li><code>min()</code>, <code>max()</code></li>
+<li><code>pmin()</code>, <code>pmax()</code>: Get the min and max across several vectors</li>
 <li>Integer division: <code>%/%</code>. Remainder: <code>%%</code>
 <ul>
-<li>
-<code>121 %/% 100 = 1</code> and <code>121 %% 100 = 21</code>
-</li>
-</ul>
-</li>
-<li>
-<code><a href="https://rdrr.io/r/base/Round.html">round()</a></code>, <code><a href="https://rdrr.io/r/base/Round.html">floor()</a></code>, <code><a href="https://rdrr.io/r/base/Round.html">ceiling()</a></code>: Rounding functions (to a specified number of decimal places, to the largest integer below a number, to the smallest integer above a number)</li>
-<li>
-<code><a href="https://rdrr.io/r/base/cut.html">cut()</a></code>: Cut a numerical vector into categories</li>
-<li>
-<code><a href="https://rdrr.io/r/base/cumsum.html">cumsum()</a></code>, <code>cummean()</code>, <code><a href="https://rdrr.io/r/base/cumsum.html">cummin()</a></code>, <code><a href="https://rdrr.io/r/base/cumsum.html">cummax()</a></code>: Cumulative functions</li>
-<li>
-<code><a href="https://rdrr.io/r/base/rank.html">rank()</a></code>: Provide the ranks of the numbers in a vector</li>
-<li>
-<code>lead(), lag()</code>: shift a vector by padding with NAs</li>
+<li><code>121 %/% 100 = 1</code> and <code>121 %% 100 = 21</code></li>
+</ul></li>
+<li><code>round()</code>, <code>floor()</code>, <code>ceiling()</code>: Rounding functions (to a specified number of decimal places, to the largest integer below a number, to the smallest integer above a number)</li>
+<li><code>cut()</code>: Cut a numerical vector into categories</li>
+<li><code>cumsum()</code>, <code>cummean()</code>, <code>cummin()</code>, <code>cummax()</code>: Cumulative functions</li>
+<li><code>rank()</code>: Provide the ranks of the numbers in a vector</li>
+<li><code>lead(), lag()</code>: shift a vector by padding with NAs</li>
 <li>Numerical summaries: <code>mean</code>, <code>median</code>, <code>min</code>, <code>max</code>, <code>quantile</code>, <code>sd</code>, <code>IQR</code>
 <ul>
 <li>Note that all numerical summary functions have an <code>na.rm</code> argument that should be set to <code>TRUE</code> if you have missing data.</li>
+</ul></li>
 </ul>
-</li>
-</ul></section><section id="exercises-1" class="level3"><h3 class="anchored" data-anchor-id="exercises-1">Exercises</h3>
+</section>
+<section id="exercises-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-1">Exercises</h3>
 <p>Exercises will be on HW4.</p>
 <p>The best way to add these functions and operators to your vocabulary is to need to recall them. Refer to the list of functions above as you try the exercises.</p>
 <p>You will need to reference function documentation to look at arguments and look in the Examples section.</p>
-</section></section><section id="dates" class="level2"><h2 class="anchored" data-anchor-id="dates">Dates</h2>
-<section id="notes-2" class="level3"><h3 class="anchored" data-anchor-id="notes-2">Notes</h3>
+</section>
+</section>
+<section id="dates" class="level2">
+<h2 class="anchored" data-anchor-id="dates">Dates</h2>
+<section id="notes-2" class="level3">
+<h3 class="anchored" data-anchor-id="notes-2">Notes</h3>
 <p>The <code>lubridate</code> package contains useful functions for working with dates and times. The <code>lubridate</code> <a href="https://lubridate.tidyverse.org/reference/index.html">function reference</a> is a useful resource for finding the functions you need. We’ll take a brief tour of this reference page.</p>
 <p>We’ll use the <code>lakers</code> dataset in the <code>lubridate</code> package to illustrate some examples.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>lakers <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(lakers)</span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>lakers <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(lakers)</span>
 <span id="cb72-2"><a href="#cb72-2"></a><span class="fu">head</span>(lakers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 13
      date opponent game_type time  period etype team  player result points type 
     &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;
@@ -1049,7 +1157,9 @@ Examples
 </div>
 <p>Below we use date-time <a href="https://lubridate.tidyverse.org/reference/index.html#date-time-parsing">parsing functions</a> to represent the <code>date</code> and <code>time</code> variables with date-time classes:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>lakers <span class="ot">&lt;-</span> lakers <span class="sc">|&gt;</span></span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>lakers <span class="ot">&lt;-</span> lakers <span class="sc">|&gt;</span></span>
 <span id="cb74-2"><a href="#cb74-2"></a>    <span class="fu">mutate</span>(</span>
 <span id="cb74-3"><a href="#cb74-3"></a>        <span class="at">date =</span> <span class="fu">ymd</span>(date),</span>
 <span id="cb74-4"><a href="#cb74-4"></a>        <span class="at">time =</span> <span class="fu">ms</span>(time)</span>
@@ -1058,7 +1168,9 @@ Examples
 </div>
 <p>Below we use <a href="https://lubridate.tidyverse.org/reference/index.html#setting-getting-and-rounding">extraction functions</a> to get components of the date-time objects:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>lakers_clean <span class="ot">&lt;-</span> lakers <span class="sc">|&gt;</span></span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>lakers_clean <span class="ot">&lt;-</span> lakers <span class="sc">|&gt;</span></span>
 <span id="cb75-2"><a href="#cb75-2"></a>    <span class="fu">mutate</span>(</span>
 <span id="cb75-3"><a href="#cb75-3"></a>        <span class="at">year =</span> <span class="fu">year</span>(date),</span>
 <span id="cb75-4"><a href="#cb75-4"></a>        <span class="at">month =</span> <span class="fu">month</span>(date),</span>
@@ -1068,7 +1180,8 @@ Examples
 <span id="cb75-8"><a href="#cb75-8"></a>        <span class="at">second =</span> <span class="fu">second</span>(time)</span>
 <span id="cb75-9"><a href="#cb75-9"></a>    )</span>
 <span id="cb75-10"><a href="#cb75-10"></a>lakers_clean <span class="sc">|&gt;</span> <span class="fu">select</span>(year<span class="sc">:</span>second)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 34,624 × 6
     year month   day day_of_week minute second
    &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;ord&gt;        &lt;dbl&gt;  &lt;dbl&gt;
@@ -1084,14 +1197,17 @@ Examples
 10  2008    10    28 Tue             10     53
 # ℹ 34,614 more rows</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>lakers_clean <span class="ot">&lt;-</span> lakers_clean <span class="sc">|&gt;</span></span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>lakers_clean <span class="ot">&lt;-</span> lakers_clean <span class="sc">|&gt;</span></span>
 <span id="cb77-2"><a href="#cb77-2"></a>    <span class="fu">group_by</span>(date, opponent, period) <span class="sc">|&gt;</span></span>
 <span id="cb77-3"><a href="#cb77-3"></a>    <span class="fu">arrange</span>(date, opponent, period, <span class="fu">desc</span>(time)) <span class="sc">|&gt;</span></span>
 <span id="cb77-4"><a href="#cb77-4"></a>    <span class="fu">mutate</span>(</span>
 <span id="cb77-5"><a href="#cb77-5"></a>        <span class="at">diff_btw_plays_sec =</span> <span class="fu">as.numeric</span>(time <span class="sc">-</span> <span class="fu">lag</span>(time, <span class="dv">1</span>))</span>
 <span id="cb77-6"><a href="#cb77-6"></a>    )</span>
 <span id="cb77-7"><a href="#cb77-7"></a>lakers_clean <span class="sc">|&gt;</span> <span class="fu">select</span>(date, opponent, time, period, diff_btw_plays_sec)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 34,624 × 5
 # Groups:   date, opponent, period [314]
    date       opponent time     period diff_btw_plays_sec
@@ -1109,51 +1225,74 @@ Examples
 # ℹ 34,614 more rows</code></pre>
 </div>
 </div>
-</section><section id="exercises-2" class="level3"><h3 class="anchored" data-anchor-id="exercises-2">Exercises</h3>
+</section>
+<section id="exercises-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-2">Exercises</h3>
 <p>Exercises will be on HW4.</p>
-</section></section><section id="factors" class="level2"><h2 class="anchored" data-anchor-id="factors">Factors</h2>
-<section id="notes-3" class="level3"><h3 class="anchored" data-anchor-id="notes-3">Notes</h3>
+</section>
+</section>
+<section id="factors" class="level2">
+<h2 class="anchored" data-anchor-id="factors">Factors</h2>
+<section id="notes-3" class="level3">
+<h3 class="anchored" data-anchor-id="notes-3">Notes</h3>
 <p><strong>Creating factors</strong></p>
 <p>In R, factors are made up of two components: the <strong>actual values</strong> of the data and the possible <strong>levels</strong> within the factor. Creating a factor requires supplying both pieces of information.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a>months <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Mar"</span>, <span class="st">"Dec"</span>, <span class="st">"Jan"</span>,  <span class="st">"Apr"</span>, <span class="st">"Jul"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a>months <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Mar"</span>, <span class="st">"Dec"</span>, <span class="st">"Jan"</span>,  <span class="st">"Apr"</span>, <span class="st">"Jul"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>However, if we were to sort this vector, R would sort this vector alphabetically.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a><span class="co"># alphabetical sort</span></span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a><span class="co"># alphabetical sort</span></span>
 <span id="cb80-2"><a href="#cb80-2"></a><span class="fu">sort</span>(months)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] "Apr" "Dec" "Jan" "Jul" "Mar"</code></pre>
 </div>
 </div>
 <p>We can fix this sorting by creating a factor version of <code>months</code>. The <code>levels</code> argument is a character vector that specifies the unique values that the factor can take. The order of the values in <code>levels</code> defines the sorting of the factor.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a>months_fct <span class="ot">&lt;-</span> <span class="fu">factor</span>(months, <span class="at">levels =</span> month.abb) <span class="co"># month.abb is a built-in variable</span></span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a>months_fct <span class="ot">&lt;-</span> <span class="fu">factor</span>(months, <span class="at">levels =</span> month.abb) <span class="co"># month.abb is a built-in variable</span></span>
 <span id="cb82-2"><a href="#cb82-2"></a>months_fct</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] Mar Dec Jan Apr Jul
 Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="fu">sort</span>(months_fct)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="fu">sort</span>(months_fct)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] Jan Mar Apr Jul Dec
 Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
 </div>
 </div>
 <p>What if we try to create a factor with values that aren’t in the levels? (e.g., a typo in a month name)</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a>months2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Jna"</span>, <span class="st">"Mar"</span>)</span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a>months2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Jna"</span>, <span class="st">"Mar"</span>)</span>
 <span id="cb86-2"><a href="#cb86-2"></a><span class="fu">factor</span>(months2, <span class="at">levels =</span> month.abb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] &lt;NA&gt; Mar 
 Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
 </div>
 </div>
 <p>Because the <code>NA</code> is introduced silently (without any error or warnings), this can be dangerous. It might be better to use the <code>fct()</code> function in the <code>forcats</code> package instead:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a><span class="fu">fct</span>(months2, <span class="at">levels =</span> month.abb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-error">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a><span class="fu">fct</span>(months2, <span class="at">levels =</span> month.abb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-error">
 <pre><code>Error in `fct()`:
 ! All values of `x` must appear in `levels` or `na`
 ℹ Missing level: "Jna"</code></pre>
@@ -1162,9 +1301,12 @@ Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
 <p><strong>Reordering factors</strong></p>
 <p>We’ll use a subset of the General Social Survey (GSS) dataset available in the <code>forcats</code> pacakges.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a><span class="fu">data</span>(gss_cat)</span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a><span class="fu">data</span>(gss_cat)</span>
 <span id="cb90-2"><a href="#cb90-2"></a><span class="fu">head</span>(gss_cat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 9
    year marital         age race  rincome        partyid     relig denom tvhours
   &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt; &lt;fct&gt;          &lt;fct&gt;       &lt;fct&gt; &lt;fct&gt;   &lt;int&gt;
@@ -1178,7 +1320,9 @@ Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
 </div>
 <p>Reordering the levels of a factor can be useful in plotting when categories would benefit from being sorted in a particular way:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a>relig_summary <span class="ot">&lt;-</span> gss_cat <span class="sc">|&gt;</span></span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a>relig_summary <span class="ot">&lt;-</span> gss_cat <span class="sc">|&gt;</span></span>
 <span id="cb92-2"><a href="#cb92-2"></a>    <span class="fu">group_by</span>(relig) <span class="sc">|&gt;</span></span>
 <span id="cb92-3"><a href="#cb92-3"></a>    <span class="fu">summarize</span>(</span>
 <span id="cb92-4"><a href="#cb92-4"></a>        <span class="at">tvhours =</span> <span class="fu">mean</span>(tvhours, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
@@ -1188,9 +1332,11 @@ Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
 <span id="cb92-8"><a href="#cb92-8"></a><span class="fu">ggplot</span>(relig_summary, <span class="fu">aes</span>(<span class="at">x =</span> tvhours, <span class="at">y =</span> relig)) <span class="sc">+</span> </span>
 <span id="cb92-9"><a href="#cb92-9"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb92-10"><a href="#cb92-10"></a>    <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output-display">
+</details>
+<div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="06-wrangling-1-notes_files/figure-html/reorder_factors_motivation-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure">
+<p><img src="06-wrangling-1-notes_files/figure-html/reorder_factors_motivation-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1201,36 +1347,48 @@ Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
 <li>The second argument determines how the factor is sorted (analogous to what you put inside <code>arrange()</code> when sorting the rows of a data frame.)</li>
 </ul>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1"></a><span class="fu">ggplot</span>(relig_summary, <span class="fu">aes</span>(<span class="at">x =</span> tvhours, <span class="at">y =</span> <span class="fu">fct_reorder</span>(relig, tvhours))) <span class="sc">+</span></span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1"></a><span class="fu">ggplot</span>(relig_summary, <span class="fu">aes</span>(<span class="at">x =</span> tvhours, <span class="at">y =</span> <span class="fu">fct_reorder</span>(relig, tvhours))) <span class="sc">+</span></span>
 <span id="cb93-2"><a href="#cb93-2"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb93-3"><a href="#cb93-3"></a>    <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output-display">
+</details>
+<div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="06-wrangling-1-notes_files/figure-html/fct_reorder-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure">
+<p><img src="06-wrangling-1-notes_files/figure-html/fct_reorder-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>For bar plots, we can use <code>fct_infreq()</code> to reorder levels from most to least common. This can be combined with <code>fct_rev()</code> to reverse the order (least to most common):</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1"></a>gss_cat <span class="sc">|&gt;</span></span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1"></a>gss_cat <span class="sc">|&gt;</span></span>
 <span id="cb94-2"><a href="#cb94-2"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> marital)) <span class="sc">+</span></span>
 <span id="cb94-3"><a href="#cb94-3"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
 <span id="cb94-4"><a href="#cb94-4"></a>    <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output-display">
+</details>
+<div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="06-wrangling-1-notes_files/figure-html/fct_infreq_rev-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure">
+<p><img src="06-wrangling-1-notes_files/figure-html/fct_infreq_rev-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1"></a>gss_cat <span class="sc">|&gt;</span></span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1"></a>gss_cat <span class="sc">|&gt;</span></span>
 <span id="cb95-2"><a href="#cb95-2"></a>    <span class="fu">mutate</span>(<span class="at">marital =</span> marital <span class="sc">|&gt;</span> <span class="fu">fct_infreq</span>() <span class="sc">|&gt;</span> <span class="fu">fct_rev</span>()) <span class="sc">|&gt;</span></span>
 <span id="cb95-3"><a href="#cb95-3"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> marital)) <span class="sc">+</span></span>
 <span id="cb95-4"><a href="#cb95-4"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
 <span id="cb95-5"><a href="#cb95-5"></a>    <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output-display">
+</details>
+<div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="06-wrangling-1-notes_files/figure-html/fct_infreq_rev-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure">
+<p><img src="06-wrangling-1-notes_files/figure-html/fct_infreq_rev-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1239,8 +1397,11 @@ Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
 <p>We talked about reordering the levels of a factor–what about changing the values of the levels themselves?</p>
 <p>For example, the names of the political parties in the GSS could use elaboration (“str” isn’t a great label for “strong”) and clean up:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1"></a>gss_cat <span class="sc">|&gt;</span> <span class="fu">count</span>(partyid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1"></a>gss_cat <span class="sc">|&gt;</span> <span class="fu">count</span>(partyid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 2
    partyid                n
    &lt;fct&gt;              &lt;int&gt;
@@ -1258,7 +1419,9 @@ Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
 </div>
 <p>We can use <code>fct_recode()</code> on <code>partyid</code> with the new level names going on the left and the old levels on the right. Any levels that aren’t mentioned explicitly (i.e., “Don’t know” and “Other party”) will be left as is:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1"></a>gss_cat <span class="sc">|&gt;</span></span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1"></a>gss_cat <span class="sc">|&gt;</span></span>
 <span id="cb98-2"><a href="#cb98-2"></a>    <span class="fu">mutate</span>(</span>
 <span id="cb98-3"><a href="#cb98-3"></a>        <span class="at">partyid =</span> <span class="fu">fct_recode</span>(partyid,</span>
 <span id="cb98-4"><a href="#cb98-4"></a>            <span class="st">"Republican, strong"</span>    <span class="ot">=</span> <span class="st">"Strong republican"</span>,</span>
@@ -1270,7 +1433,8 @@ Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
 <span id="cb98-10"><a href="#cb98-10"></a>        )</span>
 <span id="cb98-11"><a href="#cb98-11"></a>    ) <span class="sc">|&gt;</span></span>
 <span id="cb98-12"><a href="#cb98-12"></a>    <span class="fu">count</span>(partyid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 2
    partyid                   n
    &lt;fct&gt;                 &lt;int&gt;
@@ -1288,7 +1452,9 @@ Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
 </div>
 <p>To combine groups, we can assign multiple old levels to the same new level (“Other” maps to “No answer”, “Don’t know”, and “Other party”):</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1"></a>gss_cat <span class="sc">|&gt;</span></span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1"></a>gss_cat <span class="sc">|&gt;</span></span>
 <span id="cb100-2"><a href="#cb100-2"></a>    <span class="fu">mutate</span>(</span>
 <span id="cb100-3"><a href="#cb100-3"></a>        <span class="at">partyid =</span> <span class="fu">fct_recode</span>(partyid,</span>
 <span id="cb100-4"><a href="#cb100-4"></a>            <span class="st">"Republican, strong"</span>    <span class="ot">=</span> <span class="st">"Strong republican"</span>,</span>
@@ -1302,7 +1468,8 @@ Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
 <span id="cb100-12"><a href="#cb100-12"></a>            <span class="st">"Other"</span>                 <span class="ot">=</span> <span class="st">"Other party"</span></span>
 <span id="cb100-13"><a href="#cb100-13"></a>        )</span>
 <span id="cb100-14"><a href="#cb100-14"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 21,483 × 9
     year marital         age race  rincome        partyid    relig denom tvhours
    &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt; &lt;fct&gt;          &lt;fct&gt;      &lt;fct&gt; &lt;fct&gt;   &lt;int&gt;
@@ -1321,7 +1488,9 @@ Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
 </div>
 <p>We can use <code>fct_collapse()</code> to collapse many levels:</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1"></a>gss_cat <span class="sc">|&gt;</span></span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1"></a>gss_cat <span class="sc">|&gt;</span></span>
 <span id="cb102-2"><a href="#cb102-2"></a>    <span class="fu">mutate</span>(</span>
 <span id="cb102-3"><a href="#cb102-3"></a>        <span class="at">partyid =</span> <span class="fu">fct_collapse</span>(partyid,</span>
 <span id="cb102-4"><a href="#cb102-4"></a>            <span class="st">"Other"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"No answer"</span>, <span class="st">"Don't know"</span>, <span class="st">"Other party"</span>),</span>
@@ -1331,7 +1500,8 @@ Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
 <span id="cb102-8"><a href="#cb102-8"></a>        )</span>
 <span id="cb102-9"><a href="#cb102-9"></a>    ) <span class="sc">|&gt;</span></span>
 <span id="cb102-10"><a href="#cb102-10"></a>    <span class="fu">count</span>(partyid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   partyid         n
   &lt;fct&gt;       &lt;int&gt;
@@ -1341,20 +1511,28 @@ Levels: Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
 4 Democrat     7180</code></pre>
 </div>
 </div>
-</section><section id="exercises-3" class="level3"><h3 class="anchored" data-anchor-id="exercises-3">Exercises</h3>
+</section>
+<section id="exercises-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercises-3">Exercises</h3>
 <ol type="1">
 <li>Create a factor version of the following data with the levels in a sensible order.</li>
 </ol>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1"></a>ratings <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"High"</span>, <span class="st">"Medium"</span>, <span class="st">"Low"</span>)</span>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1"></a>ratings <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"High"</span>, <span class="st">"Medium"</span>, <span class="st">"Low"</span>)</span>
 <span id="cb104-2"><a href="#cb104-2"></a><span class="fu">factor</span>(ratings, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Low"</span>, <span class="st">"Medium"</span>, <span class="st">"High"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] High   Medium Low   
 Levels: Low Medium High</code></pre>
 </div>
 </div>
 <p>More exercises will be on HW4.</p>
-</section></section><section id="done" class="level2"><h2 class="anchored" data-anchor-id="done">Done!</h2>
+</section>
+</section>
+<section id="done" class="level2">
+<h2 class="anchored" data-anchor-id="done">Done!</h2>
 <ul>
 <li>Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website</li>
 </ul>
@@ -1362,7 +1540,10 @@ Levels: Low Medium High</code></pre>
 
 <!-- -->
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1830,7 +2011,9 @@ Levels: Low Medium High</code></pre>
       }
     }
   });
-  </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
       <a href="../ica/ica4/src/04-adv-maps-1-notes.html" class="pagination-link" aria-label="4 Adv Spatial Viz P1">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">4 Adv Spatial Viz P1</span></span>
       </a>          
@@ -2389,7 +2572,8 @@ Levels: Low Medium High</code></pre>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
@@ -2401,6 +2585,8 @@ Levels: Low Medium High</code></pre>
     </div>
   </div>
 </footer>
+
+
 
 
 <script src="../site_libs/quarto-html/zenscroll-min.js"></script>
