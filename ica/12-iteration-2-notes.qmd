@@ -301,7 +301,7 @@ fit_model <- function(data, mod_formula, remove_outliers) {
 
 # use pmap()
 
-
+pmap(df_arg_combos, fit_model, data = diamonds)
 
 
 ```
