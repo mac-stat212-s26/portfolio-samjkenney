@@ -275,7 +275,6 @@ Let's use this function to find articles related to:
 Let's see how these queries are translated into the URLs:
 
 ```{r use_create_nyt_url}
-#| eval: false
 req_fb <- create_nyt_url(query = "Ferris Bueller's Day Off", key = times_key)
 req_pt <- create_nyt_url(query = "Penn & Teller", key = times_key)
 ```
@@ -283,7 +282,8 @@ req_pt <- create_nyt_url(query = "Penn & Teller", key = times_key)
 We can use `req_perform()` to send out the request and `resp_body_json()` to parse the resulting JSON:
 
 ```{r nyt_responses}
-#| eval: false
+req_fb
+req_perform(req_fb)
 resp_pt <- req_pt |> req_perform() |> resp_body_json(simplifyVector = TRUE)
 ```
 
