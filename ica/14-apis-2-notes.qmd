@@ -125,7 +125,6 @@ Read in the key with the following code:
 
 
 ```{r read_census_api_key2}
-#| eval: false
 census_api_key <- readLines("census_api_key.txt")
 ```
 
