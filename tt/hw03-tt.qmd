@@ -1,0 +1,69 @@
+---
+title: "Homework 03"
+format: 
+  html: 
+    embed-resources: true
+---
+
+
+## TidyTuesday Section (optional)
+
+::: {.callout-important title="Instructions"}
+
+You can count work on this week's TidyTuesday toward the exceptional work required for an A in the Homework component.
+
+:::
+
+
+Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story with [effective visualization(s)]({{< var effective-viz-url >}}).  Provide sufficient background for readers to grasp your narrative.
+
+```{r}
+library(tidyverse)
+library(lubridate)
+library(stringr)
+olympics_schedule <- read.csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-02-10/schedule.csv')
+
+```
+
+```{r}
+olympics_schedule %>%
+  filter(is_medal_event == TRUE & is_training == TRUE)
+```
+
+```{r}
+olympics_schedule_sums <- olympics_schedule %>%
+  group_by(discipline_name, is_medal_event, date, is_training) %>%
+  summarize(count = n(), .groups = "drop") %>%
+  mutate(status = case_when(
+    is_training == "TRUE" ~ "training",
+    is_medal_event == "TRUE" ~ "medal event", 
+    .default = "standard event"
+  )) %>%
+  mutate(date = as.Date(date),
+         date = format(date, "%m-%d"))
+
+head(olympics_schedule_sums)
+```
+
+```{r}
+olympics <- ggplot(olympics_schedule_sums, aes(x = date, y = discipline_name, color = status, size = count)) +
+  scale_color_viridis_d(name = "Event Type", labels = c('Medal', 'Standard', 'Training')) +
+  scale_size_continuous(name = "Number of Events") +
+  geom_point(alpha = 0.75) +
+  theme_classic() +
+  theme(axis.text.x = element_text(vjust = 0.4, angle = 90), axis.title.y = element_blank()) +
+  labs(title = "What's the Best Day to Go to the Olympics?", subtitle = "Not all days of the Olympics are created equal! The middle days have a higher amount of events, but the end is packed with medal events.", alt = "Plot of Olympics events by discipline, count, and date. Curling has the most events , and the vast majority of them are standard. Other event disciplines have medal events dispersed throughout the Olympics. Alpine skiing, bobsleigh, luge, skeleton, and ski jumping all have training events, whereas other events do not.", x = "Date", caption = "Source: Winter Olympics Events, via TidyTuesday 2/10/2026, by Sam Kenney") 
+
+olympics
+
+```
+
+```{r}
+ggsave(plot = olympics, filename = "tt3.png", units = "px", width = 2040, height = 2040)
+
+```
+
+The Winter Olympics are full of fun and fascinating events, and it spans over 2 weeks. There's so much to see, but what if you only have one day? What's the best day to go to the Olympics? 
+Let's say you're interested in seeing as many events as possible, you don't care what kind of event it is. You'll probably want to attend 2/12 or 2/13, and you'll spend a lot of time watching curling.
+
+Interestingly, not all events have training events- only alpine skiing, bobsleigh, luge, nordic combined, skeleton, and ski jumping have them. Additionally, not all have standard events, including alpine skiing, biathlon, and luge. Certain events last the whole duration of the Olympics, like curling, while others are just a few days, like mountaineering!
